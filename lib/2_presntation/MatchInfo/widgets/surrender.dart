@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quiz_league/home_screen.dart';
 import 'package:window_manager/window_manager.dart';
 
 class Surrender extends StatelessWidget {
@@ -34,7 +35,7 @@ class Surrender extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             windowManager.setFullScreen(false);
-            context.go("/");
+            context.go(HomeScreen.routeInfo.path);
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,

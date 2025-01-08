@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
 import 'package:quiz_league/1_domain/entities/team_entity.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/cubit/match_info_cubit.dart';
+import 'package:quiz_league/2_presntation/Question/screens/question_screen.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
 
 class GameStarter extends StatelessWidget {
@@ -25,7 +26,7 @@ class GameStarter extends StatelessWidget {
     return CustomElevatedButton(
       onPressed: () {
         matchInfoCubit.startRound(teamList[0], teamList[1]);
-        context.goNamed("question", pathParameters: {
+        context.goNamed(QuestionScreen.routeInfo.name, pathParameters: {
           "leagueId": params["leagueId"],
           "matchId": params["matchId"],
           "categoryId": "$categoryId",

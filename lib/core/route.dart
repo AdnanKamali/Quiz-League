@@ -7,13 +7,15 @@ import 'package:quiz_league/2_presntation/Question/screens/question_screen.dart'
 
 final GoRouter router = GoRouter(routes: [
   GoRoute(
-    path: '/',
+    name: HomeScreen.routeInfo.name,
+    path: HomeScreen.routeInfo.path,
     builder: (BuildContext context, GoRouterState state) {
       return const HomeScreen(); // League and Time line screen into this with bottom navigation
     },
   ),
   GoRoute(
-    path: '/tabel/:leagueId',
+    name: LeagueTableScreen.routeInfo.name,
+    path: LeagueTableScreen.routeInfo.path,
     builder: (BuildContext context, GoRouterState state) {
       return LeagueTableScreen(
           leagueId: int.parse(
@@ -22,7 +24,8 @@ final GoRouter router = GoRouter(routes: [
     },
   ),
   GoRoute(
-    path: '/match/:leagueId/:matchId',
+    name: MatchInfoScreen.routeInfo.name,
+    path: MatchInfoScreen.routeInfo.path,
     builder: (BuildContext context, GoRouterState state) {
       return MatchInfoScreen(
         matchId: int.parse(state.pathParameters['matchId']!),
@@ -30,8 +33,8 @@ final GoRouter router = GoRouter(routes: [
     },
     routes: [
       GoRoute(
-        name: "question",
-        path: 'question/:categoryId',
+        path: QuestionScreen.routeInfo.path,
+        name: QuestionScreen.routeInfo.name,
         builder: (BuildContext context, GoRouterState state) {
           return const QuestionScreen();
         },

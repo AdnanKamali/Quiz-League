@@ -58,13 +58,13 @@ async function unFollow(pk) {
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-origin",
         "x-asbd-id": "129477",
-        "x-csrftoken": "cPDhehnkP6LYvlG8vlBZw66V61KSsJUc",
+        "x-csrftoken": "LN0RejpJWq5F3OWeHCqX7AfxwRJzJQcS",
         "x-ig-app-id": "936619743392459",
         "x-ig-www-claim":
-          "hmac.AR32Ljs4_DykiwFnhV7bxQR0qyOaeyasHYRzDTh5j6PAbjD9",
-        "x-instagram-ajax": "1019156953",
+          "hmac.AR32Ljs4_DykiwFnhV7bxQR0qyOaeyasHYRzDTh5j6PAbqTc",
+        "x-instagram-ajax": "1019204321",
         "x-requested-with": "XMLHttpRequest",
-        "x-web-session-id": "dm05jl:tgmp1f:tsuxfk",
+        "x-web-session-id": "tv3mby:e7lb65:gra8hh",
       },
       referrer: "https://www.instagram.com/bnd__gallery/followers/",
       referrerPolicy: "strict-origin-when-cross-origin",
@@ -84,7 +84,7 @@ var bodyListPromise = await getFollowers(url);
 var bodyList = await bodyListPromise.json();
 
 for (const element of bodyList.users) {
-  const rndInt = Math.floor(Math.random() * 3) + 6;
+  const rndInt = Math.floor(Math.random() * 3) + 8;
   await new Promise((r) => setTimeout(r, rndInt * 1000));
   unFollow(element.pk);
 }

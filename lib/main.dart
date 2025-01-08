@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
             //   create: (_) => SettingsCubit(
             //       questionCategoryUsecase: sl<QuestionCategoryUsecase>()),
             // ),
+
             BlocProvider(
               create: (_) =>
                   QuestionCubit(questionUsecase: sl<QuestionUsecase>()),

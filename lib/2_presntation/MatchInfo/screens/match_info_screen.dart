@@ -8,10 +8,17 @@ import 'package:quiz_league/2_presntation/MatchInfo/widgets/started_match.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/surrender.dart';
 
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info.dart';
+import 'package:quiz_league/core/route_info.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
+import 'package:quiz_league/core/widgets/not_found_error.dart';
 
 class MatchInfoScreen extends StatelessWidget {
   const MatchInfoScreen({super.key, required this.matchId});
+
+  static final RouteInfo routeInfo = RouteInfo(
+    name: "Match Info",
+    path: '/match/:leagueId/:matchId',
+  );
 
   final int matchId;
   @override
@@ -23,7 +30,8 @@ class MatchInfoScreen extends StatelessWidget {
         child: FutureBuilder(
             future: matchInfoCubit.getMatchInfo(matchId),
             builder: (context, matchSnapshop) {
-              if (!matchSnapshop.hasData) return Center(child: Text("Loading"));
+              if (!matchSnapshop.hasData)
+                return NotFoundErrorScreen(onTry: null);
 
               final firstTeam = matchSnapshop.data!.firstTeam;
               final secondTeam = matchSnapshop.data!.secondTeam;

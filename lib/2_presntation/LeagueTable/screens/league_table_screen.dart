@@ -4,12 +4,18 @@ import 'package:quiz_league/1_domain/entities/team_entity.dart';
 import 'package:quiz_league/2_presntation/LeagueTable/controller/cubit/league_table_cubit.dart';
 import 'package:quiz_league/2_presntation/LeagueTable/screens/team_info_popup.dart';
 import 'package:quiz_league/2_presntation/Leagues/controller/cubit/leagues_cubit.dart';
+import 'package:quiz_league/core/route_info.dart';
 import 'package:quiz_league/core/widgets/loading_container.dart';
 import 'package:quiz_league/core/widgets/not_found_error.dart';
 
 class LeagueTableScreen extends StatelessWidget {
   const LeagueTableScreen({super.key, required this.leagueId});
   final int leagueId;
+
+  static final RouteInfo routeInfo = RouteInfo(
+    name: "League Table",
+    path: '/tabel/:leagueId',
+  );
 
   Widget _leagueTableLoading(BuildContext context) {
     final fullWidth = MediaQuery.of(context).size.width;

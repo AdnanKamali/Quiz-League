@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:quiz_league/2_presntation/Leagues/screens/leagues_screen.dart';
 import 'package:quiz_league/2_presntation/Settings/screen/settings_screen.dart';
 import 'package:quiz_league/2_presntation/TimeLine/screens/match_time_line_screen.dart';
+import 'package:quiz_league/core/route_info.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  static final RouteInfo routeInfo = RouteInfo(name: "Home", path: "/");
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

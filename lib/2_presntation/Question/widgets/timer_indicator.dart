@@ -11,7 +11,7 @@ class TimerIndicator extends StatefulWidget {
 
 class _TimerIndicatorState extends State<TimerIndicator> {
   Timer? _timer;
-  int _start = 60000;
+  int _start = 63000;
 
   void startTimer() {
     const oneSec = Duration(milliseconds: 10);
@@ -32,6 +32,14 @@ class _TimerIndicatorState extends State<TimerIndicator> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2)).then(
+      (value) => startTimer(),
+    );
+  }
+
+  @override
   void dispose() {
     _timer?.cancel();
     super.dispose();
@@ -39,13 +47,11 @@ class _TimerIndicatorState extends State<TimerIndicator> {
 
   @override
   Widget build(BuildContext context) {
-    return _start == 60000
-        ? ElevatedButton(onPressed: startTimer, child: Text("Start"))
-        : LinearProgressIndicator(
-            color: Colors.indigoAccent,
-            minHeight: 10,
-            borderRadius: BorderRadius.circular(8),
-            value: _start / 60000,
-          );
+    return LinearProgressIndicator(
+      color: Colors.indigoAccent,
+      minHeight: 10,
+      borderRadius: BorderRadius.circular(8),
+      value: _start / 60000,
+    );
   }
 }
