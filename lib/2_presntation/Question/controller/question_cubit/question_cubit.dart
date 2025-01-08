@@ -13,11 +13,9 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   void getQuestion(int categoryId, int leagueId) async {
     final response = await questionUsecase.getQuestion(categoryId, leagueId);
-    print("GOT IT");
-    print(response);
     response.fold(
-      (l) => print,
-      (r) => print(r.result),
+      (l) => emit(QuestionState.error()),
+      (r) => emit(QuestionState.success(questionEntity: r.result)),
     );
   }
 }

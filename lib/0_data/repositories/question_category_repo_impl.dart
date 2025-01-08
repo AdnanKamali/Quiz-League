@@ -16,7 +16,6 @@ class QuestionCategoryRepoImpl implements QuestionCategoryRepository {
       final response = SuccessResponse(result: result);
       return Right(response);
     } catch (e) {
-      print(e);
       final failureResponse =
           FailureResponse(statusCode: 400, errorMessage: "Error");
       return Left(failureResponse);

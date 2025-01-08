@@ -10,7 +10,7 @@ import 'package:quiz_league/1_domain/usecasees/question_usecase.dart';
 import 'package:quiz_league/2_presntation/LeagueTable/controller/cubit/league_table_cubit.dart';
 import 'package:quiz_league/2_presntation/Leagues/controller/cubit/leagues_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/cubit/match_info_cubit.dart';
-import 'package:quiz_league/2_presntation/Question/controller/cubit/question_cubit.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_cubit/question_cubit.dart';
 import 'package:quiz_league/2_presntation/TimeLine/controller/cubit/match_time_line_cubit.dart';
 import 'package:quiz_league/core/route.dart';
 import 'package:quiz_league/core/theme.dart';

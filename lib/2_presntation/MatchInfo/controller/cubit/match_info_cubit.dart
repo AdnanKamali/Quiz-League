@@ -111,7 +111,6 @@ class MatchInfoCubit extends Cubit<MatchInfoState> {
 
   Future<MatchInfoEntity?> getMatchInfo(int matchId) async {
     final response = await matchInfoUsecase.getMatchInfo(matchId.toString());
-    print(response);
     return response.fold(
       (l) => null,
       (r) => r.result,

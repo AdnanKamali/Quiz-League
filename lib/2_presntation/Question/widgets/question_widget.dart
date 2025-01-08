@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_league/core/base_url.dart';
 
 class QuestionWidget extends StatelessWidget {
   const QuestionWidget(
@@ -46,7 +47,7 @@ class QuestionWidget extends StatelessWidget {
               ),
               child: Center(
                 child: Image.network(
-                  imageUrl!,
+                  baseUrl + imageUrl!,
                   height: MediaQuery.of(context).size.height * 0.36,
                 ),
               ),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_league/1_domain/entities/question_entity.dart';
 
 class QuestionOption extends StatelessWidget {
   const QuestionOption({
     super.key,
-    required this.optionValue,
+    required this.questionOption,
     required this.optionIndex,
   });
   final int optionIndex;
-  final String optionValue;
+  final QuestionOptionEntity questionOption;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +20,14 @@ class QuestionOption extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: Colors.indigoAccent),
           borderRadius: BorderRadius.circular(16),
-          color: Colors.amber,
+          color: Colors.transparent,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Spacer(),
             Text(
-              optionValue,
+              questionOption.text,
               style: Theme.of(context).textTheme.labelLarge,
             ),
             Spacer(),
