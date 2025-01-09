@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_option_cubit/question_option_cubit.dart';
 
 class TimerIndicator extends StatefulWidget {
   const TimerIndicator({super.key});
@@ -10,6 +12,7 @@ class TimerIndicator extends StatefulWidget {
 }
 
 class _TimerIndicatorState extends State<TimerIndicator> {
+  late QuestionOptionCubit questionOptionCubit;
   Timer? _timer;
   int _start = 63000;
 
@@ -21,6 +24,7 @@ class _TimerIndicatorState extends State<TimerIndicator> {
         if (_start == 0) {
           setState(() {
             timer.cancel();
+            questionOptionCubit.checkAnswer();
           });
         } else {
           setState(() {
@@ -34,6 +38,7 @@ class _TimerIndicatorState extends State<TimerIndicator> {
   @override
   void initState() {
     super.initState();
+    questionOptionCubit = context.read<QuestionOptionCubit>();
     Future.delayed(Duration(seconds: 2)).then(
       (value) => startTimer(),
     );

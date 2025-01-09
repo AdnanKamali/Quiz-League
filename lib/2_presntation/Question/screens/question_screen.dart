@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_league/1_domain/entities/question_entity.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_cubit/question_cubit.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_option_cubit/question_option_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/widgets/question_loading.dart';
 import 'package:quiz_league/2_presntation/Question/widgets/question_option.dart';
 import 'package:quiz_league/2_presntation/Question/widgets/question_option_loading.dart';
@@ -16,6 +18,87 @@ class QuestionScreen extends StatelessWidget {
     name: "Question",
     path: 'question/:categoryId',
   );
+
+  Widget initialOptionBuilder({
+    required List<QuestionOptionEntity> questionOptionList,
+  }) {
+    return Column(
+      spacing: 16,
+      children: List.generate(
+        questionOptionList.length,
+        (index) => QuestionOption(
+            questionOption: questionOptionList[index],
+            optionIndex: index + 1,
+            optionColor: Colors.transparent),
+      ),
+    );
+  }
+
+  Widget beforAnswerOptionBuilder({
+    required List<QuestionOptionEntity> questionOptionList,
+    required QuestionOptionEntity questionOptionSelected,
+  }) {
+    return Column(
+      spacing: 16,
+      children: List.generate(
+        questionOptionList.length,
+        (index) => QuestionOption(
+          questionOption: questionOptionList[index],
+          optionIndex: index + 1,
+          optionColor: questionOptionList[index] == questionOptionSelected
+              ? Colors.amber
+              : Colors.transparent,
+        ),
+      ),
+    );
+  }
+
+  Widget answeredOptionBuilder({
+    required List<QuestionOptionEntity> questionOptionList,
+    required QuestionOptionEntity questionOptionSelected,
+  }) {
+    return Column(
+      spacing: 16,
+      children: List.generate(
+        questionOptionList.length,
+        (index) {
+          Color colorOption = Colors.transparent;
+          if (questionOptionList[index].isCorrect) {
+            colorOption = Colors.green;
+          }
+          if (questionOptionList[index] == questionOptionSelected &&
+              !questionOptionSelected.isCorrect) {
+            colorOption = Colors.red;
+          }
+
+          return QuestionOption(
+            questionOption: questionOptionList[index],
+            optionIndex: index + 1,
+            optionColor: colorOption,
+          );
+        },
+      ),
+    );
+  }
+
+  Widget endTimeOptionBuilder({
+    required List<QuestionOptionEntity> questionOptionList,
+  }) {
+    return Column(
+      spacing: 16,
+      children: List.generate(
+        questionOptionList.length,
+        (index) {
+          return QuestionOption(
+            questionOption: questionOptionList[index],
+            optionIndex: index + 1,
+            optionColor:
+                questionOptionList[index].isCorrect ? Colors.green : Colors.red,
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +145,27 @@ class QuestionScreen extends StatelessWidget {
                     question: questionEntity.text,
                   ),
                   if (questionEntity.questionOptions != null)
-                    ...List.generate(
-                      questionEntity.questionOptions!.length,
-                      (index) => QuestionOption(
-                          questionOption:
-                              questionEntity.questionOptions![index],
-                          optionIndex: index + 1),
+                    BlocBuilder<QuestionOptionCubit, QuestionOptionState>(
+                      builder: (context, state) {
+                        return state.when(
+                          initial: () => initialOptionBuilder(
+                              questionOptionList:
+                                  questionEntity.questionOptions!),
+                          beforAnswered: (questionOptionSelected) =>
+                              beforAnswerOptionBuilder(
+                            questionOptionList: questionEntity.questionOptions!,
+                            questionOptionSelected: questionOptionSelected,
+                          ),
+                          answered: (questionOptionSelected, trueOption) =>
+                              answeredOptionBuilder(
+                            questionOptionList: questionEntity.questionOptions!,
+                            questionOptionSelected: questionOptionSelected,
+                          ),
+                          endTime: () => endTimeOptionBuilder(
+                            questionOptionList: questionEntity.questionOptions!,
+                          ),
+                        );
+                      },
                     ),
                   if (questionEntity.questionOptions == null) Text("TEXT TYPE")
                 ],

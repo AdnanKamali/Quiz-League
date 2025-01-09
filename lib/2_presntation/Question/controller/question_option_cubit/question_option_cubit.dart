@@ -7,4 +7,24 @@ part 'question_option_cubit.freezed.dart';
 
 class QuestionOptionCubit extends Cubit<QuestionOptionState> {
   QuestionOptionCubit() : super(QuestionOptionState.initial());
+
+  void selectOption(QuestionOptionEntity questionOption) {
+    if (state is _Answered || state is _EndTime) return;
+    emit(
+      QuestionOptionState.beforAnswered(questionOptionSelected: questionOption),
+    );
+  }
+
+  void checkAnswer() {
+    if (state is _BeforAnswered) {
+      emit(
+        QuestionOptionState.answered(
+            questionOptionSelected:
+                (state as _BeforAnswered).questionOptionSelected,
+            trueOption: (state as _BeforAnswered).questionOptionSelected),
+      );
+    } else if (state is _Initial) {
+      emit(QuestionOptionState.endTime());
+    }
+  }
 }

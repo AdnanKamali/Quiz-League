@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_option_cubit/question_option_cubit.dart';
 
 class QuestionOption extends StatelessWidget {
   const QuestionOption({
     super.key,
     required this.questionOption,
     required this.optionIndex,
+    this.optionColor = Colors.transparent,
   });
   final int optionIndex;
   final QuestionOptionEntity questionOption;
 
+  final Color optionColor;
+
   @override
   Widget build(BuildContext context) {
+    final questionOptionCubit = context.read<QuestionOptionCubit>();
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        questionOptionCubit.selectOption(questionOption);
+      },
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.indigoAccent),
           borderRadius: BorderRadius.circular(16),
-          color: Colors.transparent,
+          color: optionColor,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
