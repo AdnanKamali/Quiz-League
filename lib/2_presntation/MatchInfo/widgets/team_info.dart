@@ -22,6 +22,7 @@ class TeamInfo extends StatelessWidget {
       spacing: 25,
       children: [
         Row(
+          textDirection: TextDirection.rtl,
           spacing: 12,
           children: List.generate(
             teamInfoParams.trueQuestionList.length,

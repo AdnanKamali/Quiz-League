@@ -8,6 +8,7 @@ import 'package:quiz_league/2_presntation/MatchInfo/widgets/started_match.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/surrender.dart';
 
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info.dart';
+import 'package:quiz_league/core/object_box_init.dart';
 import 'package:quiz_league/core/route_info.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
 import 'package:quiz_league/core/widgets/not_found_error.dart';
@@ -38,22 +39,22 @@ class MatchInfoScreen extends StatelessWidget {
 
               final teamInfoParamsList = [
                 TeamInfoParams(
-                  trueQuestionList:
-                      matchInfoCubit.matchGameEntity.firstTeamTrueQuestions,
+                  trueQuestionList: matchGameEntity.firstTeamTrueQuestions,
                   name: firstTeam.name,
                   logo: firstTeam.logo,
                 ),
                 TeamInfoParams(
-                  trueQuestionList:
-                      matchInfoCubit.matchGameEntity.secondTeamTrueQuestions,
+                  trueQuestionList: matchGameEntity.secondTeamTrueQuestions,
                   name: secondTeam.name,
                   logo: secondTeam.logo,
                 ),
               ];
 
-              final starterTeam = matchInfoCubit.matchGameEntity.round % 2 == 1
-                  ? firstTeam
-                  : secondTeam;
+              final starterTeam =
+                  matchGameEntity.round == 0 || matchGameEntity.round % 2 == 0
+                      ? firstTeam
+                      : secondTeam;
+
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 25,

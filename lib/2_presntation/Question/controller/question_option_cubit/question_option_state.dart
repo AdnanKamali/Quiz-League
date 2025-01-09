@@ -7,7 +7,6 @@ class QuestionOptionState with _$QuestionOptionState {
       {required QuestionOptionEntity questionOptionSelected}) = _BeforAnswered;
   const factory QuestionOptionState.answered({
     required QuestionOptionEntity questionOptionSelected,
-    required QuestionOptionEntity trueOption,
   }) = _Answered;
   const factory QuestionOptionState.endTime() = _EndTime;
 }

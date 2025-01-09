@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_league/1_domain/entities/team_entity.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/cubit/match_info_cubit.dart';
+import 'package:quiz_league/core/object_box_init.dart';
 
 class CategoryBulilder extends StatelessWidget {
   const CategoryBulilder({super.key, required this.starterTeam});
@@ -12,6 +13,7 @@ class CategoryBulilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final matchGameEntity = matchGameEntityBox.get(1)!;
     final matchInfoCubit = context.read<MatchInfoCubit>();
 
     return Column(
@@ -44,8 +46,7 @@ class CategoryBulilder extends StatelessWidget {
                                 snapshot.data![index % 6];
                             return SizedBox(
                               child: InkWell(
-                                onTap: matchInfoCubit
-                                        .matchGameEntity.categoriesSelectedId
+                                onTap: matchGameEntity.categoriesSelectedId
                                         .contains(
                                             "${snapshot.data![index % 6].id}")
                                     ? null
@@ -54,8 +55,7 @@ class CategoryBulilder extends StatelessWidget {
                                             snapshot.data![index]);
                                       },
                                 child: Card(
-                                  color: matchInfoCubit
-                                          .matchGameEntity.categoriesSelectedId
+                                  color: matchGameEntity.categoriesSelectedId
                                           .contains(
                                               "${snapshot.data![index % 6].id}")
                                       ? Colors.grey.shade600

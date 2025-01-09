@@ -13,7 +13,6 @@ class SettingsCubit extends Cubit<SettingsState> {
       : super(SettingsState.initial());
 
   void getQuestionCategories() async {
-    final result = await questionCategoryUsecase.getQuestionCategories();
-    print(result);
+    await questionCategoryUsecase.getQuestionCategories();
   }
 }

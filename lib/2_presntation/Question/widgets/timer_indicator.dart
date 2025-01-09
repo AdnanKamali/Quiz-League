@@ -47,16 +47,30 @@ class _TimerIndicatorState extends State<TimerIndicator> {
   @override
   void dispose() {
     _timer?.cancel();
+    questionOptionCubit.cancelTimer();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return LinearProgressIndicator(
-      color: Colors.indigoAccent,
-      minHeight: 10,
-      borderRadius: BorderRadius.circular(8),
-      value: _start / 60000,
+    return BlocListener<QuestionOptionCubit, QuestionOptionState>(
+      listener: (context, state) {
+        cancelTimer() {
+          _timer!.cancel();
+          questionOptionCubit.cancelTimer();
+        }
+
+        state.mapOrNull(
+          answered: (value) => cancelTimer(),
+          endTime: (value) => cancelTimer(),
+        );
+      },
+      child: LinearProgressIndicator(
+        color: Colors.indigoAccent,
+        minHeight: 10,
+        borderRadius: BorderRadius.circular(8),
+        value: _start / 60000,
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_cubit/question_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_option_cubit/question_option_cubit.dart';
@@ -18,6 +19,13 @@ class QuestionScreen extends StatelessWidget {
     name: "Question",
     path: 'question/:categoryId',
   );
+  Widget backButton(BuildContext context) => BackButton(
+        onPressed: () {
+          final questionOptionCubit = context.read<QuestionOptionCubit>();
+          context.pop();
+          questionOptionCubit.backToInit();
+        },
+      );
 
   Widget initialOptionBuilder({
     required List<QuestionOptionEntity> questionOptionList,
@@ -53,50 +61,61 @@ class QuestionScreen extends StatelessWidget {
     );
   }
 
-  Widget answeredOptionBuilder({
+  Widget answeredOptionBuilder(
+    BuildContext context, {
     required List<QuestionOptionEntity> questionOptionList,
     required QuestionOptionEntity questionOptionSelected,
   }) {
     return Column(
       spacing: 16,
-      children: List.generate(
-        questionOptionList.length,
-        (index) {
-          Color colorOption = Colors.transparent;
-          if (questionOptionList[index].isCorrect) {
-            colorOption = Colors.green;
-          }
-          if (questionOptionList[index] == questionOptionSelected &&
-              !questionOptionSelected.isCorrect) {
-            colorOption = Colors.red;
-          }
+      children: [
+        ...List.generate(
+          questionOptionList.length,
+          (index) {
+            Color colorOption = Colors.transparent;
+            if (questionOptionList[index].isCorrect) {
+              colorOption = Colors.green;
+            }
+            if (questionOptionList[index] == questionOptionSelected &&
+                !questionOptionSelected.isCorrect) {
+              colorOption = Colors.red;
+            }
 
-          return QuestionOption(
-            questionOption: questionOptionList[index],
-            optionIndex: index + 1,
-            optionColor: colorOption,
-          );
-        },
-      ),
+            return QuestionOption(
+              questionOption: questionOptionList[index],
+              optionIndex: index + 1,
+              optionColor: colorOption,
+            );
+          },
+        ),
+        SizedBox(height: 20),
+        backButton(context)
+      ],
     );
   }
 
-  Widget endTimeOptionBuilder({
+  Widget endTimeOptionBuilder(
+    BuildContext context, {
     required List<QuestionOptionEntity> questionOptionList,
   }) {
     return Column(
       spacing: 16,
-      children: List.generate(
-        questionOptionList.length,
-        (index) {
-          return QuestionOption(
-            questionOption: questionOptionList[index],
-            optionIndex: index + 1,
-            optionColor:
-                questionOptionList[index].isCorrect ? Colors.green : Colors.red,
-          );
-        },
-      ),
+      children: [
+        ...List.generate(
+          questionOptionList.length,
+          (index) {
+            return QuestionOption(
+              questionOption: questionOptionList[index],
+              optionIndex: index + 1,
+              optionColor: questionOptionList[index].isCorrect
+                  ? Colors.green
+                  : Colors.red,
+            );
+          },
+        ),
+        SizedBox(height: 20),
+        backButton(context),
+      ],
     );
   }
 
@@ -136,9 +155,6 @@ class QuestionScreen extends StatelessWidget {
               success: (questionEntity) => Column(
                 spacing: 16,
                 children: [
-                  // BackButton(
-                  //   onPressed: () => context.pop(),
-                  // ),
                   TimerIndicator(),
                   QuestionWidget(
                     imageUrl: questionEntity.image,
@@ -156,12 +172,14 @@ class QuestionScreen extends StatelessWidget {
                             questionOptionList: questionEntity.questionOptions!,
                             questionOptionSelected: questionOptionSelected,
                           ),
-                          answered: (questionOptionSelected, trueOption) =>
+                          answered: (questionOptionSelected) =>
                               answeredOptionBuilder(
+                            context,
                             questionOptionList: questionEntity.questionOptions!,
                             questionOptionSelected: questionOptionSelected,
                           ),
                           endTime: () => endTimeOptionBuilder(
+                            context,
                             questionOptionList: questionEntity.questionOptions!,
                           ),
                         );

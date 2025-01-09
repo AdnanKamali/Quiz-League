@@ -21,8 +21,7 @@ mixin _$QuestionOptionState {
     required TResult Function() initial,
     required TResult Function(QuestionOptionEntity questionOptionSelected)
         beforAnswered,
-    required TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)
+    required TResult Function(QuestionOptionEntity questionOptionSelected)
         answered,
     required TResult Function() endTime,
   }) =>
@@ -32,9 +31,7 @@ mixin _$QuestionOptionState {
     TResult? Function()? initial,
     TResult? Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult? Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult? Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult? Function()? endTime,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,9 +40,7 @@ mixin _$QuestionOptionState {
     TResult Function()? initial,
     TResult Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult Function()? endTime,
     required TResult orElse(),
   }) =>
@@ -142,8 +137,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function(QuestionOptionEntity questionOptionSelected)
         beforAnswered,
-    required TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)
+    required TResult Function(QuestionOptionEntity questionOptionSelected)
         answered,
     required TResult Function() endTime,
   }) {
@@ -156,9 +150,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult? Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult? Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult? Function()? endTime,
   }) {
     return initial?.call();
@@ -170,9 +162,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult Function()? endTime,
     required TResult orElse(),
   }) {
@@ -296,8 +286,7 @@ class _$BeforAnsweredImpl implements _BeforAnswered {
     required TResult Function() initial,
     required TResult Function(QuestionOptionEntity questionOptionSelected)
         beforAnswered,
-    required TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)
+    required TResult Function(QuestionOptionEntity questionOptionSelected)
         answered,
     required TResult Function() endTime,
   }) {
@@ -310,9 +299,7 @@ class _$BeforAnsweredImpl implements _BeforAnswered {
     TResult? Function()? initial,
     TResult? Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult? Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult? Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult? Function()? endTime,
   }) {
     return beforAnswered?.call(questionOptionSelected);
@@ -324,9 +311,7 @@ class _$BeforAnsweredImpl implements _BeforAnswered {
     TResult Function()? initial,
     TResult Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult Function()? endTime,
     required TResult orElse(),
   }) {
@@ -394,9 +379,7 @@ abstract class _$$AnsweredImplCopyWith<$Res> {
           _$AnsweredImpl value, $Res Function(_$AnsweredImpl) then) =
       __$$AnsweredImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {QuestionOptionEntity questionOptionSelected,
-      QuestionOptionEntity trueOption});
+  $Res call({QuestionOptionEntity questionOptionSelected});
 }
 
 /// @nodoc
@@ -413,16 +396,11 @@ class __$$AnsweredImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? questionOptionSelected = null,
-    Object? trueOption = null,
   }) {
     return _then(_$AnsweredImpl(
       questionOptionSelected: null == questionOptionSelected
           ? _value.questionOptionSelected
           : questionOptionSelected // ignore: cast_nullable_to_non_nullable
-              as QuestionOptionEntity,
-      trueOption: null == trueOption
-          ? _value.trueOption
-          : trueOption // ignore: cast_nullable_to_non_nullable
               as QuestionOptionEntity,
     ));
   }
@@ -431,17 +409,14 @@ class __$$AnsweredImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AnsweredImpl implements _Answered {
-  const _$AnsweredImpl(
-      {required this.questionOptionSelected, required this.trueOption});
+  const _$AnsweredImpl({required this.questionOptionSelected});
 
   @override
   final QuestionOptionEntity questionOptionSelected;
-  @override
-  final QuestionOptionEntity trueOption;
 
   @override
   String toString() {
-    return 'QuestionOptionState.answered(questionOptionSelected: $questionOptionSelected, trueOption: $trueOption)';
+    return 'QuestionOptionState.answered(questionOptionSelected: $questionOptionSelected)';
   }
 
   @override
@@ -450,14 +425,11 @@ class _$AnsweredImpl implements _Answered {
         (other.runtimeType == runtimeType &&
             other is _$AnsweredImpl &&
             (identical(other.questionOptionSelected, questionOptionSelected) ||
-                other.questionOptionSelected == questionOptionSelected) &&
-            (identical(other.trueOption, trueOption) ||
-                other.trueOption == trueOption));
+                other.questionOptionSelected == questionOptionSelected));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, questionOptionSelected, trueOption);
+  int get hashCode => Object.hash(runtimeType, questionOptionSelected);
 
   /// Create a copy of QuestionOptionState
   /// with the given fields replaced by the non-null parameter values.
@@ -473,12 +445,11 @@ class _$AnsweredImpl implements _Answered {
     required TResult Function() initial,
     required TResult Function(QuestionOptionEntity questionOptionSelected)
         beforAnswered,
-    required TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)
+    required TResult Function(QuestionOptionEntity questionOptionSelected)
         answered,
     required TResult Function() endTime,
   }) {
-    return answered(questionOptionSelected, trueOption);
+    return answered(questionOptionSelected);
   }
 
   @override
@@ -487,12 +458,10 @@ class _$AnsweredImpl implements _Answered {
     TResult? Function()? initial,
     TResult? Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult? Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult? Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult? Function()? endTime,
   }) {
-    return answered?.call(questionOptionSelected, trueOption);
+    return answered?.call(questionOptionSelected);
   }
 
   @override
@@ -501,14 +470,12 @@ class _$AnsweredImpl implements _Answered {
     TResult Function()? initial,
     TResult Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult Function()? endTime,
     required TResult orElse(),
   }) {
     if (answered != null) {
-      return answered(questionOptionSelected, trueOption);
+      return answered(questionOptionSelected);
     }
     return orElse();
   }
@@ -553,11 +520,10 @@ class _$AnsweredImpl implements _Answered {
 
 abstract class _Answered implements QuestionOptionState {
   const factory _Answered(
-      {required final QuestionOptionEntity questionOptionSelected,
-      required final QuestionOptionEntity trueOption}) = _$AnsweredImpl;
+          {required final QuestionOptionEntity questionOptionSelected}) =
+      _$AnsweredImpl;
 
   QuestionOptionEntity get questionOptionSelected;
-  QuestionOptionEntity get trueOption;
 
   /// Create a copy of QuestionOptionState
   /// with the given fields replaced by the non-null parameter values.
@@ -610,8 +576,7 @@ class _$EndTimeImpl implements _EndTime {
     required TResult Function() initial,
     required TResult Function(QuestionOptionEntity questionOptionSelected)
         beforAnswered,
-    required TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)
+    required TResult Function(QuestionOptionEntity questionOptionSelected)
         answered,
     required TResult Function() endTime,
   }) {
@@ -624,9 +589,7 @@ class _$EndTimeImpl implements _EndTime {
     TResult? Function()? initial,
     TResult? Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult? Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult? Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult? Function()? endTime,
   }) {
     return endTime?.call();
@@ -638,9 +601,7 @@ class _$EndTimeImpl implements _EndTime {
     TResult Function()? initial,
     TResult Function(QuestionOptionEntity questionOptionSelected)?
         beforAnswered,
-    TResult Function(QuestionOptionEntity questionOptionSelected,
-            QuestionOptionEntity trueOption)?
-        answered,
+    TResult Function(QuestionOptionEntity questionOptionSelected)? answered,
     TResult Function()? endTime,
     required TResult orElse(),
   }) {

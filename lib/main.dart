@@ -13,6 +13,7 @@ import 'package:quiz_league/2_presntation/MatchInfo/controller/cubit/match_info_
 import 'package:quiz_league/2_presntation/Question/controller/question_cubit/question_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_option_cubit/question_option_cubit.dart';
 import 'package:quiz_league/2_presntation/TimeLine/controller/cubit/match_time_line_cubit.dart';
+import 'package:quiz_league/core/object_box_init.dart';
 import 'package:quiz_league/core/route.dart';
 import 'package:quiz_league/core/theme.dart';
 import 'package:quiz_league/injection.dart';
@@ -22,6 +23,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   serviceLocator();
+
+  await onInitBoxObject();
 
   const windowOptions = WindowOptions(
     minimumSize: Size(1280, 720),
@@ -66,8 +69,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (_) => MatchInfoCubit(
                   matchInfoUsecase: sl<MatchInfoUsecase>(),
-                  questionCategoryUsecase: sl<QuestionCategoryUsecase>())
-                ..onInitBoxObject(),
+                  questionCategoryUsecase: sl<QuestionCategoryUsecase>()),
             ),
             BlocProvider(
               create: (_) => MatchTimeLineCubit(
