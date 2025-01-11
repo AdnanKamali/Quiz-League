@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_league/core/theme.dart';
 import 'package:quiz_league/core/widgets/loading_container.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
@@ -8,12 +7,13 @@ class LeagueGridItemLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Shimmer(
         duration: Duration(seconds: 2),
         child: Card(
-          color: MyAppTheme.forgroundColor,
+          color: primaryColor,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

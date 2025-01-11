@@ -17,6 +17,8 @@ class QuestionOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
+
     final questionOptionCubit = context.read<QuestionOptionCubit>();
     return InkWell(
       onTap: () {
@@ -26,7 +28,7 @@ class QuestionOption extends StatelessWidget {
       highlightColor: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.indigoAccent),
+          border: Border.all(color: primaryColor),
           borderRadius: BorderRadius.circular(16),
           color: optionColor,
         ),

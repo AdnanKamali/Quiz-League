@@ -10,6 +10,7 @@ class TeamInfoPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final leagueTableCubit = context.read<LeagueTableCubit>();
+    final primaryColor = Theme.of(context).primaryColor;
     final titleTextStyle = Theme.of(context).textTheme.labelMedium;
     return IconButton(
       onPressed: () {
@@ -32,7 +33,7 @@ class TeamInfoPopup extends StatelessWidget {
                             snapshot.data![index].name,
                             textDirection: TextDirection.rtl,
                           ),
-                          tileColor: Colors.indigoAccent,
+                          tileColor: primaryColor,
                           titleTextStyle: titleTextStyle,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16)),

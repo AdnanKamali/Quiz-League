@@ -6,12 +6,14 @@ class TimeGameTileItemLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: ListTile(
-          tileColor: Colors.indigoAccent,
+          tileColor: primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),

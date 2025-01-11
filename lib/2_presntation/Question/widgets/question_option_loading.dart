@@ -7,11 +7,12 @@ class QuestionOptionLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
     final width = MediaQuery.of(context).size.width;
 
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.indigoAccent),
+        border: Border.all(color: primaryColor),
         borderRadius: BorderRadius.circular(16),
         color: Colors.transparent,
       ),

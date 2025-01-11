@@ -17,12 +17,16 @@ class LeagueTableScreen extends StatelessWidget {
     path: '/tabel/:leagueId',
   );
 
+  BoxDecoration leagueBoxDecoration(BuildContext context) => BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        color: Theme.of(context).primaryColor,
+      );
+
   Widget _leagueTableLoading(BuildContext context) {
     final fullWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6), color: Colors.indigoAccent),
+      decoration: leagueBoxDecoration(context),
       width: fullWidth,
       padding: const EdgeInsets.all(8.0),
       margin: EdgeInsets.all(6),
@@ -44,8 +48,7 @@ class LeagueTableScreen extends StatelessWidget {
     final fullWidth = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6), color: Colors.indigoAccent),
+        decoration: leagueBoxDecoration(context),
         width: fullWidth,
         padding: const EdgeInsets.all(8.0),
         margin: EdgeInsets.all(6),

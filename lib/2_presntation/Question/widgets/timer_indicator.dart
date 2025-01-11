@@ -53,6 +53,8 @@ class _TimerIndicatorState extends State<TimerIndicator> {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
+
     return BlocListener<QuestionOptionCubit, QuestionOptionState>(
       listener: (context, state) {
         cancelTimer() {
@@ -66,7 +68,7 @@ class _TimerIndicatorState extends State<TimerIndicator> {
         );
       },
       child: LinearProgressIndicator(
-        color: Colors.indigoAccent,
+        color: primaryColor,
         minHeight: 10,
         borderRadius: BorderRadius.circular(8),
         value: _start / 60000,

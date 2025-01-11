@@ -13,6 +13,8 @@ class CategoryBulilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
+    final disabledColor = Theme.of(context).disabledColor;
     final matchGameEntity = matchGameEntityBox.get(1)!;
     final matchInfoCubit = context.read<MatchInfoCubit>();
 
@@ -58,8 +60,8 @@ class CategoryBulilder extends StatelessWidget {
                                   color: matchGameEntity.categoriesSelectedId
                                           .contains(
                                               "${snapshot.data![index % 6].id}")
-                                      ? Colors.grey.shade600
-                                      : Colors.indigoAccent,
+                                      ? disabledColor
+                                      : primaryColor,
                                   child: Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Column(

@@ -11,6 +11,8 @@ class TimeGameTileItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
+
     final firstTeam = matchTimeLineEntity.firstTeamEntity;
     final secondTeam = matchTimeLineEntity.secondTeamEntity;
 
@@ -23,7 +25,7 @@ class TimeGameTileItem extends StatelessWidget {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: ListTile(
-          tileColor: isOverGame ? Colors.indigo.shade700 : Colors.indigoAccent,
+          tileColor: isOverGame ? Colors.indigo.shade700 : primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),

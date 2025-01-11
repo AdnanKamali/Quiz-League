@@ -3,10 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyAppTheme {
   // رنگ‌ها
-  static const Color primaryColor = Color(0xFF1E88E5);
+  static const Color primaryColor = Colors.indigoAccent;
   static const Color selectedOptionColor = Color(0xFFFFCA28);
   static const Color backgroundColor = Colors.indigo;
-  static const Color forgroundColor = Colors.indigoAccent;
   static const Color textColor = Colors.white;
   static const Color failColor = Color(0xFFE53935);
   static const Color successColor = Color(0xFF43A047);
@@ -45,7 +44,8 @@ class MyAppTheme {
 
   // تم تاریک
   static final ThemeData darkTheme = ThemeData(
-    primaryColor: primaryColor,
+    primaryColor: Colors.indigoAccent,
+    disabledColor: Colors.grey.shade600,
     scaffoldBackgroundColor: Colors.indigo,
     fontFamily: fontFamily,
     textTheme: TextTheme(

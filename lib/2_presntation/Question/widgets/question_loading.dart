@@ -7,6 +7,7 @@ class QuestionLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final primaryColor = Theme.of(context).primaryColor;
     return Row(
       spacing: 12,
       textDirection: TextDirection.rtl,
@@ -17,7 +18,7 @@ class QuestionLoading extends StatelessWidget {
             padding: EdgeInsets.all(12),
             height: MediaQuery.of(context).size.height * 0.4,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.indigoAccent),
+              border: Border.all(color: primaryColor),
               borderRadius: BorderRadius.circular(40),
             ),
             child: Column(
