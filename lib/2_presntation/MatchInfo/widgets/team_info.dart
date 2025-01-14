@@ -1,46 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/widgets/question_state.dart';
-
-class TeamInfoParams {
-  final List<String> trueQuestionList;
-  final String name;
-  final String logo;
-
-  TeamInfoParams(
-      {required this.trueQuestionList, required this.name, required this.logo});
-}
+import 'package:quiz_league/1_domain/entities/team_entity.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info/team_logo.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info/team_name.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info/team_score_board.dart';
 
 class TeamInfo extends StatelessWidget {
-  const TeamInfo({super.key, required this.teamInfoParams});
+  const TeamInfo({
+    super.key,
+    required this.teamEntity,
+    required this.questionAnsweredList,
+  });
 
-  final TeamInfoParams teamInfoParams;
+  final TeamEntity teamEntity;
+  final List<bool?> questionAnsweredList;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       spacing: 25,
       children: [
-        Row(
-          textDirection: TextDirection.rtl,
-          spacing: 12,
-          children: List.generate(
-            teamInfoParams.trueQuestionList.length,
-            (index) => PlayerQuestionState(
-                isTrue: teamInfoParams.trueQuestionList[index]),
-          ),
-        ),
-        Image.network(
-          teamInfoParams.logo,
-          height: 200,
-        ),
-        Text(
-          teamInfoParams.name,
-          style: TextStyle(
-            fontSize: 45.sp,
-            color: Colors.white,
-          ),
-        )
+        TeamScoreBoard(questionAnsweredList: questionAnsweredList),
+        TeamLogo(logo: teamEntity.logo),
+        TeamName(name: teamEntity.name),
       ],
     );
   }

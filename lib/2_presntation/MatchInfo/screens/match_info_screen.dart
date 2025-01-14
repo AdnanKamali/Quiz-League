@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/controller/cubit/match_info_cubit.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/category_bulilder.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/match_teams_info.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/started_match.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/surrender.dart';
 
-import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info.dart';
-import 'package:quiz_league/core/object_box_init.dart';
 import 'package:quiz_league/core/route_info.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
-import 'package:quiz_league/core/widgets/not_found_error.dart';
 
 class MatchInfoScreen extends StatelessWidget {
   const MatchInfoScreen({super.key, required this.matchId});
@@ -24,98 +22,69 @@ class MatchInfoScreen extends StatelessWidget {
   final int matchId;
   @override
   Widget build(BuildContext context) {
+    final matchControllerCubit = context.read<MatchControllerCubit>();
     final matchInfoCubit = context.read<MatchInfoCubit>();
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(25),
-        child: FutureBuilder(
-            future: matchInfoCubit.getMatchInfo(matchId),
-            builder: (context, matchSnapshop) {
-              if (!matchSnapshop.hasData)
-                return NotFoundErrorScreen(onTry: null);
-
-              final firstTeam = matchSnapshop.data!.firstTeam;
-              final secondTeam = matchSnapshop.data!.secondTeam;
-
-              final teamInfoParamsList = [
-                TeamInfoParams(
-                  trueQuestionList: matchGameEntity.firstTeamTrueQuestions,
-                  name: firstTeam.name,
-                  logo: firstTeam.logo,
-                ),
-                TeamInfoParams(
-                  trueQuestionList: matchGameEntity.secondTeamTrueQuestions,
-                  name: secondTeam.name,
-                  logo: secondTeam.logo,
-                ),
-              ];
-
-              final starterTeam =
-                  matchGameEntity.round == 0 || matchGameEntity.round % 2 == 0
-                      ? firstTeam
-                      : secondTeam;
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: 25,
-                children: [
-                  MatchTeamsInfo(
-                    teamInfoParamsList: teamInfoParamsList,
-                  ),
-                  SizedBox(height: 30),
-                  BlocBuilder<MatchInfoCubit, MatchInfoState>(
-                    builder: (context, state) {
-                      return Column(
-                        spacing: 35,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 25,
+          children: [
+            MatchTeamsInfo(
+              hostTeam: matchInfoCubit.hostTeam,
+              guestTeam: matchInfoCubit.guestTeam,
+            ),
+            SizedBox(height: 30),
+            BlocBuilder<MatchControllerCubit, MatchControllerState>(
+              builder: (context, state) {
+                return Column(
+                  spacing: 35,
+                  children: [
+                    state.when(
+                      initial: () => Text(""),
+                      beforStartMatch: () =>
+                          CategoryBulilder(hostTeam: matchInfoCubit.hostTeam),
+                      roundStarted: (categoryEntity) => StartedMatch(
+                        questionCategoryEntity: categoryEntity,
+                        teamTurn: matchInfoCubit.teamTurn,
+                      ),
+                      endGame: (winnerTeam) => Column(
+                        spacing: 14,
                         children: [
-                          state.when(
-                            initial: () =>
-                                CategoryBulilder(starterTeam: starterTeam),
-                            loading: () => Text(""),
-                            started: (questionCategoryEntity) => StartedMatch(
-                              categoryId: questionCategoryEntity.id,
-                              questionCategoryEntity: questionCategoryEntity,
-                              teamList: [firstTeam, secondTeam],
-                              starterTeam: starterTeam,
+                          if (winnerTeam != null)
+                            Center(
+                              child: Text("تیم برنده: ${winnerTeam.name}"),
                             ),
-                            overed: (winnerTeam) => Column(
-                              spacing: 14,
-                              children: [
-                                if (winnerTeam != null)
-                                  Center(
-                                    child:
-                                        Text("تیم برنده: ${winnerTeam.name}"),
-                                  ),
-                                if (winnerTeam == null)
-                                  Center(
-                                    child: Text(
-                                      "نتیجه : مساوی",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineLarge,
-                                    ),
-                                  ),
-                                CustomElevatedButton(
-                                  child: Text("بازگشت به صفحه اصلی"),
-                                  onPressed: () {
-                                    context.go("/");
-                                    matchInfoCubit.resetGame();
-                                  },
-                                )
-                              ],
+                          if (winnerTeam == null)
+                            Center(
+                              child: Text(
+                                "نتیجه : مساوی",
+                                style:
+                                    Theme.of(context).textTheme.headlineLarge,
+                              ),
                             ),
-                          ),
-                          state.maybeMap(
-                            overed: (value) => Text(""),
-                            orElse: () => Surrender(),
+                          CustomElevatedButton(
+                            child: Text("بازگشت به صفحه اصلی"),
+                            onPressed: () {
+                              context.go("/");
+                              matchControllerCubit.backToInitialStateAndReset();
+                            },
                           )
                         ],
-                      );
-                    },
-                  ),
-                ],
-              );
-            }),
+                      ),
+                    ),
+                    state.maybeMap(
+                      endGame: (value) => Text(""),
+                      orElse: () => Surrender(),
+                    )
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

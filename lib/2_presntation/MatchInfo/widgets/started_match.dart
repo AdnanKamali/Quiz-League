@@ -6,16 +6,12 @@ import 'package:quiz_league/2_presntation/MatchInfo/widgets/game_starter.dart';
 class StartedMatch extends StatelessWidget {
   const StartedMatch({
     super.key,
-    required this.teamList,
-    required this.starterTeam,
+    required this.teamTurn,
     required this.questionCategoryEntity,
-    required this.categoryId,
   });
 
-  final List<TeamEntity> teamList;
-  final TeamEntity starterTeam;
+  final TeamEntity teamTurn;
   final QuestionCategoryEntity questionCategoryEntity;
-  final int categoryId;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +30,7 @@ class StartedMatch extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.normal),
             ),
             Text(
-              starterTeam.name,
+              teamTurn.name,
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             Text(
@@ -44,8 +40,6 @@ class StartedMatch extends StatelessWidget {
           ],
         ),
         GameStarter(
-          teamList: teamList,
-          categoryId: categoryId,
           questionCategoryEntity: questionCategoryEntity,
         ),
       ],

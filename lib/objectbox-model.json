@@ -4,83 +4,39 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "2:715927220178045743",
-      "lastPropertyId": "3:126126461463416833",
+      "id": "1:4636615785119391922",
+      "lastPropertyId": "3:5250216892255379117",
       "name": "SettingsEntity",
       "properties": [
         {
-          "id": "1:2632738998402894766",
+          "id": "1:384008284256441552",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:5186763676940013029",
+          "id": "2:806000350233051462",
           "name": "questionCategoryCountPerRound",
           "type": 6
         },
         {
-          "id": "3:126126461463416833",
+          "id": "3:5250216892255379117",
           "name": "roundCount",
           "type": 6
         }
       ],
       "relations": []
-    },
-    {
-      "id": "3:2498379085814813052",
-      "lastPropertyId": "7:6799194277966990988",
-      "name": "MatchGameEntity",
-      "properties": [
-        {
-          "id": "1:4700126382927328416",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:6134416879610677160",
-          "name": "round",
-          "type": 6
-        },
-        {
-          "id": "3:7767586780677169558",
-          "name": "hostTeamId",
-          "type": 6
-        },
-        {
-          "id": "5:3916163629831153199",
-          "name": "firstTeamTrueQuestions",
-          "type": 30
-        },
-        {
-          "id": "6:1471888314672129500",
-          "name": "secondTeamTrueQuestions",
-          "type": 30
-        },
-        {
-          "id": "7:6799194277966990988",
-          "name": "categoriesSelectedId",
-          "type": 30
-        }
-      ],
-      "relations": []
     }
   ],
-  "lastEntityId": "3:2498379085814813052",
+  "lastEntityId": "1:4636615785119391922",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [
-    9089785061346644142
-  ],
+  "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [
-    1323630653377247350,
-    4133113194263758613
-  ],
+  "retiredPropertyUids": [],
   "retiredRelationUids": [],
   "version": 1
 }

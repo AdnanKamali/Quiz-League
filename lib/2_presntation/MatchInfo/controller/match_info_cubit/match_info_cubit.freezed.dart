@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'settings_cubit.dart';
+part of 'match_info_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,15 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$SettingsState {
+mixin _$MatchInfoState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SettingsEntity settingsEntity) success,
+    required TResult Function(MatchInfoEntity matchInfoEntity) success,
+    required TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)
+        scoreChange,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +31,10 @@ mixin _$SettingsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SettingsEntity settingsEntity)? success,
+    TResult? Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult? Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +42,10 @@ mixin _$SettingsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SettingsEntity settingsEntity)? success,
+    TResult Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -46,6 +55,7 @@ mixin _$SettingsState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_ScoreChange value) scoreChange,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +64,7 @@ mixin _$SettingsState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_ScoreChange value)? scoreChange,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +73,7 @@ mixin _$SettingsState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_ScoreChange value)? scoreChange,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -69,23 +81,23 @@ mixin _$SettingsState {
 }
 
 /// @nodoc
-abstract class $SettingsStateCopyWith<$Res> {
-  factory $SettingsStateCopyWith(
-          SettingsState value, $Res Function(SettingsState) then) =
-      _$SettingsStateCopyWithImpl<$Res, SettingsState>;
+abstract class $MatchInfoStateCopyWith<$Res> {
+  factory $MatchInfoStateCopyWith(
+          MatchInfoState value, $Res Function(MatchInfoState) then) =
+      _$MatchInfoStateCopyWithImpl<$Res, MatchInfoState>;
 }
 
 /// @nodoc
-class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
-    implements $SettingsStateCopyWith<$Res> {
-  _$SettingsStateCopyWithImpl(this._value, this._then);
+class _$MatchInfoStateCopyWithImpl<$Res, $Val extends MatchInfoState>
+    implements $MatchInfoStateCopyWith<$Res> {
+  _$MatchInfoStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SettingsState
+  /// Create a copy of MatchInfoState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -98,13 +110,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$MatchInfoStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SettingsState
+  /// Create a copy of MatchInfoState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -115,7 +127,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'SettingsState.initial()';
+    return 'MatchInfoState.initial()';
   }
 
   @override
@@ -132,7 +144,10 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SettingsEntity settingsEntity) success,
+    required TResult Function(MatchInfoEntity matchInfoEntity) success,
+    required TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)
+        scoreChange,
     required TResult Function() error,
   }) {
     return initial();
@@ -143,7 +158,10 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SettingsEntity settingsEntity)? success,
+    TResult? Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult? Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -154,7 +172,10 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SettingsEntity settingsEntity)? success,
+    TResult Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -170,6 +191,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_ScoreChange value) scoreChange,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -181,6 +203,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_ScoreChange value)? scoreChange,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -192,6 +215,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_ScoreChange value)? scoreChange,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -202,7 +226,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements SettingsState {
+abstract class _Initial implements MatchInfoState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -215,13 +239,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$MatchInfoStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SettingsState
+  /// Create a copy of MatchInfoState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -232,7 +256,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'SettingsState.loading()';
+    return 'MatchInfoState.loading()';
   }
 
   @override
@@ -249,7 +273,10 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SettingsEntity settingsEntity) success,
+    required TResult Function(MatchInfoEntity matchInfoEntity) success,
+    required TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)
+        scoreChange,
     required TResult Function() error,
   }) {
     return loading();
@@ -260,7 +287,10 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SettingsEntity settingsEntity)? success,
+    TResult? Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult? Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -271,7 +301,10 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SettingsEntity settingsEntity)? success,
+    TResult Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -287,6 +320,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_ScoreChange value) scoreChange,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -298,6 +332,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_ScoreChange value)? scoreChange,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -309,6 +344,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_ScoreChange value)? scoreChange,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -319,7 +355,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements SettingsState {
+abstract class _Loading implements MatchInfoState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -329,29 +365,29 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({SettingsEntity settingsEntity});
+  $Res call({MatchInfoEntity matchInfoEntity});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$MatchInfoStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SettingsState
+  /// Create a copy of MatchInfoState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? settingsEntity = null,
+    Object? matchInfoEntity = null,
   }) {
     return _then(_$SuccessImpl(
-      settingsEntity: null == settingsEntity
-          ? _value.settingsEntity
-          : settingsEntity // ignore: cast_nullable_to_non_nullable
-              as SettingsEntity,
+      matchInfoEntity: null == matchInfoEntity
+          ? _value.matchInfoEntity
+          : matchInfoEntity // ignore: cast_nullable_to_non_nullable
+              as MatchInfoEntity,
     ));
   }
 }
@@ -359,14 +395,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl({required this.settingsEntity});
+  const _$SuccessImpl({required this.matchInfoEntity});
 
   @override
-  final SettingsEntity settingsEntity;
+  final MatchInfoEntity matchInfoEntity;
 
   @override
   String toString() {
-    return 'SettingsState.success(settingsEntity: $settingsEntity)';
+    return 'MatchInfoState.success(matchInfoEntity: $matchInfoEntity)';
   }
 
   @override
@@ -374,14 +410,14 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.settingsEntity, settingsEntity) ||
-                other.settingsEntity == settingsEntity));
+            (identical(other.matchInfoEntity, matchInfoEntity) ||
+                other.matchInfoEntity == matchInfoEntity));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, settingsEntity);
+  int get hashCode => Object.hash(runtimeType, matchInfoEntity);
 
-  /// Create a copy of SettingsState
+  /// Create a copy of MatchInfoState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -394,10 +430,13 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SettingsEntity settingsEntity) success,
+    required TResult Function(MatchInfoEntity matchInfoEntity) success,
+    required TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)
+        scoreChange,
     required TResult Function() error,
   }) {
-    return success(settingsEntity);
+    return success(matchInfoEntity);
   }
 
   @override
@@ -405,10 +444,13 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SettingsEntity settingsEntity)? success,
+    TResult? Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult? Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult? Function()? error,
   }) {
-    return success?.call(settingsEntity);
+    return success?.call(matchInfoEntity);
   }
 
   @override
@@ -416,12 +458,15 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SettingsEntity settingsEntity)? success,
+    TResult Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(settingsEntity);
+      return success(matchInfoEntity);
     }
     return orElse();
   }
@@ -432,6 +477,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_ScoreChange value) scoreChange,
     required TResult Function(_Error value) error,
   }) {
     return success(this);
@@ -443,6 +489,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_ScoreChange value)? scoreChange,
     TResult? Function(_Error value)? error,
   }) {
     return success?.call(this);
@@ -454,6 +501,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_ScoreChange value)? scoreChange,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -464,16 +512,213 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements SettingsState {
-  const factory _Success({required final SettingsEntity settingsEntity}) =
+abstract class _Success implements MatchInfoState {
+  const factory _Success({required final MatchInfoEntity matchInfoEntity}) =
       _$SuccessImpl;
 
-  SettingsEntity get settingsEntity;
+  MatchInfoEntity get matchInfoEntity;
 
-  /// Create a copy of SettingsState
+  /// Create a copy of MatchInfoState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ScoreChangeImplCopyWith<$Res> {
+  factory _$$ScoreChangeImplCopyWith(
+          _$ScoreChangeImpl value, $Res Function(_$ScoreChangeImpl) then) =
+      __$$ScoreChangeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered});
+}
+
+/// @nodoc
+class __$$ScoreChangeImplCopyWithImpl<$Res>
+    extends _$MatchInfoStateCopyWithImpl<$Res, _$ScoreChangeImpl>
+    implements _$$ScoreChangeImplCopyWith<$Res> {
+  __$$ScoreChangeImplCopyWithImpl(
+      _$ScoreChangeImpl _value, $Res Function(_$ScoreChangeImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of MatchInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hostTeamAnswered = null,
+    Object? guestTeamAnswered = null,
+  }) {
+    return _then(_$ScoreChangeImpl(
+      hostTeamAnswered: null == hostTeamAnswered
+          ? _value._hostTeamAnswered
+          : hostTeamAnswered // ignore: cast_nullable_to_non_nullable
+              as List<bool?>,
+      guestTeamAnswered: null == guestTeamAnswered
+          ? _value._guestTeamAnswered
+          : guestTeamAnswered // ignore: cast_nullable_to_non_nullable
+              as List<bool?>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ScoreChangeImpl implements _ScoreChange {
+  const _$ScoreChangeImpl(
+      {required final List<bool?> hostTeamAnswered,
+      required final List<bool?> guestTeamAnswered})
+      : _hostTeamAnswered = hostTeamAnswered,
+        _guestTeamAnswered = guestTeamAnswered;
+
+  final List<bool?> _hostTeamAnswered;
+  @override
+  List<bool?> get hostTeamAnswered {
+    if (_hostTeamAnswered is EqualUnmodifiableListView)
+      return _hostTeamAnswered;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_hostTeamAnswered);
+  }
+
+  final List<bool?> _guestTeamAnswered;
+  @override
+  List<bool?> get guestTeamAnswered {
+    if (_guestTeamAnswered is EqualUnmodifiableListView)
+      return _guestTeamAnswered;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_guestTeamAnswered);
+  }
+
+  @override
+  String toString() {
+    return 'MatchInfoState.scoreChange(hostTeamAnswered: $hostTeamAnswered, guestTeamAnswered: $guestTeamAnswered)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ScoreChangeImpl &&
+            const DeepCollectionEquality()
+                .equals(other._hostTeamAnswered, _hostTeamAnswered) &&
+            const DeepCollectionEquality()
+                .equals(other._guestTeamAnswered, _guestTeamAnswered));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_hostTeamAnswered),
+      const DeepCollectionEquality().hash(_guestTeamAnswered));
+
+  /// Create a copy of MatchInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ScoreChangeImplCopyWith<_$ScoreChangeImpl> get copyWith =>
+      __$$ScoreChangeImplCopyWithImpl<_$ScoreChangeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(MatchInfoEntity matchInfoEntity) success,
+    required TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)
+        scoreChange,
+    required TResult Function() error,
+  }) {
+    return scoreChange(hostTeamAnswered, guestTeamAnswered);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult? Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
+    TResult? Function()? error,
+  }) {
+    return scoreChange?.call(hostTeamAnswered, guestTeamAnswered);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (scoreChange != null) {
+      return scoreChange(hostTeamAnswered, guestTeamAnswered);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_ScoreChange value) scoreChange,
+    required TResult Function(_Error value) error,
+  }) {
+    return scoreChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_ScoreChange value)? scoreChange,
+    TResult? Function(_Error value)? error,
+  }) {
+    return scoreChange?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_ScoreChange value)? scoreChange,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (scoreChange != null) {
+      return scoreChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ScoreChange implements MatchInfoState {
+  const factory _ScoreChange(
+      {required final List<bool?> hostTeamAnswered,
+      required final List<bool?> guestTeamAnswered}) = _$ScoreChangeImpl;
+
+  List<bool?> get hostTeamAnswered;
+  List<bool?> get guestTeamAnswered;
+
+  /// Create a copy of MatchInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ScoreChangeImplCopyWith<_$ScoreChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -486,13 +731,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$MatchInfoStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SettingsState
+  /// Create a copy of MatchInfoState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -503,7 +748,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'SettingsState.error()';
+    return 'MatchInfoState.error()';
   }
 
   @override
@@ -520,7 +765,10 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SettingsEntity settingsEntity) success,
+    required TResult Function(MatchInfoEntity matchInfoEntity) success,
+    required TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)
+        scoreChange,
     required TResult Function() error,
   }) {
     return error();
@@ -531,7 +779,10 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SettingsEntity settingsEntity)? success,
+    TResult? Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult? Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -542,7 +793,10 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SettingsEntity settingsEntity)? success,
+    TResult Function(MatchInfoEntity matchInfoEntity)? success,
+    TResult Function(
+            List<bool?> hostTeamAnswered, List<bool?> guestTeamAnswered)?
+        scoreChange,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -558,6 +812,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_ScoreChange value) scoreChange,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -569,6 +824,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_ScoreChange value)? scoreChange,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -580,6 +836,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_ScoreChange value)? scoreChange,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -590,6 +847,6 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements SettingsState {
+abstract class _Error implements MatchInfoState {
   const factory _Error() = _$ErrorImpl;
 }

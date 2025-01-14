@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_league/2_presntation/Leagues/screens/leagues_screen.dart';
-import 'package:quiz_league/2_presntation/Settings/screen/settings_screen.dart';
 import 'package:quiz_league/2_presntation/TimeLine/screens/match_time_line_screen.dart';
 import 'package:quiz_league/core/route_info.dart';
 
@@ -23,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final pages = [
     LeaguesScreen(),
     MatchTimeLineScreen(),
-    SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {

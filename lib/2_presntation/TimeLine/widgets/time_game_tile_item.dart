@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quiz_league/1_domain/entities/match_time_line_entity.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -11,6 +14,8 @@ class TimeGameTileItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final matchInfoCubit = context.read<MatchInfoCubit>();
+    final matchControllerCubit = context.read<MatchControllerCubit>();
     final primaryColor = Theme.of(context).primaryColor;
 
     final firstTeam = matchTimeLineEntity.firstTeamEntity;
@@ -19,6 +24,7 @@ class TimeGameTileItem extends StatelessWidget {
     final startTime = Jalali.fromDateTime(matchTimeLineEntity.startTime);
     final isStartedMatch =
         DateTime.now().isAfter(matchTimeLineEntity.startTime);
+
     final isOverGame = matchTimeLineEntity.endTime != null;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -87,7 +93,11 @@ class TimeGameTileItem extends StatelessWidget {
                                   .headlineMedium
                                   ?.copyWith(color: Colors.orange),
                             ),
-                            onPressed: () {
+                            onPressed: () async {
+                              await matchInfoCubit
+                                  .getMatchInfo(matchTimeLineEntity.id);
+                              matchControllerCubit.beforStartRound();
+
                               windowManager.setFullScreen(true);
                               context.go(
                                   "/match/${matchTimeLineEntity.leagueEntity.id}/${matchTimeLineEntity.id}");

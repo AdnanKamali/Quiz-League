@@ -2,34 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
-import 'package:quiz_league/1_domain/entities/team_entity.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/controller/cubit/match_info_cubit.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/screens/question_screen.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
 
 class GameStarter extends StatelessWidget {
   const GameStarter({
     super.key,
-    required this.teamList,
     required this.questionCategoryEntity,
-    required this.categoryId,
   });
-  final List<TeamEntity> teamList;
   final QuestionCategoryEntity questionCategoryEntity;
-  final int categoryId;
 
   @override
   Widget build(BuildContext context) {
     final params = ModalRoute.of(context)?.settings.arguments as Map;
-    final matchInfoCubit = context.read<MatchInfoCubit>();
+    final matchInfoCubit = context.read<MatchControllerCubit>();
 
     return CustomElevatedButton(
       onPressed: () {
-        matchInfoCubit.startRound(teamList[0], teamList[1]);
+        matchInfoCubit.startGamePlayed();
         context.goNamed(QuestionScreen.routeInfo.name, pathParameters: {
           "leagueId": params["leagueId"],
           "matchId": params["matchId"],
-          "categoryId": "$categoryId",
+          "categoryId": "${questionCategoryEntity.id}",
         });
       },
       child: Row(

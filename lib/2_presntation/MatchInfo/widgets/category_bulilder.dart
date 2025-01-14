@@ -3,90 +3,54 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_league/1_domain/entities/team_entity.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/controller/cubit/match_info_cubit.dart';
-import 'package:quiz_league/core/object_box_init.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/widgets/category/category_item.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/widgets/category/category_list_view.dart';
 
 class CategoryBulilder extends StatelessWidget {
-  const CategoryBulilder({super.key, required this.starterTeam});
+  const CategoryBulilder({super.key, required this.hostTeam});
 
-  final TeamEntity starterTeam;
+  final TeamEntity hostTeam;
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-    final disabledColor = Theme.of(context).disabledColor;
-    final matchGameEntity = matchGameEntityBox.get(1)!;
-    final matchInfoCubit = context.read<MatchInfoCubit>();
+    final matchControllerCubit = context.read<MatchControllerCubit>();
+
+    final scrollConfigurationBehavior =
+        ScrollConfiguration.of(context).copyWith(
+      dragDevices: {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      },
+    );
 
     return Column(
       children: [
         Text(
-          "${starterTeam.name} , یک موضوع رو انتخاب کن",
+          "${hostTeam.name} , یک موضوع رو انتخاب کن",
           style: Theme.of(context).textTheme.labelMedium,
         ),
         FutureBuilder(
-          future: matchInfoCubit.getQuestionCategoryList(),
+          future: matchControllerCubit.getQuestionCategoryList(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return SizedBox(
                 height: 250,
                 child: ScrollConfiguration(
-                  behavior: ScrollConfiguration.of(context).copyWith(
-                    dragDevices: {
-                      PointerDeviceKind.touch,
-                      PointerDeviceKind.mouse,
+                  behavior: scrollConfigurationBehavior,
+                  child: CategoryListView(
+                      children: List.generate(
+                    snapshot.data!.length,
+                    (index) {
+                      final questionCategoryEntity = snapshot.data![index];
+                      final isUsedCategory = matchControllerCubit.categoryUsed
+                          .contains(snapshot.data![index]);
+                      return CategoryItem(
+                        questionCategoryEntity: questionCategoryEntity,
+                        isUsed: isUsedCategory,
+                      );
                     },
-                  ),
-                  child: Center(
-                    child: ListView(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        children: List.generate(
-                          snapshot.data!.length,
-                          (index) {
-                            final questionCategoryEntity =
-                                snapshot.data![index % 6];
-                            return SizedBox(
-                              child: InkWell(
-                                onTap: matchGameEntity.categoriesSelectedId
-                                        .contains(
-                                            "${snapshot.data![index % 6].id}")
-                                    ? null
-                                    : () {
-                                        matchInfoCubit.selectCategory(
-                                            snapshot.data![index]);
-                                      },
-                                child: Card(
-                                  color: matchGameEntity.categoriesSelectedId
-                                          .contains(
-                                              "${snapshot.data![index % 6].id}")
-                                      ? disabledColor
-                                      : primaryColor,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Column(
-                                      spacing: 14,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Image.network(
-                                          questionCategoryEntity.logo,
-                                          height: 150,
-                                        ),
-                                        Text(
-                                          questionCategoryEntity.title,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        )),
-                  ),
+                  )),
                 ),
               );
             }

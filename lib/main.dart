@@ -9,11 +9,11 @@ import 'package:quiz_league/1_domain/usecasees/question_category_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/question_usecase.dart';
 import 'package:quiz_league/2_presntation/LeagueTable/controller/cubit/league_table_cubit.dart';
 import 'package:quiz_league/2_presntation/Leagues/controller/cubit/leagues_cubit.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/controller/cubit/match_info_cubit.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_cubit/question_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_option_cubit/question_option_cubit.dart';
 import 'package:quiz_league/2_presntation/TimeLine/controller/cubit/match_time_line_cubit.dart';
-import 'package:quiz_league/core/object_box_init.dart';
 import 'package:quiz_league/core/route.dart';
 import 'package:quiz_league/core/theme.dart';
 import 'package:quiz_league/injection.dart';
@@ -23,8 +23,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   serviceLocator();
-
-  await onInitBoxObject();
 
   const windowOptions = WindowOptions(
     minimumSize: Size(1280, 720),
@@ -67,9 +65,13 @@ class MyApp extends StatelessWidget {
               create: (_) => QuestionOptionCubit(),
             ),
             BlocProvider(
-              create: (_) => MatchInfoCubit(
-                  matchInfoUsecase: sl<MatchInfoUsecase>(),
+              create: (_) => MatchControllerCubit(
                   questionCategoryUsecase: sl<QuestionCategoryUsecase>()),
+            ),
+            BlocProvider(
+              create: (_) => MatchInfoCubit(
+                matchInfoUsecase: sl<MatchInfoUsecase>(),
+              ),
             ),
             BlocProvider(
               create: (_) => MatchTimeLineCubit(
