@@ -37,6 +37,7 @@ class QuestionOptionCubit extends Cubit<QuestionOptionState> {
   }
 
   Timer? _timer;
+  Timer? get timer => _timer;
 
   void cancelTimer() {
     _timer?.cancel();
@@ -44,7 +45,7 @@ class QuestionOptionCubit extends Cubit<QuestionOptionState> {
   }
 
   void startTimerForSelectedOptionToShowResult() {
-    int maxTimeToShowAnswerSecond = 7;
+    int maxTimeToShowAnswerSecond = 2;
 
     if (_timer != null) cancelTimer();
     _timer = Timer.periodic(

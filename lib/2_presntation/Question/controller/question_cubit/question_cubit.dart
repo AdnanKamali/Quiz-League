@@ -11,10 +11,13 @@ class QuestionCubit extends Cubit<QuestionState> {
   QuestionCubit({required this.questionUsecase})
       : super(QuestionState.initial());
 
-  void getQuestion(int categoryId, int leagueId) async {
+  void getQuestion({required int categoryId, required int leagueId}) async {
     emit(QuestionState.loading());
-    await Future.delayed(Duration(seconds: 2));
-    final response = await questionUsecase.getQuestion(categoryId, leagueId);
+    await Future.delayed(Duration(milliseconds: 500));
+    final response = await questionUsecase.getQuestion(
+      leagueId: leagueId,
+      categoryId: categoryId,
+    );
     response.fold(
       (l) => emit(QuestionState.error()),
       (r) => emit(QuestionState.success(questionEntity: r.result)),

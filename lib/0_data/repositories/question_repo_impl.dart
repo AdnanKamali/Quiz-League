@@ -9,12 +9,14 @@ class QuestionRepoImpl implements QuestionRepository {
 
   QuestionRepoImpl({required this.questionRemoteDatasourceRestClient});
   @override
-  Future<Either<FailureResponse, SuccessResponse<QuestionEntity>>> getQuestion(
-      int categoryId, int leagueId) async {
+  Future<Either<FailureResponse, SuccessResponse<QuestionEntity>>> getQuestion({
+    required int leagueId,
+    required int categoryId,
+  }) async {
     try {
       final result = await questionRemoteDatasourceRestClient.getQuestion(
-        "$categoryId",
         "$leagueId",
+        "$categoryId",
       );
       final response = SuccessResponse(result: result);
       return Right(response);

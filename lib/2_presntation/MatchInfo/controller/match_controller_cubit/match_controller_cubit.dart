@@ -15,6 +15,7 @@ class MatchControllerCubit extends Cubit<MatchControllerState> {
 
   void backToInitialStateAndReset() {
     emit(MatchControllerState.initial());
+    gamePlayed = 1;
     _categoryUsed = [];
   }
 
@@ -48,6 +49,10 @@ class MatchControllerCubit extends Cubit<MatchControllerState> {
     } else {
       emit(state);
     }
+  }
+
+  void endGame(TeamEntity? winnerTeam) {
+    emit(MatchControllerState.endGame(winnerTeam: winnerTeam));
   }
 
   Future<List<QuestionCategoryEntity>?> getQuestionCategoryList() async {

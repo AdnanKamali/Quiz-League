@@ -12,19 +12,43 @@ class MatchInfoCubit extends Cubit<MatchInfoState> {
   MatchInfoCubit({required this.matchInfoUsecase})
       : super(MatchInfoState.initial());
 
+  void backToInitial() {
+    _hostTeamAnswered.replaceRange(0, 6, List.generate(6, (index) => null));
+    _guestTeamAnswered.replaceRange(0, 6, List.generate(6, (index) => null));
+    _hostTeamQuestionTurn = 0;
+    _guestTeamQuestionTurn = 0;
+  }
+
   final List<bool?> _hostTeamAnswered = List.generate(6, (index) => null);
   int _hostTeamQuestionTurn = 0;
   final List<bool?> _guestTeamAnswered = List.generate(6, (index) => null);
   int _guestTeamQuestionTurn = 0;
 
   void addScore(bool answerResult) {
-    print("SHOW RESULT");
     if (teamTurn == _hostTeam) {
       _hostTeamAnswered[_hostTeamQuestionTurn] = answerResult;
       _hostTeamQuestionTurn++;
     } else {
       _guestTeamAnswered[_guestTeamQuestionTurn] = answerResult;
       _guestTeamQuestionTurn++;
+    }
+  }
+
+  TeamEntity? get winnerTeam {
+    int guestScore = 0;
+    int hostScore = 0;
+    for (final isTrueAnswer in _guestTeamAnswered) {
+      if (isTrueAnswer != null && isTrueAnswer) guestScore++;
+    }
+    for (final isTrueAnswer in _hostTeamAnswered) {
+      if (isTrueAnswer != null && isTrueAnswer) hostScore++;
+    }
+    if (hostScore > guestScore) {
+      return hostTeam;
+    } else if (hostScore < guestScore) {
+      return guestTeam;
+    } else {
+      return null;
     }
   }
 

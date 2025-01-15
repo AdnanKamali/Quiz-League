@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/screens/question_screen.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
 
@@ -16,11 +14,9 @@ class GameStarter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final params = ModalRoute.of(context)?.settings.arguments as Map;
-    final matchInfoCubit = context.read<MatchControllerCubit>();
 
     return CustomElevatedButton(
       onPressed: () {
-        matchInfoCubit.startGamePlayed();
         context.goNamed(QuestionScreen.routeInfo.name, pathParameters: {
           "leagueId": params["leagueId"],
           "matchId": params["matchId"],

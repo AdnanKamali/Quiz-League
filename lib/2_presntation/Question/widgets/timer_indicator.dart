@@ -40,14 +40,25 @@ class _TimerIndicatorState extends State<TimerIndicator> {
     super.initState();
     questionOptionCubit = context.read<QuestionOptionCubit>();
     Future.delayed(Duration(seconds: 2)).then(
-      (value) => startTimer(),
+      (value) => questionOptionCubit.state.maybeWhen(
+        orElse: () => startTimer(),
+        answered: (_) => null,
+        endTime: () => null,
+      ),
     );
+  }
+
+  void timerDisposer() {
+    if (_timer != null && _timer!.isActive) _timer?.cancel();
+    if (questionOptionCubit.timer != null &&
+        questionOptionCubit.timer!.isActive) {
+      questionOptionCubit.cancelTimer();
+    }
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
-    questionOptionCubit.cancelTimer();
+    timerDisposer();
     super.dispose();
   }
 
@@ -57,14 +68,9 @@ class _TimerIndicatorState extends State<TimerIndicator> {
 
     return BlocListener<QuestionOptionCubit, QuestionOptionState>(
       listener: (context, state) {
-        cancelTimer() {
-          _timer!.cancel();
-          questionOptionCubit.cancelTimer();
-        }
-
         state.mapOrNull(
-          answered: (value) => cancelTimer(),
-          endTime: (value) => cancelTimer(),
+          answered: (value) => timerDisposer(),
+          endTime: (value) => timerDisposer(),
         );
       },
       child: LinearProgressIndicator(

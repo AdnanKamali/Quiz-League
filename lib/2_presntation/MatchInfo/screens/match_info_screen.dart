@@ -69,6 +69,7 @@ class MatchInfoScreen extends StatelessWidget {
                             child: Text("بازگشت به صفحه اصلی"),
                             onPressed: () {
                               context.go("/");
+                              matchInfoCubit.backToInitial();
                               matchControllerCubit.backToInitialStateAndReset();
                             },
                           )

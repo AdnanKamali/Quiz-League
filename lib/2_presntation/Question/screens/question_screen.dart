@@ -12,6 +12,7 @@ import 'package:quiz_league/2_presntation/Question/widgets/question_option_loadi
 import 'package:quiz_league/2_presntation/Question/widgets/question_widget.dart';
 import 'package:quiz_league/2_presntation/Question/widgets/timer_indicator.dart';
 import 'package:quiz_league/core/route_info.dart';
+import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
 import 'package:quiz_league/core/widgets/not_found_error.dart';
 
 final answerParamsSingleton = AnswerParams(
@@ -30,18 +31,19 @@ class QuestionScreen extends StatelessWidget {
     name: "Question",
     path: 'question/:categoryId',
   );
-  Widget backButton(BuildContext context) => BackButton(
-        onPressed: () {
-          final questionOptionCubit = context.read<QuestionOptionCubit>();
-          final matchInfoCubit = context.read<MatchInfoCubit>();
-          final matchControllerCubit = context.read<MatchControllerCubit>();
-          questionOptionCubit.backToInit();
-
-          matchInfoCubit.changeTeamTurn();
-          matchControllerCubit.questionAnswered();
-          context.pop();
-        },
-      );
+  void onBackToMatch(BuildContext context) {
+    final questionOptionCubit = context.read<QuestionOptionCubit>();
+    final matchInfoCubit = context.read<MatchInfoCubit>();
+    final matchControllerCubit = context.read<MatchControllerCubit>();
+    matchControllerCubit.startGamePlayed();
+    if (matchControllerCubit.gamePlayed == 13) {
+      matchControllerCubit.endGame(matchInfoCubit.winnerTeam);
+    }
+    matchInfoCubit.changeTeamTurn();
+    matchControllerCubit.questionAnswered();
+    questionOptionCubit.backToInit();
+    context.pop();
+  }
 
   Widget initialOptionBuilder({
     required List<QuestionOptionEntity> questionOptionList,
@@ -105,7 +107,9 @@ class QuestionScreen extends StatelessWidget {
           },
         ),
         SizedBox(height: 20),
-        backButton(context)
+        BackButton(
+          onPressed: () => onBackToMatch(context),
+        )
       ],
     );
   }
@@ -130,7 +134,9 @@ class QuestionScreen extends StatelessWidget {
           },
         ),
         SizedBox(height: 20),
-        backButton(context),
+        BackButton(
+          onPressed: () => onBackToMatch(context),
+        ),
       ],
     );
   }
@@ -139,18 +145,20 @@ class QuestionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final questionCubit = context.read<QuestionCubit>();
     final matchInfoCubit = context.read<MatchInfoCubit>();
+    // final questionOptionCubit = context.read<QuestionOptionCubit>();
 
     final params = ModalRoute.of(context)?.settings.arguments as Map;
 
     answerParamsSingleton.matchId = int.parse(params["matchId"]);
 
     questionCubit.getQuestion(
-        int.parse(params["categoryId"]), int.parse(params["leagueId"]));
+        categoryId: int.parse(params["categoryId"]),
+        leagueId: int.parse(params["leagueId"]));
 
     final notFoundErrorScreen = NotFoundErrorScreen(
       onTry: () => questionCubit.getQuestion(
-        int.parse(params["categoryId"]),
-        int.parse(params["leagueId"]),
+        leagueId: int.parse(params["leagueId"]),
+        categoryId: int.parse(params["categoryId"]),
       ),
     );
     return Scaffold(
@@ -158,7 +166,7 @@ class QuestionScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: BlocBuilder<QuestionCubit, QuestionState>(
-          builder: (context, state) {
+          builder: (cttx, state) {
             return state.when(
               initial: () => notFoundErrorScreen,
               loading: () => Column(
@@ -182,13 +190,15 @@ class QuestionScreen extends StatelessWidget {
                       imageUrl: questionEntity.image,
                       question: questionEntity.text,
                     ),
-                    if (questionEntity.questionOptions != null)
+                    if (questionEntity.questionType != QuestionType.TEXT)
                       BlocBuilder<QuestionOptionCubit, QuestionOptionState>(
-                        builder: (context, state) {
+                        builder: (ctx, state) {
                           return state.when(
-                            initial: () => initialOptionBuilder(
-                                questionOptionList:
-                                    questionEntity.questionOptions!),
+                            initial: () {
+                              return initialOptionBuilder(
+                                  questionOptionList:
+                                      questionEntity.questionOptions!);
+                            },
                             beforAnswered: (questionOptionSelected) =>
                                 beforAnswerOptionBuilder(
                               questionOptionList:
@@ -216,8 +226,96 @@ class QuestionScreen extends StatelessWidget {
                           );
                         },
                       ),
-                    if (questionEntity.questionOptions == null)
-                      Text("TEXT TYPE")
+                    if (questionEntity.questionType == QuestionType.TEXT)
+                      Column(
+                        children: [
+                          Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: TextField(
+                              style: TextStyle(fontSize: 82),
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: BorderSide(color: Colors.indigo),
+                                ),
+                                label: Text(
+                                  "متن جواب رو وارد کنید",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.indigoAccent),
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                              ),
+                            ),
+                          ),
+                          BlocBuilder<QuestionOptionCubit, QuestionOptionState>(
+                              builder: (ctx, state) {
+                            return state.maybeWhen(
+                              orElse: () => CustomElevatedButton(
+                                child: Text("مشاهده جواب"),
+                                onPressed: () {
+                                  final questionOptionCubit =
+                                      context.read<QuestionOptionCubit>();
+                                  questionOptionCubit.endTimeWithoutAnswered();
+                                },
+                              ),
+                              endTime: () => Column(
+                                spacing: 26,
+                                children: [
+                                  SizedBox(
+                                    height: 26,
+                                  ),
+                                  Text(
+                                    questionEntity.questionOptions!.isEmpty
+                                        ? "پاسخی وارد نشده"
+                                        : "پاسخ: ${questionEntity.questionOptions!.first.text}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineLarge,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    spacing: 165,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          matchInfoCubit.addScore(false);
+                                          onBackToMatch(context);
+                                        },
+                                        icon: Icon(
+                                          Icons.cancel,
+                                          size: 82,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          matchInfoCubit.addScore(true);
+                                          onBackToMatch(context);
+                                        },
+                                        icon: Icon(
+                                          Icons.check,
+                                          size: 82,
+                                          color: Colors.green,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
                   ],
                 );
               },

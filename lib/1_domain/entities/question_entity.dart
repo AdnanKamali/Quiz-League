@@ -18,7 +18,7 @@ enum QuestionType {
   MCQ_4,
   MCQ_3,
   MCQ_2,
-  Text,
+  TEXT,
 }
 
 class QuestionOptionEntity {

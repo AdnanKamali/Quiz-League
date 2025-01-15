@@ -99,8 +99,10 @@ class TimeGameTileItem extends StatelessWidget {
                               matchControllerCubit.beforStartRound();
 
                               windowManager.setFullScreen(true);
-                              context.go(
-                                  "/match/${matchTimeLineEntity.leagueEntity.id}/${matchTimeLineEntity.id}");
+                              if (context.mounted) {
+                                context.go(
+                                    "/match/${matchTimeLineEntity.leagueEntity.id}/${matchTimeLineEntity.id}");
+                              }
                             },
                           ),
                         if (isStartedMatch && isOverGame)

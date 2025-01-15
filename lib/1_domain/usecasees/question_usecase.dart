@@ -8,7 +8,10 @@ class QuestionUsecase {
 
   QuestionUsecase({required this.questionRepository});
   Future<Either<FailureResponse, SuccessResponse<QuestionEntity>>> getQuestion(
-      int categoryId, int leagueId) async {
-    return await questionRepository.getQuestion(categoryId, leagueId);
+      {required int categoryId, required int leagueId}) async {
+    return await questionRepository.getQuestion(
+      leagueId: leagueId,
+      categoryId: categoryId,
+    );
   }
 }

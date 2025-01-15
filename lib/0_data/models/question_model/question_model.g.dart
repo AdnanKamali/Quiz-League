@@ -66,5 +66,5 @@ const _$QuestionTypeEnumMap = {
   QuestionType.MCQ_4: 'MCQ_4',
   QuestionType.MCQ_3: 'MCQ_3',
   QuestionType.MCQ_2: 'MCQ_2',
-  QuestionType.Text: 'Text',
+  QuestionType.TEXT: 'TEXT',
 };
