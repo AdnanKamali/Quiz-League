@@ -430,7 +430,9 @@ TeamTableModel _$TeamTableModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TeamTableModel {
-  TeamModel get team => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get logo => throw _privateConstructorUsedError;
   int get points => throw _privateConstructorUsedError;
   @JsonKey(name: "table_info")
   TeamTableInfoModel get teamTableInfoModel =>
@@ -453,11 +455,12 @@ abstract class $TeamTableModelCopyWith<$Res> {
       _$TeamTableModelCopyWithImpl<$Res, TeamTableModel>;
   @useResult
   $Res call(
-      {TeamModel team,
+      {int id,
+      String name,
+      String logo,
       int points,
       @JsonKey(name: "table_info") TeamTableInfoModel teamTableInfoModel});
 
-  $TeamModelCopyWith<$Res> get team;
   $TeamTableInfoModelCopyWith<$Res> get teamTableInfoModel;
 }
 
@@ -476,15 +479,25 @@ class _$TeamTableModelCopyWithImpl<$Res, $Val extends TeamTableModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? team = null,
+    Object? id = null,
+    Object? name = null,
+    Object? logo = null,
     Object? points = null,
     Object? teamTableInfoModel = null,
   }) {
     return _then(_value.copyWith(
-      team: null == team
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as TeamModel,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      logo: null == logo
+          ? _value.logo
+          : logo // ignore: cast_nullable_to_non_nullable
+              as String,
       points: null == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
@@ -494,16 +507,6 @@ class _$TeamTableModelCopyWithImpl<$Res, $Val extends TeamTableModel>
           : teamTableInfoModel // ignore: cast_nullable_to_non_nullable
               as TeamTableInfoModel,
     ) as $Val);
-  }
-
-  /// Create a copy of TeamTableModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TeamModelCopyWith<$Res> get team {
-    return $TeamModelCopyWith<$Res>(_value.team, (value) {
-      return _then(_value.copyWith(team: value) as $Val);
-    });
   }
 
   /// Create a copy of TeamTableModel
@@ -527,12 +530,12 @@ abstract class _$$TeamTableModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {TeamModel team,
+      {int id,
+      String name,
+      String logo,
       int points,
       @JsonKey(name: "table_info") TeamTableInfoModel teamTableInfoModel});
 
-  @override
-  $TeamModelCopyWith<$Res> get team;
   @override
   $TeamTableInfoModelCopyWith<$Res> get teamTableInfoModel;
 }
@@ -550,15 +553,25 @@ class __$$TeamTableModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? team = null,
+    Object? id = null,
+    Object? name = null,
+    Object? logo = null,
     Object? points = null,
     Object? teamTableInfoModel = null,
   }) {
     return _then(_$TeamTableModelImpl(
-      team: null == team
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as TeamModel,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      logo: null == logo
+          ? _value.logo
+          : logo // ignore: cast_nullable_to_non_nullable
+              as String,
       points: null == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
@@ -575,7 +588,9 @@ class __$$TeamTableModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TeamTableModelImpl implements _TeamTableModel {
   const _$TeamTableModelImpl(
-      {required this.team,
+      {required this.id,
+      required this.name,
+      required this.logo,
       required this.points,
       @JsonKey(name: "table_info") required this.teamTableInfoModel});
 
@@ -583,7 +598,11 @@ class _$TeamTableModelImpl implements _TeamTableModel {
       _$$TeamTableModelImplFromJson(json);
 
   @override
-  final TeamModel team;
+  final int id;
+  @override
+  final String name;
+  @override
+  final String logo;
   @override
   final int points;
   @override
@@ -592,7 +611,7 @@ class _$TeamTableModelImpl implements _TeamTableModel {
 
   @override
   String toString() {
-    return 'TeamTableModel(team: $team, points: $points, teamTableInfoModel: $teamTableInfoModel)';
+    return 'TeamTableModel(id: $id, name: $name, logo: $logo, points: $points, teamTableInfoModel: $teamTableInfoModel)';
   }
 
   @override
@@ -600,7 +619,9 @@ class _$TeamTableModelImpl implements _TeamTableModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TeamTableModelImpl &&
-            (identical(other.team, team) || other.team == team) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.logo, logo) || other.logo == logo) &&
             (identical(other.points, points) || other.points == points) &&
             (identical(other.teamTableInfoModel, teamTableInfoModel) ||
                 other.teamTableInfoModel == teamTableInfoModel));
@@ -609,7 +630,7 @@ class _$TeamTableModelImpl implements _TeamTableModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, team, points, teamTableInfoModel);
+      Object.hash(runtimeType, id, name, logo, points, teamTableInfoModel);
 
   /// Create a copy of TeamTableModel
   /// with the given fields replaced by the non-null parameter values.
@@ -628,16 +649,16 @@ class _$TeamTableModelImpl implements _TeamTableModel {
   }
 
   @override
-  TeamEntity get teamEntity => TeamEntity.fromModel(this.team);
-
-  @override
+  // TODO: implement teamTableInfoEntity
   TeamTableInfoEntity get teamTableInfoEntity =>
       TeamTableInfoEntity.fromModel(this.teamTableInfoModel);
 }
 
 abstract class _TeamTableModel implements TeamTableModel {
   const factory _TeamTableModel(
-          {required final TeamModel team,
+          {required final int id,
+          required final String name,
+          required final String logo,
           required final int points,
           @JsonKey(name: "table_info")
           required final TeamTableInfoModel teamTableInfoModel}) =
@@ -647,7 +668,11 @@ abstract class _TeamTableModel implements TeamTableModel {
       _$TeamTableModelImpl.fromJson;
 
   @override
-  TeamModel get team;
+  int get id;
+  @override
+  String get name;
+  @override
+  String get logo;
   @override
   int get points;
   @override

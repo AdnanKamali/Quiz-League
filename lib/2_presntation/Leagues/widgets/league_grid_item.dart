@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quiz_league/1_domain/entities/league_entity.dart';
+import 'package:quiz_league/1_domain/entities/core/card.dart';
 
 class LeagueGridItem extends StatelessWidget {
   const LeagueGridItem({super.key, required this.leagueItemEntity});
-  final LeagueEntity leagueItemEntity;
+  final CardEntity leagueItemEntity;
 
   @override
   Widget build(BuildContext context) {

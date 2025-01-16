@@ -36,15 +36,16 @@ class TeamEntity extends CardEntity {
       );
 }
 
-class TeamTableEntity {
-  final TeamEntity teamEntity;
+class TeamTableEntity extends TeamEntity {
   final int points;
   final TeamTableInfoEntity teamTableInfoEntity;
 
   TeamTableEntity({
-    required this.teamEntity,
     required this.points,
     required this.teamTableInfoEntity,
+    required super.id,
+    required super.name,
+    required super.logo,
   });
 }
 

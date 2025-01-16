@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:quiz_league/1_domain/entities/core/match.dart';
 import 'package:quiz_league/1_domain/entities/match_info_entity.dart';
 import 'package:quiz_league/1_domain/entities/team_entity.dart';
 import 'package:quiz_league/1_domain/usecasees/match_info_usecase.dart';
@@ -13,59 +14,74 @@ class MatchInfoCubit extends Cubit<MatchInfoState> {
       : super(MatchInfoState.initial());
 
   void backToInitial() {
-    _hostTeamAnswered.replaceRange(0, 6, List.generate(6, (index) => null));
-    _guestTeamAnswered.replaceRange(0, 6, List.generate(6, (index) => null));
-    _hostTeamQuestionTurn = 0;
-    _guestTeamQuestionTurn = 0;
+    final List<bool?> zeroAnswerList = List.generate(6, (index) => null);
+    _hostTeamAnswered.replaceRange(0, 6, zeroAnswerList);
+    _guestTeamAnswered.replaceRange(0, 6, zeroAnswerList);
+    _hostTeamQuestionAnswerdCount = 0;
+    _guestTeamQuestionAnswerdCount = 0;
   }
 
   final List<bool?> _hostTeamAnswered = List.generate(6, (index) => null);
-  int _hostTeamQuestionTurn = 0;
+  int _hostTeamQuestionAnswerdCount = 0;
   final List<bool?> _guestTeamAnswered = List.generate(6, (index) => null);
-  int _guestTeamQuestionTurn = 0;
+  int _guestTeamQuestionAnswerdCount = 0;
 
   void addScore(bool answerResult) {
-    if (teamTurn == _hostTeam) {
-      _hostTeamAnswered[_hostTeamQuestionTurn] = answerResult;
-      _hostTeamQuestionTurn++;
+    if (teamTurn == _matchEntity.hostTeam) {
+      _hostTeamAnswered[_hostTeamQuestionAnswerdCount] = answerResult;
+      _hostTeamQuestionAnswerdCount++;
     } else {
-      _guestTeamAnswered[_guestTeamQuestionTurn] = answerResult;
-      _guestTeamQuestionTurn++;
+      _guestTeamAnswered[_guestTeamQuestionAnswerdCount] = answerResult;
+      _guestTeamQuestionAnswerdCount++;
     }
   }
 
-  TeamEntity? get winnerTeam {
-    int guestScore = 0;
+  int _calculateHostTeamScore() {
     int hostScore = 0;
-    for (final isTrueAnswer in _guestTeamAnswered) {
-      if (isTrueAnswer != null && isTrueAnswer) guestScore++;
-    }
     for (final isTrueAnswer in _hostTeamAnswered) {
       if (isTrueAnswer != null && isTrueAnswer) hostScore++;
     }
-    if (hostScore > guestScore) {
-      return hostTeam;
-    } else if (hostScore < guestScore) {
-      return guestTeam;
+    return hostScore;
+  }
+
+  int _calculateGuestTeamScore() {
+    int guestScore = 0;
+    for (final isTrueAnswer in _guestTeamAnswered) {
+      if (isTrueAnswer != null && isTrueAnswer) guestScore++;
+    }
+    return guestScore;
+  }
+
+  TeamEntity? get winnerTeam {
+    final hostTeamScore = _calculateHostTeamScore();
+    final guestTeamScore = _calculateGuestTeamScore();
+
+    final isWinnerHostTeam = hostTeamScore > guestTeamScore;
+    final isWinnerGuestTeam = hostTeamScore < guestTeamScore;
+    final draw = null;
+
+    if (isWinnerHostTeam) {
+      return _matchEntity.hostTeam;
+    } else if (isWinnerGuestTeam) {
+      return _matchEntity.guestTeam;
     } else {
-      return null;
+      return draw;
     }
   }
 
-  late TeamEntity _hostTeam;
-  TeamEntity get hostTeam => _hostTeam;
-
-  late TeamEntity _guestTeam;
-  TeamEntity get guestTeam => _guestTeam;
+  late MatchEntity _matchEntity;
+  MatchEntity get matchEntity => _matchEntity;
 
   late TeamEntity _teamTurn;
   TeamEntity get teamTurn => _teamTurn;
 
   void changeTeamTurn() {
-    if (_teamTurn == _hostTeam) {
-      _teamTurn = _guestTeam;
+    final isTurnOfHost = _teamTurn == _matchEntity.hostTeam;
+
+    if (isTurnOfHost) {
+      _teamTurn = _matchEntity.guestTeam;
     } else {
-      _teamTurn = _hostTeam;
+      _teamTurn = _matchEntity.hostTeam;
     }
     emit(
       MatchInfoState.scoreChange(
@@ -81,9 +97,8 @@ class MatchInfoCubit extends Cubit<MatchInfoState> {
     response.fold(
       (l) => emit(MatchInfoState.error()),
       (r) {
-        _hostTeam = r.result.hostTeam;
-        _guestTeam = r.result.guestTeam;
-        _teamTurn = _hostTeam;
+        _matchEntity = r.result;
+        _teamTurn = _matchEntity.hostTeam;
         emit(MatchInfoState.success(matchInfoEntity: r.result));
       },
     );

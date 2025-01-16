@@ -33,7 +33,9 @@ class TeamModel extends TeamEntity with _$TeamModel {
 @freezed
 class TeamTableModel extends TeamTableEntity with _$TeamTableModel {
   const factory TeamTableModel({
-    required TeamModel team,
+    required int id,
+    required String name,
+    required String logo,
     required int points,
     @JsonKey(name: "table_info") required TeamTableInfoModel teamTableInfoModel,
   }) = _TeamTableModel;

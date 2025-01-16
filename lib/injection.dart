@@ -26,38 +26,42 @@ void serviceLocator() {
       QuestionRemoteDatasourceRestClient(dio);
 
   // Leagues Inject
-  sl.registerSingleton(LeaguesRepoImpl(
+  sl.registerSingleton(LeaguesRepository(
       leagueRemoteDatasourceRestClient: leagueRemoteDatasourceRestClient));
   sl.registerSingleton(
-      LeaguesUsecase(leaguesRepository: sl<LeaguesRepoImpl>()));
+      LeaguesUsecase(leaguesRepository: sl<LeaguesRepository>()));
 
   // League Teams Table Inject
-  sl.registerSingleton(LeagueTeamsTableRepoImpl(
+  sl.registerSingleton(LeagueTeamsTableRepository(
+      leagueRemoteDatasourceRestClient: leagueRemoteDatasourceRestClient));
+  sl.registerSingleton(TeamPlayersRepository(
       leagueRemoteDatasourceRestClient: leagueRemoteDatasourceRestClient));
   sl.registerSingleton(LeagueTeamTableUsecase(
-      leagueTeamTableRepository: sl<LeagueTeamsTableRepoImpl>()));
+    leagueTeamTableRepository: sl<LeagueTeamsTableRepository>(),
+    teamPlayersRepository: sl<TeamPlayersRepository>(),
+  ));
 
   // Match Time Line Injection
-  sl.registerSingleton(MatchTimeLineRepoImpl(
+  sl.registerSingleton(MatchTimeLineRepository(
       leagueRemoteDatasourceRestClient: leagueRemoteDatasourceRestClient));
   sl.registerSingleton(MatchTimeLineUsecase(
-      matchTimeLineRepository: sl<MatchTimeLineRepoImpl>()));
+      matchTimeLineRepository: sl<MatchTimeLineRepository>()));
 
   // Match Info Injection
-  sl.registerSingleton(MatchInfoRepoImpl(
+  sl.registerSingleton(MatchInfoRepository(
       leagueRemoteDatasourceRestClient: leagueRemoteDatasourceRestClient));
   sl.registerSingleton(
-      MatchInfoUsecase(matchInfoRepository: sl<MatchInfoRepoImpl>()));
+      MatchInfoUsecase(matchInfoRepository: sl<MatchInfoRepository>()));
 
   // Question Category Injection
-  sl.registerSingleton(QuestionCategoryRepoImpl(
+  sl.registerSingleton(QuestionCategoryRepository(
       questionRemoteDatasourceRestClient: questionRemoteDatasourceRestClient));
   sl.registerSingleton(QuestionCategoryUsecase(
-      questionCategoryRepository: sl<QuestionCategoryRepoImpl>()));
+      questionCategoryRepository: sl<QuestionCategoryRepository>()));
 
   // Question Injection
-  sl.registerSingleton(QuestionRepoImpl(
+  sl.registerSingleton(QuestionRepository(
       questionRemoteDatasourceRestClient: questionRemoteDatasourceRestClient));
   sl.registerSingleton(
-      QuestionUsecase(questionRepository: sl<QuestionRepoImpl>()));
+      QuestionUsecase(questionRepository: sl<QuestionRepository>()));
 }

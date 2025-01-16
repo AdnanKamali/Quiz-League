@@ -148,8 +148,8 @@ class LeagueTableScreen extends StatelessWidget {
           Row(
             spacing: 6,
             children: [
-              _teamLogo(teamTableEntity.teamEntity.logo),
-              _textWidget(context, teamTableEntity.teamEntity.name)
+              _teamLogo(teamTableEntity.logo),
+              _textWidget(context, teamTableEntity.name)
             ],
           ),
         ),
@@ -159,7 +159,7 @@ class LeagueTableScreen extends StatelessWidget {
         DataCell(_textWidget(context, teamTableInfo.wins.toString())),
         DataCell(_textWidget(context, teamTableInfo.diffrent.toString())),
         DataCell(_textWidget(context, teamTableEntity.points.toString())),
-        DataCell(TeamInfoPopup(teamId: teamTableEntity.teamEntity.id)),
+        DataCell(TeamInfoPopup(teamId: teamTableEntity.id)),
       ],
     );
   }

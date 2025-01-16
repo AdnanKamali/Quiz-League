@@ -1,15 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:quiz_league/0_data/datasources/remote/question/question_remote_datasource.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
-import 'package:quiz_league/1_domain/repositories/question_category_repository.dart';
+import 'package:quiz_league/1_domain/repositories/get_list_interface.dart';
 import 'package:quiz_league/core/response.dart';
 
-class QuestionCategoryRepoImpl implements QuestionCategoryRepository {
+class QuestionCategoryRepository
+    implements GetListInterfaceWithoutPara<QuestionCategoryEntity> {
   final QuestionRemoteDatasourceRestClient questionRemoteDatasourceRestClient;
-  QuestionCategoryRepoImpl({required this.questionRemoteDatasourceRestClient});
+  QuestionCategoryRepository(
+      {required this.questionRemoteDatasourceRestClient});
+
   @override
   Future<Either<FailureResponse, SuccessResponse<List<QuestionCategoryEntity>>>>
-      getQuestionCategories() async {
+      getList() async {
     try {
       final result =
           await questionRemoteDatasourceRestClient.getQuestionCategories();

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:quiz_league/0_data/repositories/match_time_line_repo_impl.dart';
 import 'package:quiz_league/1_domain/entities/match_time_line_entity.dart';
-import 'package:quiz_league/1_domain/repositories/match_time_line_repository.dart';
+
 import 'package:quiz_league/core/response.dart';
 
 class MatchTimeLineUsecase {
@@ -9,6 +10,6 @@ class MatchTimeLineUsecase {
 
   Future<Either<FailureResponse, SuccessResponse<List<MatchTimeLineEntity>>>>
       getMatchsTimeLine() async {
-    return matchTimeLineRepository.getMatchesTimeLine();
+    return matchTimeLineRepository.getList();
   }
 }

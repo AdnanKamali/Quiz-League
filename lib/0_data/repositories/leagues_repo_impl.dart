@@ -1,15 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:quiz_league/0_data/datasources/remote/league/league_remote_datasource.dart';
 import 'package:quiz_league/1_domain/entities/league_entity.dart';
-import 'package:quiz_league/1_domain/repositories/leagues_repository.dart';
+import 'package:quiz_league/1_domain/repositories/get_list_interface.dart';
 import 'package:quiz_league/core/response.dart';
 
-class LeaguesRepoImpl implements LeaguesRepository {
-  const LeaguesRepoImpl({required this.leagueRemoteDatasourceRestClient});
+class LeaguesRepository implements GetListInterfaceWithoutPara<LeagueEntity> {
+  const LeaguesRepository({required this.leagueRemoteDatasourceRestClient});
   final LeagueRemoteDatasourceRestClient leagueRemoteDatasourceRestClient;
+
   @override
   Future<Either<FailureResponse, SuccessResponse<List<LeagueEntity>>>>
-      getLeagues() async {
+      getList() async {
     try {
       final result = await leagueRemoteDatasourceRestClient.getLeagues();
       final response = SuccessResponse(result: result);

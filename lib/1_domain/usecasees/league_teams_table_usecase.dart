@@ -1,19 +1,23 @@
 import 'package:dartz/dartz.dart';
+import 'package:quiz_league/0_data/repositories/league_teams_table_repo_impl.dart';
 import 'package:quiz_league/1_domain/entities/team_entity.dart';
-import 'package:quiz_league/1_domain/repositories/league_teams_table_repository.dart';
 import 'package:quiz_league/core/response.dart';
 
 class LeagueTeamTableUsecase {
-  final LeagueTeamTableRepository leagueTeamTableRepository;
-  LeagueTeamTableUsecase({required this.leagueTeamTableRepository});
+  final LeagueTeamsTableRepository leagueTeamTableRepository;
+  final TeamPlayersRepository teamPlayersRepository;
+  LeagueTeamTableUsecase({
+    required this.leagueTeamTableRepository,
+    required this.teamPlayersRepository,
+  });
 
   Future<Either<FailureResponse, SuccessResponse<List<TeamTableEntity>>>>
       getLeagueTeamsTable(String leagueId) async {
-    return await leagueTeamTableRepository.getLeagueTeamsTable(leagueId);
+    return await leagueTeamTableRepository.getList(leagueId);
   }
 
   Future<Either<FailureResponse, SuccessResponse<List<TeamPlayerEntity>>>>
       getTeamPlayers(String teamId) async {
-    return await leagueTeamTableRepository.getTeamPlayers(teamId);
+    return await teamPlayersRepository.getList(teamId);
   }
 }

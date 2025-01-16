@@ -33,8 +33,7 @@ class MatchInfoScreen extends StatelessWidget {
           spacing: 25,
           children: [
             MatchTeamsInfo(
-              hostTeam: matchInfoCubit.hostTeam,
-              guestTeam: matchInfoCubit.guestTeam,
+              matchEntity: matchInfoCubit.matchEntity,
             ),
             SizedBox(height: 30),
             BlocBuilder<MatchControllerCubit, MatchControllerState>(
@@ -44,8 +43,9 @@ class MatchInfoScreen extends StatelessWidget {
                   children: [
                     state.when(
                       initial: () => Text(""),
-                      beforStartMatch: () =>
-                          CategoryBulilder(hostTeam: matchInfoCubit.hostTeam),
+                      beforStartMatch: () => CategoryBulilder(
+                        hostTeam: matchInfoCubit.matchEntity.hostTeam,
+                      ),
                       roundStarted: (categoryEntity) => StartedMatch(
                         questionCategoryEntity: categoryEntity,
                         teamTurn: matchInfoCubit.teamTurn,

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:quiz_league/0_data/repositories/leagues_repo_impl.dart';
 import 'package:quiz_league/1_domain/entities/league_entity.dart';
-import 'package:quiz_league/1_domain/repositories/leagues_repository.dart';
 import 'package:quiz_league/core/response.dart';
 
 class LeaguesUsecase {
@@ -9,6 +9,6 @@ class LeaguesUsecase {
 
   Future<Either<FailureResponse, SuccessResponse<List<LeagueEntity>>>>
       getLeagues() async {
-    return await leaguesRepository.getLeagues();
+    return await leaguesRepository.getList();
   }
 }

@@ -42,7 +42,9 @@ Map<String, dynamic> _$$TeamModelImplToJson(_$TeamModelImpl instance) =>
 
 _$TeamTableModelImpl _$$TeamTableModelImplFromJson(Map<String, dynamic> json) =>
     _$TeamTableModelImpl(
-      team: TeamModel.fromJson(json['team'] as Map<String, dynamic>),
+      id: (json['id'] as num).toInt(),
+      name: json['name'] as String,
+      logo: json['logo'] as String,
       points: (json['points'] as num).toInt(),
       teamTableInfoModel: TeamTableInfoModel.fromJson(
           json['table_info'] as Map<String, dynamic>),
@@ -51,7 +53,9 @@ _$TeamTableModelImpl _$$TeamTableModelImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$TeamTableModelImplToJson(
         _$TeamTableModelImpl instance) =>
     <String, dynamic>{
-      'team': instance.team,
+      'id': instance.id,
+      'name': instance.name,
+      'logo': instance.logo,
       'points': instance.points,
       'table_info': instance.teamTableInfoModel,
     };

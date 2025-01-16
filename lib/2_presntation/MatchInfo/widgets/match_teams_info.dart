@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quiz_league/1_domain/entities/team_entity.dart';
+import 'package:quiz_league/1_domain/entities/core/match.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info.dart';
 
 class MatchTeamsInfo extends StatelessWidget {
-  const MatchTeamsInfo({
-    super.key,
-    required this.hostTeam,
-    required this.guestTeam,
-  });
+  const MatchTeamsInfo({super.key, required this.matchEntity});
 
-  final TeamEntity hostTeam;
-  final TeamEntity guestTeam;
+  final MatchEntity matchEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +22,7 @@ class MatchTeamsInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TeamInfo(
-                teamEntity: guestTeam,
+                teamEntity: matchEntity.guestTeam,
                 questionAnsweredList: state.maybeWhen(
                   orElse: () => baseQuestionAnsweredList,
                   scoreChange: (_, guestTeamAnswered) => guestTeamAnswered,
@@ -43,7 +38,7 @@ class MatchTeamsInfo extends StatelessWidget {
                 ],
               ),
               TeamInfo(
-                teamEntity: hostTeam,
+                teamEntity: matchEntity.hostTeam,
                 questionAnsweredList: state.maybeWhen(
                   orElse: () => baseQuestionAnsweredList,
                   scoreChange: (hostTeamAnswered, _) => hostTeamAnswered,
