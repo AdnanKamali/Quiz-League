@@ -10,7 +10,7 @@ class QuestionCategoryModel extends QuestionCategoryEntity
   const factory QuestionCategoryModel({
     required int id,
     required String logo,
-    required String title,
+    required String name,
     required String? description,
   }) = _QuestionCategoryModel;
 

@@ -1,15 +1,14 @@
 // ignore_for_file: constant_identifier_names
 
-class QuestionCategoryEntity {
-  final int id;
-  final String title;
-  final String logo;
+import 'package:quiz_league/1_domain/entities/core/card.dart';
+
+class QuestionCategoryEntity extends CardEntity {
   final String? description;
 
   QuestionCategoryEntity({
-    required this.id,
-    required this.title,
-    required this.logo,
+    required super.id,
+    required super.name,
+    required super.logo,
     required this.description,
   });
 }

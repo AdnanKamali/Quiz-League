@@ -81,8 +81,8 @@ class MatchInfoCubit extends Cubit<MatchInfoState> {
     response.fold(
       (l) => emit(MatchInfoState.error()),
       (r) {
-        _hostTeam = r.result.firstTeam;
-        _guestTeam = r.result.secondTeam;
+        _hostTeam = r.result.hostTeam;
+        _guestTeam = r.result.guestTeam;
         _teamTurn = _hostTeam;
         emit(MatchInfoState.success(matchInfoEntity: r.result));
       },

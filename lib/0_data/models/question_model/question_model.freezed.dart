@@ -23,7 +23,7 @@ QuestionCategoryModel _$QuestionCategoryModelFromJson(
 mixin _$QuestionCategoryModel {
   int get id => throw _privateConstructorUsedError;
   String get logo => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
 
   /// Serializes this QuestionCategoryModel to a JSON map.
@@ -42,7 +42,7 @@ abstract class $QuestionCategoryModelCopyWith<$Res> {
           $Res Function(QuestionCategoryModel) then) =
       _$QuestionCategoryModelCopyWithImpl<$Res, QuestionCategoryModel>;
   @useResult
-  $Res call({int id, String logo, String title, String? description});
+  $Res call({int id, String logo, String name, String? description});
 }
 
 /// @nodoc
@@ -63,7 +63,7 @@ class _$QuestionCategoryModelCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? logo = null,
-    Object? title = null,
+    Object? name = null,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
@@ -75,9 +75,9 @@ class _$QuestionCategoryModelCopyWithImpl<$Res,
           ? _value.logo
           : logo // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       description: freezed == description
           ? _value.description
@@ -96,7 +96,7 @@ abstract class _$$QuestionCategoryModelImplCopyWith<$Res>
       __$$QuestionCategoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String logo, String title, String? description});
+  $Res call({int id, String logo, String name, String? description});
 }
 
 /// @nodoc
@@ -115,7 +115,7 @@ class __$$QuestionCategoryModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? logo = null,
-    Object? title = null,
+    Object? name = null,
     Object? description = freezed,
   }) {
     return _then(_$QuestionCategoryModelImpl(
@@ -127,9 +127,9 @@ class __$$QuestionCategoryModelImplCopyWithImpl<$Res>
           ? _value.logo
           : logo // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       description: freezed == description
           ? _value.description
@@ -145,7 +145,7 @@ class _$QuestionCategoryModelImpl implements _QuestionCategoryModel {
   const _$QuestionCategoryModelImpl(
       {required this.id,
       required this.logo,
-      required this.title,
+      required this.name,
       required this.description});
 
   factory _$QuestionCategoryModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -156,13 +156,13 @@ class _$QuestionCategoryModelImpl implements _QuestionCategoryModel {
   @override
   final String logo;
   @override
-  final String title;
+  final String name;
   @override
   final String? description;
 
   @override
   String toString() {
-    return 'QuestionCategoryModel(id: $id, logo: $logo, title: $title, description: $description)';
+    return 'QuestionCategoryModel(id: $id, logo: $logo, name: $name, description: $description)';
   }
 
   @override
@@ -172,14 +172,14 @@ class _$QuestionCategoryModelImpl implements _QuestionCategoryModel {
             other is _$QuestionCategoryModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.logo, logo) || other.logo == logo) &&
-            (identical(other.title, title) || other.title == title) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, logo, title, description);
+  int get hashCode => Object.hash(runtimeType, id, logo, name, description);
 
   /// Create a copy of QuestionCategoryModel
   /// with the given fields replaced by the non-null parameter values.
@@ -202,7 +202,7 @@ abstract class _QuestionCategoryModel implements QuestionCategoryModel {
   const factory _QuestionCategoryModel(
       {required final int id,
       required final String logo,
-      required final String title,
+      required final String name,
       required final String? description}) = _$QuestionCategoryModelImpl;
 
   factory _QuestionCategoryModel.fromJson(Map<String, dynamic> json) =
@@ -213,7 +213,7 @@ abstract class _QuestionCategoryModel implements QuestionCategoryModel {
   @override
   String get logo;
   @override
-  String get title;
+  String get name;
   @override
   String? get description;
 

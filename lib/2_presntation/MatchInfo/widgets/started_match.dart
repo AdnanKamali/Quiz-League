@@ -34,7 +34,7 @@ class StartedMatch extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             Text(
-              "،موضوع : ${questionCategoryEntity.title}",
+              "،موضوع : ${questionCategoryEntity.name}",
               style: Theme.of(context).textTheme.headlineLarge,
             ),
           ],

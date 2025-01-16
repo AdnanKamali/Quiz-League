@@ -41,7 +41,7 @@ class CategoryItem extends StatelessWidget {
                   height: 150,
                 ),
                 Text(
-                  questionCategoryEntity.title,
+                  questionCategoryEntity.name,
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
               ],

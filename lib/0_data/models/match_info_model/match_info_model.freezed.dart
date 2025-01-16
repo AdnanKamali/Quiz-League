@@ -21,10 +21,10 @@ MatchInfoModel _$MatchInfoModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MatchInfoModel {
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "first_team")
-  TeamModel get firstTeam => throw _privateConstructorUsedError;
-  @JsonKey(name: "second_team")
-  TeamModel get secondTeam => throw _privateConstructorUsedError;
+  @JsonKey(name: "host_team")
+  TeamModel get hostTeam => throw _privateConstructorUsedError;
+  @JsonKey(name: "guest_team")
+  TeamModel get guestTeam => throw _privateConstructorUsedError;
 
   /// Serializes this MatchInfoModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,11 +44,11 @@ abstract class $MatchInfoModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      @JsonKey(name: "first_team") TeamModel firstTeam,
-      @JsonKey(name: "second_team") TeamModel secondTeam});
+      @JsonKey(name: "host_team") TeamModel hostTeam,
+      @JsonKey(name: "guest_team") TeamModel guestTeam});
 
-  $TeamModelCopyWith<$Res> get firstTeam;
-  $TeamModelCopyWith<$Res> get secondTeam;
+  $TeamModelCopyWith<$Res> get hostTeam;
+  $TeamModelCopyWith<$Res> get guestTeam;
 }
 
 /// @nodoc
@@ -67,21 +67,21 @@ class _$MatchInfoModelCopyWithImpl<$Res, $Val extends MatchInfoModel>
   @override
   $Res call({
     Object? id = null,
-    Object? firstTeam = null,
-    Object? secondTeam = null,
+    Object? hostTeam = null,
+    Object? guestTeam = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      firstTeam: null == firstTeam
-          ? _value.firstTeam
-          : firstTeam // ignore: cast_nullable_to_non_nullable
+      hostTeam: null == hostTeam
+          ? _value.hostTeam
+          : hostTeam // ignore: cast_nullable_to_non_nullable
               as TeamModel,
-      secondTeam: null == secondTeam
-          ? _value.secondTeam
-          : secondTeam // ignore: cast_nullable_to_non_nullable
+      guestTeam: null == guestTeam
+          ? _value.guestTeam
+          : guestTeam // ignore: cast_nullable_to_non_nullable
               as TeamModel,
     ) as $Val);
   }
@@ -90,9 +90,9 @@ class _$MatchInfoModelCopyWithImpl<$Res, $Val extends MatchInfoModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $TeamModelCopyWith<$Res> get firstTeam {
-    return $TeamModelCopyWith<$Res>(_value.firstTeam, (value) {
-      return _then(_value.copyWith(firstTeam: value) as $Val);
+  $TeamModelCopyWith<$Res> get hostTeam {
+    return $TeamModelCopyWith<$Res>(_value.hostTeam, (value) {
+      return _then(_value.copyWith(hostTeam: value) as $Val);
     });
   }
 
@@ -100,9 +100,9 @@ class _$MatchInfoModelCopyWithImpl<$Res, $Val extends MatchInfoModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $TeamModelCopyWith<$Res> get secondTeam {
-    return $TeamModelCopyWith<$Res>(_value.secondTeam, (value) {
-      return _then(_value.copyWith(secondTeam: value) as $Val);
+  $TeamModelCopyWith<$Res> get guestTeam {
+    return $TeamModelCopyWith<$Res>(_value.guestTeam, (value) {
+      return _then(_value.copyWith(guestTeam: value) as $Val);
     });
   }
 }
@@ -117,13 +117,13 @@ abstract class _$$MatchInfoModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      @JsonKey(name: "first_team") TeamModel firstTeam,
-      @JsonKey(name: "second_team") TeamModel secondTeam});
+      @JsonKey(name: "host_team") TeamModel hostTeam,
+      @JsonKey(name: "guest_team") TeamModel guestTeam});
 
   @override
-  $TeamModelCopyWith<$Res> get firstTeam;
+  $TeamModelCopyWith<$Res> get hostTeam;
   @override
-  $TeamModelCopyWith<$Res> get secondTeam;
+  $TeamModelCopyWith<$Res> get guestTeam;
 }
 
 /// @nodoc
@@ -140,21 +140,21 @@ class __$$MatchInfoModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? firstTeam = null,
-    Object? secondTeam = null,
+    Object? hostTeam = null,
+    Object? guestTeam = null,
   }) {
     return _then(_$MatchInfoModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      firstTeam: null == firstTeam
-          ? _value.firstTeam
-          : firstTeam // ignore: cast_nullable_to_non_nullable
+      hostTeam: null == hostTeam
+          ? _value.hostTeam
+          : hostTeam // ignore: cast_nullable_to_non_nullable
               as TeamModel,
-      secondTeam: null == secondTeam
-          ? _value.secondTeam
-          : secondTeam // ignore: cast_nullable_to_non_nullable
+      guestTeam: null == guestTeam
+          ? _value.guestTeam
+          : guestTeam // ignore: cast_nullable_to_non_nullable
               as TeamModel,
     ));
   }
@@ -165,8 +165,8 @@ class __$$MatchInfoModelImplCopyWithImpl<$Res>
 class _$MatchInfoModelImpl implements _MatchInfoModel {
   const _$MatchInfoModelImpl(
       {required this.id,
-      @JsonKey(name: "first_team") required this.firstTeam,
-      @JsonKey(name: "second_team") required this.secondTeam});
+      @JsonKey(name: "host_team") required this.hostTeam,
+      @JsonKey(name: "guest_team") required this.guestTeam});
 
   factory _$MatchInfoModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$MatchInfoModelImplFromJson(json);
@@ -174,15 +174,15 @@ class _$MatchInfoModelImpl implements _MatchInfoModel {
   @override
   final int id;
   @override
-  @JsonKey(name: "first_team")
-  final TeamModel firstTeam;
+  @JsonKey(name: "host_team")
+  final TeamModel hostTeam;
   @override
-  @JsonKey(name: "second_team")
-  final TeamModel secondTeam;
+  @JsonKey(name: "guest_team")
+  final TeamModel guestTeam;
 
   @override
   String toString() {
-    return 'MatchInfoModel(id: $id, firstTeam: $firstTeam, secondTeam: $secondTeam)';
+    return 'MatchInfoModel(id: $id, hostTeam: $hostTeam, guestTeam: $guestTeam)';
   }
 
   @override
@@ -191,15 +191,15 @@ class _$MatchInfoModelImpl implements _MatchInfoModel {
         (other.runtimeType == runtimeType &&
             other is _$MatchInfoModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.firstTeam, firstTeam) ||
-                other.firstTeam == firstTeam) &&
-            (identical(other.secondTeam, secondTeam) ||
-                other.secondTeam == secondTeam));
+            (identical(other.hostTeam, hostTeam) ||
+                other.hostTeam == hostTeam) &&
+            (identical(other.guestTeam, guestTeam) ||
+                other.guestTeam == guestTeam));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, firstTeam, secondTeam);
+  int get hashCode => Object.hash(runtimeType, id, hostTeam, guestTeam);
 
   /// Create a copy of MatchInfoModel
   /// with the given fields replaced by the non-null parameter values.
@@ -221,8 +221,8 @@ class _$MatchInfoModelImpl implements _MatchInfoModel {
 abstract class _MatchInfoModel implements MatchInfoModel {
   const factory _MatchInfoModel(
           {required final int id,
-          @JsonKey(name: "first_team") required final TeamModel firstTeam,
-          @JsonKey(name: "second_team") required final TeamModel secondTeam}) =
+          @JsonKey(name: "host_team") required final TeamModel hostTeam,
+          @JsonKey(name: "guest_team") required final TeamModel guestTeam}) =
       _$MatchInfoModelImpl;
 
   factory _MatchInfoModel.fromJson(Map<String, dynamic> json) =
@@ -231,11 +231,11 @@ abstract class _MatchInfoModel implements MatchInfoModel {
   @override
   int get id;
   @override
-  @JsonKey(name: "first_team")
-  TeamModel get firstTeam;
+  @JsonKey(name: "host_team")
+  TeamModel get hostTeam;
   @override
-  @JsonKey(name: "second_team")
-  TeamModel get secondTeam;
+  @JsonKey(name: "guest_team")
+  TeamModel get guestTeam;
 
   /// Create a copy of MatchInfoModel
   /// with the given fields replaced by the non-null parameter values.

@@ -11,7 +11,7 @@ _$QuestionCategoryModelImpl _$$QuestionCategoryModelImplFromJson(
     _$QuestionCategoryModelImpl(
       id: (json['id'] as num).toInt(),
       logo: json['logo'] as String,
-      title: json['title'] as String,
+      name: json['name'] as String,
       description: json['description'] as String?,
     );
 
@@ -20,7 +20,7 @@ Map<String, dynamic> _$$QuestionCategoryModelImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'logo': instance.logo,
-      'title': instance.title,
+      'name': instance.name,
       'description': instance.description,
     };
 

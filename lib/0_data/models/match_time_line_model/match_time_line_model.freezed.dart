@@ -23,15 +23,15 @@ mixin _$MatchTimeLineModel {
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: "start_time")
   DateTime get startTime => throw _privateConstructorUsedError;
-  @JsonKey(name: "first_team_score")
-  int get firstTeamScore => throw _privateConstructorUsedError;
-  @JsonKey(name: "second_team_score")
-  int get secondTeamScore => throw _privateConstructorUsedError;
+  @JsonKey(name: "host_team_score")
+  int get hostTeamScore => throw _privateConstructorUsedError;
+  @JsonKey(name: "guest_team_score")
+  int get guestTeamScore => throw _privateConstructorUsedError;
   LeagueModel get league => throw _privateConstructorUsedError;
-  @JsonKey(name: "first_team")
-  TeamModel get firstTeam => throw _privateConstructorUsedError;
-  @JsonKey(name: "second_team")
-  TeamModel get secondTeam => throw _privateConstructorUsedError;
+  @JsonKey(name: "host_team")
+  TeamModel get hostTeam => throw _privateConstructorUsedError;
+  @JsonKey(name: "guest_team")
+  TeamModel get guestTeam => throw _privateConstructorUsedError;
   @JsonKey(name: "end_time")
   DateTime? get endTime => throw _privateConstructorUsedError;
 
@@ -54,16 +54,16 @@ abstract class $MatchTimeLineModelCopyWith<$Res> {
   $Res call(
       {int id,
       @JsonKey(name: "start_time") DateTime startTime,
-      @JsonKey(name: "first_team_score") int firstTeamScore,
-      @JsonKey(name: "second_team_score") int secondTeamScore,
+      @JsonKey(name: "host_team_score") int hostTeamScore,
+      @JsonKey(name: "guest_team_score") int guestTeamScore,
       LeagueModel league,
-      @JsonKey(name: "first_team") TeamModel firstTeam,
-      @JsonKey(name: "second_team") TeamModel secondTeam,
+      @JsonKey(name: "host_team") TeamModel hostTeam,
+      @JsonKey(name: "guest_team") TeamModel guestTeam,
       @JsonKey(name: "end_time") DateTime? endTime});
 
   $LeagueModelCopyWith<$Res> get league;
-  $TeamModelCopyWith<$Res> get firstTeam;
-  $TeamModelCopyWith<$Res> get secondTeam;
+  $TeamModelCopyWith<$Res> get hostTeam;
+  $TeamModelCopyWith<$Res> get guestTeam;
 }
 
 /// @nodoc
@@ -83,11 +83,11 @@ class _$MatchTimeLineModelCopyWithImpl<$Res, $Val extends MatchTimeLineModel>
   $Res call({
     Object? id = null,
     Object? startTime = null,
-    Object? firstTeamScore = null,
-    Object? secondTeamScore = null,
+    Object? hostTeamScore = null,
+    Object? guestTeamScore = null,
     Object? league = null,
-    Object? firstTeam = null,
-    Object? secondTeam = null,
+    Object? hostTeam = null,
+    Object? guestTeam = null,
     Object? endTime = freezed,
   }) {
     return _then(_value.copyWith(
@@ -99,25 +99,25 @@ class _$MatchTimeLineModelCopyWithImpl<$Res, $Val extends MatchTimeLineModel>
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      firstTeamScore: null == firstTeamScore
-          ? _value.firstTeamScore
-          : firstTeamScore // ignore: cast_nullable_to_non_nullable
+      hostTeamScore: null == hostTeamScore
+          ? _value.hostTeamScore
+          : hostTeamScore // ignore: cast_nullable_to_non_nullable
               as int,
-      secondTeamScore: null == secondTeamScore
-          ? _value.secondTeamScore
-          : secondTeamScore // ignore: cast_nullable_to_non_nullable
+      guestTeamScore: null == guestTeamScore
+          ? _value.guestTeamScore
+          : guestTeamScore // ignore: cast_nullable_to_non_nullable
               as int,
       league: null == league
           ? _value.league
           : league // ignore: cast_nullable_to_non_nullable
               as LeagueModel,
-      firstTeam: null == firstTeam
-          ? _value.firstTeam
-          : firstTeam // ignore: cast_nullable_to_non_nullable
+      hostTeam: null == hostTeam
+          ? _value.hostTeam
+          : hostTeam // ignore: cast_nullable_to_non_nullable
               as TeamModel,
-      secondTeam: null == secondTeam
-          ? _value.secondTeam
-          : secondTeam // ignore: cast_nullable_to_non_nullable
+      guestTeam: null == guestTeam
+          ? _value.guestTeam
+          : guestTeam // ignore: cast_nullable_to_non_nullable
               as TeamModel,
       endTime: freezed == endTime
           ? _value.endTime
@@ -140,9 +140,9 @@ class _$MatchTimeLineModelCopyWithImpl<$Res, $Val extends MatchTimeLineModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $TeamModelCopyWith<$Res> get firstTeam {
-    return $TeamModelCopyWith<$Res>(_value.firstTeam, (value) {
-      return _then(_value.copyWith(firstTeam: value) as $Val);
+  $TeamModelCopyWith<$Res> get hostTeam {
+    return $TeamModelCopyWith<$Res>(_value.hostTeam, (value) {
+      return _then(_value.copyWith(hostTeam: value) as $Val);
     });
   }
 
@@ -150,9 +150,9 @@ class _$MatchTimeLineModelCopyWithImpl<$Res, $Val extends MatchTimeLineModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $TeamModelCopyWith<$Res> get secondTeam {
-    return $TeamModelCopyWith<$Res>(_value.secondTeam, (value) {
-      return _then(_value.copyWith(secondTeam: value) as $Val);
+  $TeamModelCopyWith<$Res> get guestTeam {
+    return $TeamModelCopyWith<$Res>(_value.guestTeam, (value) {
+      return _then(_value.copyWith(guestTeam: value) as $Val);
     });
   }
 }
@@ -168,19 +168,19 @@ abstract class _$$MatchTimeLineModelImplCopyWith<$Res>
   $Res call(
       {int id,
       @JsonKey(name: "start_time") DateTime startTime,
-      @JsonKey(name: "first_team_score") int firstTeamScore,
-      @JsonKey(name: "second_team_score") int secondTeamScore,
+      @JsonKey(name: "host_team_score") int hostTeamScore,
+      @JsonKey(name: "guest_team_score") int guestTeamScore,
       LeagueModel league,
-      @JsonKey(name: "first_team") TeamModel firstTeam,
-      @JsonKey(name: "second_team") TeamModel secondTeam,
+      @JsonKey(name: "host_team") TeamModel hostTeam,
+      @JsonKey(name: "guest_team") TeamModel guestTeam,
       @JsonKey(name: "end_time") DateTime? endTime});
 
   @override
   $LeagueModelCopyWith<$Res> get league;
   @override
-  $TeamModelCopyWith<$Res> get firstTeam;
+  $TeamModelCopyWith<$Res> get hostTeam;
   @override
-  $TeamModelCopyWith<$Res> get secondTeam;
+  $TeamModelCopyWith<$Res> get guestTeam;
 }
 
 /// @nodoc
@@ -198,11 +198,11 @@ class __$$MatchTimeLineModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? startTime = null,
-    Object? firstTeamScore = null,
-    Object? secondTeamScore = null,
+    Object? hostTeamScore = null,
+    Object? guestTeamScore = null,
     Object? league = null,
-    Object? firstTeam = null,
-    Object? secondTeam = null,
+    Object? hostTeam = null,
+    Object? guestTeam = null,
     Object? endTime = freezed,
   }) {
     return _then(_$MatchTimeLineModelImpl(
@@ -214,25 +214,25 @@ class __$$MatchTimeLineModelImplCopyWithImpl<$Res>
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      firstTeamScore: null == firstTeamScore
-          ? _value.firstTeamScore
-          : firstTeamScore // ignore: cast_nullable_to_non_nullable
+      hostTeamScore: null == hostTeamScore
+          ? _value.hostTeamScore
+          : hostTeamScore // ignore: cast_nullable_to_non_nullable
               as int,
-      secondTeamScore: null == secondTeamScore
-          ? _value.secondTeamScore
-          : secondTeamScore // ignore: cast_nullable_to_non_nullable
+      guestTeamScore: null == guestTeamScore
+          ? _value.guestTeamScore
+          : guestTeamScore // ignore: cast_nullable_to_non_nullable
               as int,
       league: null == league
           ? _value.league
           : league // ignore: cast_nullable_to_non_nullable
               as LeagueModel,
-      firstTeam: null == firstTeam
-          ? _value.firstTeam
-          : firstTeam // ignore: cast_nullable_to_non_nullable
+      hostTeam: null == hostTeam
+          ? _value.hostTeam
+          : hostTeam // ignore: cast_nullable_to_non_nullable
               as TeamModel,
-      secondTeam: null == secondTeam
-          ? _value.secondTeam
-          : secondTeam // ignore: cast_nullable_to_non_nullable
+      guestTeam: null == guestTeam
+          ? _value.guestTeam
+          : guestTeam // ignore: cast_nullable_to_non_nullable
               as TeamModel,
       endTime: freezed == endTime
           ? _value.endTime
@@ -248,11 +248,11 @@ class _$MatchTimeLineModelImpl implements _MatchTimeLineModel {
   const _$MatchTimeLineModelImpl(
       {required this.id,
       @JsonKey(name: "start_time") required this.startTime,
-      @JsonKey(name: "first_team_score") required this.firstTeamScore,
-      @JsonKey(name: "second_team_score") required this.secondTeamScore,
+      @JsonKey(name: "host_team_score") required this.hostTeamScore,
+      @JsonKey(name: "guest_team_score") required this.guestTeamScore,
       required this.league,
-      @JsonKey(name: "first_team") required this.firstTeam,
-      @JsonKey(name: "second_team") required this.secondTeam,
+      @JsonKey(name: "host_team") required this.hostTeam,
+      @JsonKey(name: "guest_team") required this.guestTeam,
       @JsonKey(name: "end_time") required this.endTime});
 
   factory _$MatchTimeLineModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -264,26 +264,26 @@ class _$MatchTimeLineModelImpl implements _MatchTimeLineModel {
   @JsonKey(name: "start_time")
   final DateTime startTime;
   @override
-  @JsonKey(name: "first_team_score")
-  final int firstTeamScore;
+  @JsonKey(name: "host_team_score")
+  final int hostTeamScore;
   @override
-  @JsonKey(name: "second_team_score")
-  final int secondTeamScore;
+  @JsonKey(name: "guest_team_score")
+  final int guestTeamScore;
   @override
   final LeagueModel league;
   @override
-  @JsonKey(name: "first_team")
-  final TeamModel firstTeam;
+  @JsonKey(name: "host_team")
+  final TeamModel hostTeam;
   @override
-  @JsonKey(name: "second_team")
-  final TeamModel secondTeam;
+  @JsonKey(name: "guest_team")
+  final TeamModel guestTeam;
   @override
   @JsonKey(name: "end_time")
   final DateTime? endTime;
 
   @override
   String toString() {
-    return 'MatchTimeLineModel(id: $id, startTime: $startTime, firstTeamScore: $firstTeamScore, secondTeamScore: $secondTeamScore, league: $league, firstTeam: $firstTeam, secondTeam: $secondTeam, endTime: $endTime)';
+    return 'MatchTimeLineModel(id: $id, startTime: $startTime, hostTeamScore: $hostTeamScore, guestTeamScore: $guestTeamScore, league: $league, hostTeam: $hostTeam, guestTeam: $guestTeam, endTime: $endTime)';
   }
 
   @override
@@ -294,22 +294,22 @@ class _$MatchTimeLineModelImpl implements _MatchTimeLineModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.startTime, startTime) ||
                 other.startTime == startTime) &&
-            (identical(other.firstTeamScore, firstTeamScore) ||
-                other.firstTeamScore == firstTeamScore) &&
-            (identical(other.secondTeamScore, secondTeamScore) ||
-                other.secondTeamScore == secondTeamScore) &&
+            (identical(other.hostTeamScore, hostTeamScore) ||
+                other.hostTeamScore == hostTeamScore) &&
+            (identical(other.guestTeamScore, guestTeamScore) ||
+                other.guestTeamScore == guestTeamScore) &&
             (identical(other.league, league) || other.league == league) &&
-            (identical(other.firstTeam, firstTeam) ||
-                other.firstTeam == firstTeam) &&
-            (identical(other.secondTeam, secondTeam) ||
-                other.secondTeam == secondTeam) &&
+            (identical(other.hostTeam, hostTeam) ||
+                other.hostTeam == hostTeam) &&
+            (identical(other.guestTeam, guestTeam) ||
+                other.guestTeam == guestTeam) &&
             (identical(other.endTime, endTime) || other.endTime == endTime));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, startTime, firstTeamScore,
-      secondTeamScore, league, firstTeam, secondTeam, endTime);
+  int get hashCode => Object.hash(runtimeType, id, startTime, hostTeamScore,
+      guestTeamScore, league, hostTeam, guestTeam, endTime);
 
   /// Create a copy of MatchTimeLineModel
   /// with the given fields replaced by the non-null parameter values.
@@ -328,26 +328,20 @@ class _$MatchTimeLineModelImpl implements _MatchTimeLineModel {
   }
 
   @override
-  TeamEntity get firstTeamEntity => TeamEntity.fromModel(this.firstTeam);
-
-  @override
   LeagueEntity get leagueEntity => LeagueEntity.fromModel(this.league);
-
-  @override
-  TeamEntity get secondTeamEntity => TeamEntity.fromModel(this.secondTeam);
 }
 
 abstract class _MatchTimeLineModel implements MatchTimeLineModel {
   const factory _MatchTimeLineModel(
-      {required final int id,
-      @JsonKey(name: "start_time") required final DateTime startTime,
-      @JsonKey(name: "first_team_score") required final int firstTeamScore,
-      @JsonKey(name: "second_team_score") required final int secondTeamScore,
-      required final LeagueModel league,
-      @JsonKey(name: "first_team") required final TeamModel firstTeam,
-      @JsonKey(name: "second_team") required final TeamModel secondTeam,
-      @JsonKey(name: "end_time")
-      required final DateTime? endTime}) = _$MatchTimeLineModelImpl;
+          {required final int id,
+          @JsonKey(name: "start_time") required final DateTime startTime,
+          @JsonKey(name: "host_team_score") required final int hostTeamScore,
+          @JsonKey(name: "guest_team_score") required final int guestTeamScore,
+          required final LeagueModel league,
+          @JsonKey(name: "host_team") required final TeamModel hostTeam,
+          @JsonKey(name: "guest_team") required final TeamModel guestTeam,
+          @JsonKey(name: "end_time") required final DateTime? endTime}) =
+      _$MatchTimeLineModelImpl;
 
   factory _MatchTimeLineModel.fromJson(Map<String, dynamic> json) =
       _$MatchTimeLineModelImpl.fromJson;
@@ -358,19 +352,19 @@ abstract class _MatchTimeLineModel implements MatchTimeLineModel {
   @JsonKey(name: "start_time")
   DateTime get startTime;
   @override
-  @JsonKey(name: "first_team_score")
-  int get firstTeamScore;
+  @JsonKey(name: "host_team_score")
+  int get hostTeamScore;
   @override
-  @JsonKey(name: "second_team_score")
-  int get secondTeamScore;
+  @JsonKey(name: "guest_team_score")
+  int get guestTeamScore;
   @override
   LeagueModel get league;
   @override
-  @JsonKey(name: "first_team")
-  TeamModel get firstTeam;
+  @JsonKey(name: "host_team")
+  TeamModel get hostTeam;
   @override
-  @JsonKey(name: "second_team")
-  TeamModel get secondTeam;
+  @JsonKey(name: "guest_team")
+  TeamModel get guestTeam;
   @override
   @JsonKey(name: "end_time")
   DateTime? get endTime;

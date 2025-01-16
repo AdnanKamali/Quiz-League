@@ -9,8 +9,8 @@ part 'match_info_model.g.dart';
 class MatchInfoModel extends MatchInfoEntity with _$MatchInfoModel {
   const factory MatchInfoModel({
     required int id,
-    @JsonKey(name: "first_team") required TeamModel firstTeam,
-    @JsonKey(name: "second_team") required TeamModel secondTeam,
+    @JsonKey(name: "host_team") required TeamModel hostTeam,
+    @JsonKey(name: "guest_team") required TeamModel guestTeam,
   }) = _MatchInfoModel;
 
   factory MatchInfoModel.fromJson(Map<String, Object?> json) =>

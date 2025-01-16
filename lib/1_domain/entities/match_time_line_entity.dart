@@ -1,28 +1,24 @@
 import 'package:quiz_league/0_data/models/match_time_line_model/match_time_line_model.dart';
+import 'package:quiz_league/1_domain/entities/core/match.dart';
 import 'package:quiz_league/1_domain/entities/league_entity.dart';
-import 'package:quiz_league/1_domain/entities/team_entity.dart';
 
-class MatchTimeLineEntity {
-  final int id;
+class MatchTimeLineEntity extends MatchEntity {
   final LeagueEntity leagueEntity;
 
-  final TeamEntity firstTeamEntity;
-  final TeamEntity secondTeamEntity;
-
-  final int firstTeamScore;
-  final int secondTeamScore;
+  final int hostTeamScore;
+  final int guestTeamScore;
 
   final DateTime startTime;
   final DateTime? endTime;
 
   MatchTimeLineEntity({
-    required this.id,
+    required super.id,
+    required super.hostTeam,
+    required super.guestTeam,
     required this.leagueEntity,
     required this.startTime,
-    required this.firstTeamScore,
-    required this.secondTeamScore,
-    required this.firstTeamEntity,
-    required this.secondTeamEntity,
+    required this.hostTeamScore,
+    required this.guestTeamScore,
     required this.endTime,
   });
 
@@ -30,11 +26,11 @@ class MatchTimeLineEntity {
       MatchTimeLineEntity(
         id: model.id,
         endTime: model.endTime,
-        firstTeamEntity: model.firstTeamEntity,
+        hostTeam: model.hostTeam,
+        guestTeam: model.guestTeam,
         leagueEntity: model.leagueEntity,
-        secondTeamEntity: model.secondTeamEntity,
         startTime: model.startTime,
-        firstTeamScore: model.firstTeamScore,
-        secondTeamScore: model.secondTeamScore,
+        hostTeamScore: model.hostTeamScore,
+        guestTeamScore: model.guestTeamScore,
       );
 }

@@ -18,8 +18,8 @@ class TimeGameTileItem extends StatelessWidget {
     final matchControllerCubit = context.read<MatchControllerCubit>();
     final primaryColor = Theme.of(context).primaryColor;
 
-    final firstTeam = matchTimeLineEntity.firstTeamEntity;
-    final secondTeam = matchTimeLineEntity.secondTeamEntity;
+    final hsotTeam = matchTimeLineEntity.hostTeam;
+    final guestTeam = matchTimeLineEntity.guestTeam;
 
     final startTime = Jalali.fromDateTime(matchTimeLineEntity.startTime);
     final isStartedMatch =
@@ -72,11 +72,11 @@ class TimeGameTileItem extends StatelessWidget {
                       spacing: 12,
                       children: [
                         Image.network(
-                          firstTeam.logo,
+                          hsotTeam.logo,
                           height: 35,
                         ),
                         Text(
-                          firstTeam.name,
+                          hsotTeam.name,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         if (!isStartedMatch)
@@ -107,15 +107,15 @@ class TimeGameTileItem extends StatelessWidget {
                           ),
                         if (isStartedMatch && isOverGame)
                           Text(
-                            "${matchTimeLineEntity.firstTeamScore} - ${matchTimeLineEntity.secondTeamScore}",
+                            "${matchTimeLineEntity.hostTeamScore} - ${matchTimeLineEntity.guestTeamScore}",
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         Text(
-                          secondTeam.name,
+                          guestTeam.name,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         Image.network(
-                          secondTeam.logo,
+                          guestTeam.logo,
                           height: 35,
                         ),
                       ],

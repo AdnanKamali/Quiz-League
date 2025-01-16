@@ -1,4 +1,5 @@
 import 'package:quiz_league/0_data/models/teams_model/team_model.dart';
+import 'package:quiz_league/1_domain/entities/core/card.dart';
 
 class TeamTableInfoEntity {
   final int games;
@@ -25,12 +26,8 @@ class TeamTableInfoEntity {
       );
 }
 
-class TeamEntity {
-  final int id;
-  final String name;
-  final String logo;
-
-  TeamEntity({required this.id, required this.name, required this.logo});
+class TeamEntity extends CardEntity {
+  TeamEntity({required super.id, required super.name, required super.logo});
 
   factory TeamEntity.fromModel(TeamModel model) => TeamEntity(
         id: model.id,

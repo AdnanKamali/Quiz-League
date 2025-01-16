@@ -1,20 +1,16 @@
 import 'package:quiz_league/0_data/models/match_info_model/match_info_model.dart';
-import 'package:quiz_league/1_domain/entities/team_entity.dart';
+import 'package:quiz_league/1_domain/entities/core/match.dart';
 
-class MatchInfoEntity {
-  final int id;
-  final TeamEntity firstTeam;
-  final TeamEntity secondTeam;
-
+class MatchInfoEntity extends MatchEntity {
   MatchInfoEntity({
-    required this.id,
-    required this.firstTeam,
-    required this.secondTeam,
+    required super.id,
+    required super.hostTeam,
+    required super.guestTeam,
   });
 
   factory MatchInfoEntity.fromModel(MatchInfoModel model) => MatchInfoEntity(
         id: model.id,
-        firstTeam: model.firstTeam,
-        secondTeam: model.secondTeam,
+        hostTeam: model.hostTeam,
+        guestTeam: model.guestTeam,
       );
 }

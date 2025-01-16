@@ -1,14 +1,11 @@
 import 'package:quiz_league/0_data/models/league_model/league_model.dart';
+import 'package:quiz_league/1_domain/entities/core/card.dart';
 
-class LeagueEntity {
-  final int id;
-  final String logo;
-  final String name;
-
+class LeagueEntity extends CardEntity {
   LeagueEntity({
-    required this.id,
-    required this.logo,
-    required this.name,
+    required super.id,
+    required super.logo,
+    required super.name,
   });
 
   factory LeagueEntity.fromModel(LeagueModel model) => LeagueEntity(
