@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:quiz_league/0_data/datasources/remote/league/league_remote_datasource.dart';
 import 'package:quiz_league/0_data/models/teams_model/team_model.dart';
 import 'package:quiz_league/1_domain/entities/team_entity.dart';
-import 'package:quiz_league/1_domain/repositories/get_list_interface.dart';
+import 'package:quiz_league/1_domain/data_types/interfaces/get_list_interface.dart';
 import 'package:quiz_league/core/response.dart';
 
 class LeagueTeamsTableRepository

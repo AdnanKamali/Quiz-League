@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:quiz_league/0_data/datasources/remote/league/league_remote_datasource.dart';
 import 'package:quiz_league/1_domain/entities/match_info_entity.dart';
-import 'package:quiz_league/1_domain/repositories/get_object_interface.dart';
+import 'package:quiz_league/1_domain/data_types/interfaces/get_object_interface.dart';
 import 'package:quiz_league/core/response.dart';
 
 class MatchInfoRepository

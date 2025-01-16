@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:quiz_league/0_data/datasources/remote/question/question_remote_datasource.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
-import 'package:quiz_league/1_domain/repositories/get_object_interface.dart';
-import 'package:quiz_league/core/define_params/get_question_params.dart';
+import 'package:quiz_league/1_domain/data_types/interfaces/get_object_interface.dart';
+import 'package:quiz_league/1_domain/data_types/params/get_question_params.dart';
 import 'package:quiz_league/core/response.dart';
 
 class QuestionRepository

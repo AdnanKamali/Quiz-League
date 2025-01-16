@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
 import 'package:quiz_league/1_domain/usecasees/question_usecase.dart';
-import 'package:quiz_league/core/define_params/get_question_params.dart';
+import 'package:quiz_league/1_domain/data_types/params/get_question_params.dart';
 
 part 'question_state.dart';
 part 'question_cubit.freezed.dart';
