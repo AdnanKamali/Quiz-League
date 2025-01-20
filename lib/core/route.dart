@@ -36,7 +36,7 @@ final GoRouter router = GoRouter(routes: [
         path: QuestionScreen.routeInfo.path,
         name: QuestionScreen.routeInfo.name,
         builder: (BuildContext context, GoRouterState state) {
-          return const QuestionScreen();
+          return QuestionScreen();
         },
       ),
     ],

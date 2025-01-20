@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/category_bulilder.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/match_teams_info.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/started_match.dart';
@@ -10,6 +9,7 @@ import 'package:quiz_league/2_presntation/MatchInfo/widgets/surrender.dart';
 
 import 'package:quiz_league/core/route_info.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
+import 'package:quiz_league/singletone.dart';
 
 class MatchInfoScreen extends StatelessWidget {
   const MatchInfoScreen({super.key, required this.matchId});
@@ -23,7 +23,6 @@ class MatchInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final matchControllerCubit = context.read<MatchControllerCubit>();
-    final matchInfoCubit = context.read<MatchInfoCubit>();
 
     return Scaffold(
       body: Padding(
@@ -32,9 +31,7 @@ class MatchInfoScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 25,
           children: [
-            MatchTeamsInfo(
-              matchEntity: matchInfoCubit.matchEntity,
-            ),
+            MatchTeamsInfo(),
             SizedBox(height: 30),
             BlocBuilder<MatchControllerCubit, MatchControllerState>(
               builder: (context, state) {
@@ -43,12 +40,10 @@ class MatchInfoScreen extends StatelessWidget {
                   children: [
                     state.when(
                       initial: () => Text(""),
-                      beforStartMatch: () => CategoryBulilder(
-                        hostTeam: matchInfoCubit.matchEntity.hostTeam,
-                      ),
+                      beforStartMatch: () => CategoryBulilder(),
                       roundStarted: (categoryEntity) => StartedMatch(
                         questionCategoryEntity: categoryEntity,
-                        teamTurn: matchInfoCubit.teamTurn,
+                        teamTurn: MatchGameManager().teamTurn(),
                       ),
                       endGame: (winnerTeam) => Column(
                         spacing: 14,
@@ -69,7 +64,6 @@ class MatchInfoScreen extends StatelessWidget {
                             child: Text("بازگشت به صفحه اصلی"),
                             onPressed: () {
                               context.go("/");
-                              matchInfoCubit.backToInitial();
                               matchControllerCubit.backToInitialStateAndReset();
                             },
                           )

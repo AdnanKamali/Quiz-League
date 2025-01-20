@@ -14,6 +14,7 @@ import 'package:quiz_league/2_presntation/Question/widgets/timer_indicator.dart'
 import 'package:quiz_league/core/route_info.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
 import 'package:quiz_league/core/widgets/not_found_error.dart';
+import 'package:quiz_league/singletone.dart';
 
 final answerParamsSingleton = AnswerParams(
   questionId: 0,
@@ -25,21 +26,19 @@ final answerParamsSingleton = AnswerParams(
 );
 
 class QuestionScreen extends StatelessWidget {
-  const QuestionScreen({super.key});
+  QuestionScreen({super.key});
 
   static final RouteInfo routeInfo = RouteInfo(
     name: "Question",
     path: 'question/:categoryId',
   );
+  final matchGameManager = MatchGameManager();
   void onBackToMatch(BuildContext context) {
     final questionOptionCubit = context.read<QuestionOptionCubit>();
     final matchInfoCubit = context.read<MatchInfoCubit>();
     final matchControllerCubit = context.read<MatchControllerCubit>();
-    matchControllerCubit.startGamePlayed();
-    if (matchControllerCubit.gamePlayed == 13) {
-      matchControllerCubit.endGame(matchInfoCubit.winnerTeam);
-    }
-    matchInfoCubit.changeTeamTurn();
+
+    matchInfoCubit.scoreChange();
     matchControllerCubit.questionAnswered();
     questionOptionCubit.backToInit();
     context.pop();
@@ -144,8 +143,6 @@ class QuestionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionCubit = context.read<QuestionCubit>();
-    final matchInfoCubit = context.read<MatchInfoCubit>();
-    // final questionOptionCubit = context.read<QuestionOptionCubit>();
 
     final params = ModalRoute.of(context)?.settings.arguments as Map;
 
@@ -206,8 +203,15 @@ class QuestionScreen extends StatelessWidget {
                               questionOptionSelected: questionOptionSelected,
                             ),
                             answered: (questionOptionSelected) {
-                              matchInfoCubit
-                                  .addScore(questionOptionSelected.isCorrect);
+                              if (matchGameManager.teamTurn() ==
+                                  matchGameManager.guestTeam.teamEntity) {
+                                matchGameManager.guestTeam.addQuestinoAnswered(
+                                    questionOptionSelected.isCorrect);
+                              } else {
+                                matchGameManager.hostTeam.addQuestinoAnswered(
+                                    questionOptionSelected.isCorrect);
+                              }
+
                               return answeredOptionBuilder(
                                 context,
                                 questionOptionList:
@@ -216,7 +220,15 @@ class QuestionScreen extends StatelessWidget {
                               );
                             },
                             endTime: () {
-                              matchInfoCubit.addScore(false);
+                              final matchGameManager = MatchGameManager();
+                              if (matchGameManager.teamTurn() ==
+                                  matchGameManager.guestTeam.teamEntity) {
+                                matchGameManager.guestTeam
+                                    .addQuestinoAnswered(false);
+                              } else {
+                                matchGameManager.hostTeam
+                                    .addQuestinoAnswered(false);
+                              }
                               return endTimeOptionBuilder(
                                 context,
                                 questionOptionList:
@@ -288,7 +300,15 @@ class QuestionScreen extends StatelessWidget {
                                     children: [
                                       IconButton(
                                         onPressed: () {
-                                          matchInfoCubit.addScore(false);
+                                          if (matchGameManager.teamTurn() ==
+                                              matchGameManager
+                                                  .guestTeam.teamEntity) {
+                                            matchGameManager.guestTeam
+                                                .addQuestinoAnswered(true);
+                                          } else {
+                                            matchGameManager.hostTeam
+                                                .addQuestinoAnswered(true);
+                                          }
                                           onBackToMatch(context);
                                         },
                                         icon: Icon(
@@ -299,7 +319,15 @@ class QuestionScreen extends StatelessWidget {
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          matchInfoCubit.addScore(true);
+                                          if (matchGameManager.teamTurn() ==
+                                              matchGameManager
+                                                  .guestTeam.teamEntity) {
+                                            matchGameManager.guestTeam
+                                                .addQuestinoAnswered(true);
+                                          } else {
+                                            matchGameManager.hostTeam
+                                                .addQuestinoAnswered(true);
+                                          }
                                           onBackToMatch(context);
                                         },
                                         icon: Icon(
