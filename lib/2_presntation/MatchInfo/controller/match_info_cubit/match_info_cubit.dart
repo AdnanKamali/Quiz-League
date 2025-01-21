@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:quiz_league/1_domain/entities/match_info_entity.dart';
 import 'package:quiz_league/1_domain/usecasees/match_info_usecase.dart';
-import 'package:quiz_league/singletone.dart';
+import 'package:quiz_league/match_manager_singletone.dart';
 
 part 'match_info_state.dart';
 part 'match_info_cubit.freezed.dart';

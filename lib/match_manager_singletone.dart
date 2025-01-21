@@ -58,6 +58,14 @@ class MatchGameManager {
     _categoryUsed.add(categoryEntity);
   }
 
+  void addScore(bool isTrue) {
+    if (teamTurn() == guestTeam.teamEntity) {
+      guestTeam.addQuestinoAnswered(isTrue);
+    } else {
+      hostTeam.addQuestinoAnswered(isTrue);
+    }
+  }
+
   bool isSelecteCategoryRound() {
     return _roundOfSelectCategory.contains(_matchRound);
   }

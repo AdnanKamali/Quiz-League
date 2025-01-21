@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info.dart';
-import 'package:quiz_league/singletone.dart';
+import 'package:quiz_league/match_manager_singletone.dart';
 
 class MatchTeamsInfo extends StatelessWidget {
   MatchTeamsInfo({super.key});

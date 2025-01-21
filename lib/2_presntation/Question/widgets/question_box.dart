@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_league/core/base_url.dart';
 
-class QuestionWidget extends StatelessWidget {
-  const QuestionWidget(
+class QuestionBox extends StatelessWidget {
+  const QuestionBox(
       {super.key, required this.imageUrl, required this.question});
 
   final String? imageUrl;

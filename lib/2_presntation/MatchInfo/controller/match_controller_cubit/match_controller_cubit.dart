@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
 import 'package:quiz_league/1_domain/entities/team_entity.dart';
 import 'package:quiz_league/1_domain/usecasees/question_category_usecase.dart';
-import 'package:quiz_league/singletone.dart';
+import 'package:quiz_league/match_manager_singletone.dart';
 
 part 'match_controller_state.dart';
 part 'match_controller_cubit.freezed.dart';

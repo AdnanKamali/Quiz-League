@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_option_cubit/question_option_cubit.dart';
 
-class QuestionOption extends StatelessWidget {
-  const QuestionOption({
+// when change state change color
+
+class QuestionOptionItem extends StatelessWidget {
+  const QuestionOptionItem({
     super.key,
     required this.questionOption,
     required this.optionIndex,
@@ -21,9 +23,7 @@ class QuestionOption extends StatelessWidget {
 
     final questionOptionCubit = context.read<QuestionOptionCubit>();
     return InkWell(
-      onTap: () {
-        questionOptionCubit.selectOption(questionOption);
-      },
+      onTap: () => questionOptionCubit.selectOption(questionOption),
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: Container(

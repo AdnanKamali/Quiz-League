@@ -9,7 +9,7 @@ import 'package:quiz_league/2_presntation/MatchInfo/widgets/surrender.dart';
 
 import 'package:quiz_league/core/route_info.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
-import 'package:quiz_league/singletone.dart';
+import 'package:quiz_league/match_manager_singletone.dart';
 
 class MatchInfoScreen extends StatelessWidget {
   const MatchInfoScreen({super.key, required this.matchId});

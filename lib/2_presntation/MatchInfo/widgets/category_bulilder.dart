@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/category/category_item.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/widgets/category/category_list_view.dart';
-import 'package:quiz_league/singletone.dart';
+import 'package:quiz_league/match_manager_singletone.dart';
 
 class CategoryBulilder extends StatelessWidget {
   CategoryBulilder({super.key});

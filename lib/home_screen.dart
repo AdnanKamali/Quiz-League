@@ -40,10 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.access_alarm),
             label: "زمان برگزاری مسابقات",
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.settings),
-          //   label: "تنظیمات",
-          // ),
         ],
       ),
     );

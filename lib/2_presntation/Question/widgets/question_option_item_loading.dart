@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_league/core/widgets/loading_container.dart';
 
-class QuestionOptionLoading extends StatelessWidget {
-  const QuestionOptionLoading({super.key, required this.optionIndex});
+class QuestionOptionItemLoading extends StatelessWidget {
+  const QuestionOptionItemLoading({super.key, required this.optionIndex});
   final int optionIndex;
 
   @override
