@@ -19,9 +19,6 @@ class QuestionOptionItemLoading extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Spacer(),
-          LoadingContainer(size: Size(width * 0.4, 32)),
-          Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
             child: SizedBox(
@@ -34,6 +31,9 @@ class QuestionOptionItemLoading extends StatelessWidget {
               ),
             ),
           ),
+          Spacer(),
+          LoadingContainer(size: Size(width * 0.4, 32)),
+          Spacer(),
         ],
       ),
     );

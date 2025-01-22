@@ -29,11 +29,6 @@ class OptionBaseSubScreenBuilder extends StatelessWidget {
             ...List.generate(
               questionOptionEntityList.length,
               (index) {
-                // When answered
-                // if true answer
-                // the option == selecteoption should green
-                // else the selectoption to red and true option to green
-
                 final questionOption = questionOptionEntityList[index];
                 Color colorOption = state.when(
                   initial: () => initialOptionColor,

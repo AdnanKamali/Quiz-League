@@ -22,10 +22,10 @@ class MatchTeamsInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TeamInfo(
-              teamEntity: matchGameManager.guestTeam.teamEntity!,
+              teamEntity: matchGameManager.hostTeam.teamEntity!,
               questionAnsweredList: state.maybeWhen(
                 orElse: () => baseQuestionAnsweredList,
-                scoreChange: (_, guestTeamAnswered) => guestTeamAnswered,
+                scoreChange: (hostTeamAnswered, _) => hostTeamAnswered,
               ),
             ),
             Column(
@@ -38,10 +38,10 @@ class MatchTeamsInfo extends StatelessWidget {
               ],
             ),
             TeamInfo(
-              teamEntity: matchGameManager.hostTeam.teamEntity!,
+              teamEntity: matchGameManager.guestTeam.teamEntity!,
               questionAnsweredList: state.maybeWhen(
                 orElse: () => baseQuestionAnsweredList,
-                scoreChange: (hostTeamAnswered, _) => hostTeamAnswered,
+                scoreChange: (_, guestTeamAnswered) => guestTeamAnswered,
               ),
             ),
           ],

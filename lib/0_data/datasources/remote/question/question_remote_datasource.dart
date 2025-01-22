@@ -19,4 +19,6 @@ abstract class QuestionRemoteDatasourceRestClient {
     @Path("leagueId") String leagueId,
     @Path("categoryId") String categoryId,
   );
+  @POST("/answer/")
+  Future<int> postAnswer(@Body() Map<String, dynamic> body);
 }

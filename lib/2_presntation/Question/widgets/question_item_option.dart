@@ -35,12 +35,6 @@ class QuestionOptionItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(),
-            Text(
-              questionOption.text,
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
               child: SizedBox(
@@ -53,6 +47,12 @@ class QuestionOptionItem extends StatelessWidget {
                 ),
               ),
             ),
+            Spacer(),
+            Text(
+              questionOption.text,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            Spacer(),
           ],
         ),
       ),

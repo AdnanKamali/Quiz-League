@@ -20,8 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final pages = [
-    LeaguesScreen(),
     MatchTimeLineScreen(),
+    LeaguesScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -33,12 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: (value) => _onChangeScreen(value),
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.ballot),
-            label: "لیگ ها",
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.access_alarm),
             label: "زمان برگزاری مسابقات",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.ballot),
+            label: "لیگ ها",
           ),
         ],
       ),

@@ -32,6 +32,7 @@ class QuestionScreen extends StatelessWidget {
 
     matchInfoCubit.scoreChange();
     matchControllerCubit.questionAnswered();
+    questionOptionCubit.submitAnswerToServer();
     questionOptionCubit.backToInit();
     context.pop();
   }
@@ -43,8 +44,9 @@ class QuestionScreen extends StatelessWidget {
     final params = ModalRoute.of(context)?.settings.arguments as Map;
 
     questionCubit.getQuestion(
-        categoryId: int.parse(params["categoryId"]),
-        leagueId: int.parse(params["leagueId"]));
+      categoryId: int.parse(params["categoryId"]),
+      leagueId: int.parse(params["leagueId"]),
+    );
 
     final notFoundErrorScreen = NotFoundErrorScreen(
       onTry: () => questionCubit.getQuestion(

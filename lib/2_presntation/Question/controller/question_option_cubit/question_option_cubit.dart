@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
+import 'package:quiz_league/1_domain/usecasees/post_answer_usecase.dart';
+import 'package:quiz_league/answer_params_singletone.dart';
 import 'package:quiz_league/match_manager_singletone.dart';
 
 part 'question_option_state.dart';
@@ -11,9 +13,13 @@ part 'question_option_cubit.freezed.dart';
 // Change Singleton to here and set it to AnswerParams in here
 
 class QuestionOptionCubit extends Cubit<QuestionOptionState> {
-  QuestionOptionCubit() : super(QuestionOptionState.initial());
+  QuestionOptionCubit({
+    required this.postAnswerUsecase,
+  }) : super(QuestionOptionState.initial());
+  final PostAnswerUsecase postAnswerUsecase;
 
   final matchGameManager = MatchGameManager();
+  final answerParams = AnswerParamsSingletone();
 
   void backToInit() {
     emit(QuestionOptionState.initial());
@@ -21,6 +27,9 @@ class QuestionOptionCubit extends Cubit<QuestionOptionState> {
 
   void selectOption(QuestionOptionEntity option) {
     matchGameManager.addScore(option.isCorrect);
+    answerParams.setSelectedOptionId = option.id;
+    answerParams.setIsCorrect = option.isCorrect;
+
     if (_timer != null) cancelTimer();
     startTimerForSelectedOptionToShowResult();
     emit(QuestionOptionState.beforAnswered(questionOptionSelected: option));
@@ -67,5 +76,7 @@ class QuestionOptionCubit extends Cubit<QuestionOptionState> {
     }
   }
 
-  void submitAnswerToServer() {}
+  void submitAnswerToServer() async {
+    await postAnswerUsecase.postAnswer(answerParams: AnswerParamsSingletone());
+  }
 }

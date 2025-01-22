@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
 import 'package:quiz_league/1_domain/entities/team_entity.dart';
 import 'package:quiz_league/1_domain/usecasees/question_category_usecase.dart';
+import 'package:quiz_league/answer_params_singletone.dart';
 import 'package:quiz_league/match_manager_singletone.dart';
 
 part 'match_controller_state.dart';
@@ -15,6 +16,7 @@ class MatchControllerCubit extends Cubit<MatchControllerState> {
   }) : super(MatchControllerState.initial());
 
   final matchGameManager = MatchGameManager();
+  final answerParams = AnswerParamsSingletone();
 
   void backToInitialStateAndReset() {
     emit(MatchControllerState.initial());
@@ -32,6 +34,7 @@ class MatchControllerCubit extends Cubit<MatchControllerState> {
   }
 
   void questionAnswered() {
+    answerParams.setTeamId = matchGameManager.teamTurn().id;
     matchGameManager.nextRound();
     if (matchGameManager.isSelecteCategoryRound()) {
       beforStartRound();

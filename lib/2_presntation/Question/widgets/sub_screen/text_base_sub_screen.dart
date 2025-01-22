@@ -19,30 +19,27 @@ class TextBaseSubScreenBuilder extends StatelessWidget {
     final matchGameManager = MatchGameManager();
     return Column(
       children: [
-        Directionality(
-          textDirection: TextDirection.rtl,
-          child: TextField(
-            style: TextStyle(fontSize: 82),
-            decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(color: Colors.indigo),
+        TextField(
+          style: TextStyle(fontSize: 82),
+          decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: Colors.indigo),
+            ),
+            label: Text(
+              "متن جواب رو وارد کنید",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 26,
+                fontWeight: FontWeight.normal,
               ),
-              label: Text(
-                "متن جواب رو وارد کنید",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 26,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.indigoAccent),
-                borderRadius: BorderRadius.circular(16),
-              ),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.indigoAccent),
+              borderRadius: BorderRadius.circular(16),
             ),
           ),
         ),
