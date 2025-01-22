@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_league/1_domain/entities/team_entity.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info/team_logo.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info/team_name.dart';
-import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_info/team_score_board.dart';
+import 'package:quiz_league/2_presntation/MatchInfo/widgets/team_score_board.dart';
+import 'package:quiz_league/core/widgets/game_card.dart';
 
 class TeamInfo extends StatelessWidget {
   const TeamInfo({
@@ -16,12 +15,19 @@ class TeamInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final teamContainerImageContext = GameContainerImageContext(
+      title: teamEntity.name,
+      gameCardDirection: GameCardDirection.Vertical,
+      imageSize: ImageSize.Big,
+      imageUrl: teamEntity.logo,
+    );
     return Column(
       spacing: 25,
       children: [
         TeamScoreBoard(questionAnsweredList: questionAnsweredList),
-        TeamLogo(logo: teamEntity.logo),
-        TeamName(name: teamEntity.name),
+        GameContainerItemFactory.createGameContainerImage(
+          teamContainerImageContext,
+        ),
       ],
     );
   }

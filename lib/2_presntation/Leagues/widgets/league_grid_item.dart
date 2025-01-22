@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quiz_league/1_domain/entities/core/card.dart';
 import 'package:quiz_league/core/widgets/game_card.dart';
@@ -10,23 +9,18 @@ class LeagueGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final labelLargeTextStyle = Theme.of(context).textTheme.labelLarge;
+    final gameContainerContext = GameContainerImageContext(
+      gameCardDirection: GameCardDirection.Vertical,
+      imageSize: ImageSize.Medium,
+      imageUrl: leagueItemEntity.logo,
+      title: leagueItemEntity.name,
+      subTitle: "فصل 1403-04",
+    );
 
-    return GameCardItem(
+    return GameContainerButton(
       onTap: () => context.push("/tabel/${leagueItemEntity.id}"),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Image.network(leagueItemEntity.logo, height: 120),
-          Text(
-            leagueItemEntity.name,
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontSize: 14.sp,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          Text("فصل 1403-04", style: labelLargeTextStyle),
-        ],
+      child: GameContainerItemFactory.createGameContainerImage(
+        gameContainerContext,
       ),
     );
   }

@@ -16,6 +16,46 @@ class LeagueTableScreen extends StatelessWidget {
     name: "League Table",
     path: '/tabel/:leagueId',
   );
+  @override
+  Widget build(BuildContext context) {
+    final leagueTableCubit = context.read<LeagueTableCubit>();
+    leagueTableCubit.getLeagueTable(leagueId);
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: BlocBuilder<LeaguesCubit, LeaguesState>(
+          builder: (context, state) {
+            return state.when(
+                initial: () => Text("داده ای وجود ندارد"),
+                loading: () => Text("درحال دریافت داده"),
+                success: (teamEntityList) {
+                  final leagueEntity = teamEntityList
+                      .firstWhere((element) => element.id == leagueId);
+                  return Text(
+                    leagueEntity.name,
+                    style: TextStyle(fontSize: 24),
+                  );
+                },
+                error: () => Text("داده ای دریافت نشد"));
+          },
+        ),
+      ),
+      body: BlocBuilder<LeagueTableCubit, LeagueTableState>(
+        builder: (ctx, state) {
+          final notFoundErrorScreen = NotFoundErrorScreen(
+            onTry: () => leagueTableCubit.getLeagueTable(leagueId),
+          );
+          return state.when(
+            loading: () => _leagueTableLoading(context),
+            initial: () => notFoundErrorScreen,
+            success: (teamEntityList) =>
+                _leagueTable(context, teamEntityList: teamEntityList),
+            error: () => notFoundErrorScreen,
+          );
+        },
+      ),
+    );
+  }
 
   BoxDecoration leagueBoxDecoration(BuildContext context) => BoxDecoration(
         borderRadius: BorderRadius.circular(6),
@@ -62,45 +102,6 @@ class LeagueTableScreen extends StatelessWidget {
               (index) =>
                   teamDataRow(context, index + 1, teamEntityList[index])),
         ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final leagueTableCubit = context.read<LeagueTableCubit>();
-    leagueTableCubit.getLeagueTable(leagueId);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: BlocBuilder<LeaguesCubit, LeaguesState>(
-          builder: (context, state) {
-            return state.when(
-                initial: () => Text("داده ای وجود ندارد"),
-                loading: () => Text("درحال دریافت داده"),
-                success: (teamEntityList) {
-                  final leagueEntity = teamEntityList
-                      .firstWhere((element) => element.id == leagueId);
-                  return Text(leagueEntity.name);
-                },
-                error: () => Text("داده ای دریافت نشد"));
-          },
-        ),
-      ),
-      body: BlocBuilder<LeagueTableCubit, LeagueTableState>(
-        builder: (ctx, state) {
-          return state.when(
-            loading: () => _leagueTableLoading(context),
-            initial: () => NotFoundErrorScreen(
-              onTry: () => leagueTableCubit.getLeagueTable(leagueId),
-            ),
-            success: (teamEntityList) =>
-                _leagueTable(context, teamEntityList: teamEntityList),
-            error: () => NotFoundErrorScreen(
-              onTry: () => leagueTableCubit.getLeagueTable(leagueId),
-            ),
-          );
-        },
       ),
     );
   }

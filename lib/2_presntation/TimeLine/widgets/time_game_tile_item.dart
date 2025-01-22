@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:quiz_league/1_domain/entities/match_time_line_entity.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
+import 'package:quiz_league/core/theme.dart';
 import 'package:quiz_league/core/widgets/game_card.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:window_manager/window_manager.dart';
@@ -13,13 +14,39 @@ class TimeGameTileItem extends StatelessWidget {
   const TimeGameTileItem({super.key, required this.matchTimeLineEntity});
   final MatchTimeLineEntity matchTimeLineEntity;
 
+  GameContainerImageContext gameContainerButtonContext({
+    required String imageUrl,
+    required String title,
+  }) {
+    return GameContainerImageContext(
+      gameCardDirection: GameCardDirection.Horizontal,
+      imageSize: ImageSize.Small,
+      imageUrl: imageUrl,
+      title: title,
+      backgroundColor: Colors.transparent,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final matchInfoCubit = context.read<MatchInfoCubit>();
     final matchControllerCubit = context.read<MatchControllerCubit>();
 
+    final disabledColor = Theme.of(context).disabledColor;
+
     final hsotTeam = matchTimeLineEntity.hostTeam;
     final guestTeam = matchTimeLineEntity.guestTeam;
+
+    final leagueGameCardContext = gameContainerButtonContext(
+      imageUrl: matchTimeLineEntity.leagueEntity.logo,
+      title: matchTimeLineEntity.leagueEntity.name,
+    );
+
+    final hostTeamGameCardContext = gameContainerButtonContext(
+        imageUrl: hsotTeam.logo, title: hsotTeam.name);
+
+    final guestTeamGameCardContext = gameContainerButtonContext(
+        imageUrl: guestTeam.logo, title: guestTeam.name);
 
     final startTime = Jalali.fromDateTime(matchTimeLineEntity.startTime);
     final isStartedMatch =
@@ -28,25 +55,14 @@ class TimeGameTileItem extends StatelessWidget {
     final isOverGame = matchTimeLineEntity.endTime != null;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GameCardItem(
-        isDisabled: isOverGame,
+      child: GameContainer(
+        backgroundColor: isOverGame ? disabledColor : MyAppTheme.primaryColor,
         child: Column(
           spacing: 16,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              spacing: 14,
-              children: [
-                Text(
-                  matchTimeLineEntity.leagueEntity.name,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                Image.network(
-                  matchTimeLineEntity.leagueEntity.logo,
-                  height: 40,
-                ),
-              ],
-            ),
+            GameContainerItemFactory.createGameContainerImage(
+                leagueGameCardContext),
             Divider(
               color: Colors.indigo,
             ),
@@ -66,13 +82,8 @@ class TimeGameTileItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     spacing: 12,
                     children: [
-                      Image.network(
-                        hsotTeam.logo,
-                        height: 35,
-                      ),
-                      Text(
-                        hsotTeam.name,
-                        style: Theme.of(context).textTheme.headlineMedium,
+                      GameContainerItemFactory.createGameContainerImage(
+                        hostTeamGameCardContext,
                       ),
                       if (!isStartedMatch)
                         Text(
@@ -105,13 +116,8 @@ class TimeGameTileItem extends StatelessWidget {
                           "${matchTimeLineEntity.hostTeamScore} - ${matchTimeLineEntity.guestTeamScore}",
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
-                      Text(
-                        guestTeam.name,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      Image.network(
-                        guestTeam.logo,
-                        height: 35,
+                      GameContainerItemFactory.createGameContainerImage(
+                        guestTeamGameCardContext,
                       ),
                     ],
                   ),

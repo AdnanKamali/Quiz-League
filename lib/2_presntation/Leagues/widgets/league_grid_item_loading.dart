@@ -12,7 +12,7 @@ class LeagueGridItemLoading extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: Shimmer(
         duration: Duration(seconds: 2),
-        child: GameCardItem(
+        child: GameContainer(
           child: Column(
             spacing: 12,
             children: [

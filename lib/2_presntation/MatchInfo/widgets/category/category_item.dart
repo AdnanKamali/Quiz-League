@@ -18,22 +18,21 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final matchControllerCubit = context.read<MatchControllerCubit>();
 
-    return GameCardItem(
-      onTap: () => matchControllerCubit.startRound(questionCategoryEntity),
-      isDisabled: isUsed,
-      child: Column(
-        spacing: 14,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.network(
-            questionCategoryEntity.logo,
-            height: 150,
-          ),
-          Text(
-            questionCategoryEntity.name,
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-        ],
+    final GameContainerImageContext gameContainerImageContext =
+        GameContainerImageContext(
+      title: questionCategoryEntity.name,
+      gameCardDirection: GameCardDirection.Vertical,
+      imageSize: ImageSize.Medium,
+      imageUrl: questionCategoryEntity.logo,
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GameContainerButton(
+        onTap: () => matchControllerCubit.startRound(questionCategoryEntity),
+        child: GameContainerItemFactory.createGameContainerImage(
+          gameContainerImageContext,
+        ),
       ),
     );
   }
