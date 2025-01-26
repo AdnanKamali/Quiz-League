@@ -13,35 +13,6 @@ class MyAppTheme {
   // فونت‌ها
   static const String fontFamily = "Pelak";
 
-  // تم روشن
-  static final ThemeData lightTheme = ThemeData(
-    primaryColor: primaryColor,
-    scaffoldBackgroundColor: backgroundColor,
-    fontFamily: fontFamily,
-    textTheme: TextTheme(
-      headlineLarge: TextStyle(
-          fontSize: 32.sp, fontWeight: FontWeight.bold, color: textColor),
-      headlineMedium: TextStyle(
-          fontSize: 20.sp, fontWeight: FontWeight.w600, color: textColor),
-      bodyLarge: TextStyle(
-          fontSize: 16.sp, fontWeight: FontWeight.normal, color: textColor),
-      bodyMedium: TextStyle(
-          fontSize: 14.sp,
-          fontWeight: FontWeight.normal,
-          color: textColor.withOpacity(0.7)),
-    ),
-    appBarTheme: AppBarTheme(
-      backgroundColor: primaryColor,
-      titleTextStyle: TextStyle(
-          fontSize: 20.sp, fontWeight: FontWeight.w600, color: Colors.white),
-    ),
-    buttonTheme: ButtonThemeData(
-      buttonColor: selectedOptionColor,
-      textTheme: ButtonTextTheme.primary,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-    ),
-  );
-
   // تم تاریک
   static final ThemeData darkTheme = ThemeData(
     primaryColor: Colors.indigoAccent,
