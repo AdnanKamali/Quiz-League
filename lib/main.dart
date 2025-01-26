@@ -94,7 +94,6 @@ class MyApp extends StatelessWidget {
             ],
             debugShowCheckedModeBanner: false,
             title: 'Quiz League',
-            theme: MyAppTheme.lightTheme,
             darkTheme: MyAppTheme.darkTheme,
             themeMode: ThemeMode.dark,
             routerConfig: router,
