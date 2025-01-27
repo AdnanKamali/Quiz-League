@@ -649,7 +649,6 @@ class _$TeamTableModelImpl implements _TeamTableModel {
   }
 
   @override
-  // TODO: implement teamTableInfoEntity
   TeamTableInfoEntity get teamTableInfoEntity =>
       TeamTableInfoEntity.fromModel(this.teamTableInfoModel);
 }

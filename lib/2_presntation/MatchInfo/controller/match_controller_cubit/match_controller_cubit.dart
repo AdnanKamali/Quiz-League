@@ -19,6 +19,7 @@ class MatchControllerCubit extends Cubit<MatchControllerState> {
   final answerParams = AnswerParamsSingletone();
 
   void backToInitialStateAndReset() {
+    matchGameManager.reset();
     emit(MatchControllerState.initial());
   }
 
@@ -36,6 +37,10 @@ class MatchControllerCubit extends Cubit<MatchControllerState> {
   void questionAnswered() {
     answerParams.setTeamId = matchGameManager.teamTurn().id;
     matchGameManager.nextRound();
+    if (matchGameManager.isEndGame) {
+      emit(MatchControllerState.endGame(
+          winnerTeam: matchGameManager.winnerTeam()));
+    }
     if (matchGameManager.isSelecteCategoryRound()) {
       beforStartRound();
     } else {

@@ -71,10 +71,11 @@ class GameContainerItemFactory {
             ));
       case GameCardDirection.Vertical:
         return GameContainer(
+            backgroundColor: gameCardContext.backgroundColor,
             child: Column(
-          spacing: 12,
-          children: children,
-        ));
+              spacing: 12,
+              children: children,
+            ));
     }
   }
 }
@@ -107,13 +108,16 @@ class GameContainerButton extends GameContainer {
     required super.child,
     required this.onTap,
   });
-  final void Function() onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: GameContainer(child: child),
+      child: GameContainer(
+        backgroundColor: Colors.transparent,
+        child: child,
+      ),
     );
   }
 }

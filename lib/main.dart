@@ -6,7 +6,6 @@ import 'package:quiz_league/1_domain/usecasees/league_teams_table_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/leagues_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/match_info_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/match_time_line_usecase.dart';
-import 'package:quiz_league/1_domain/usecasees/post_answer_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/question_category_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/question_usecase.dart';
 import 'package:quiz_league/2_presntation/LeagueTable/controller/cubit/league_table_cubit.dart';
@@ -14,7 +13,8 @@ import 'package:quiz_league/2_presntation/Leagues/controller/cubit/leagues_cubit
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_cubit/question_cubit.dart';
-import 'package:quiz_league/2_presntation/Question/controller/question_option_cubit/question_option_cubit.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_option_bloc/question_option_bloc.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_text_cubit/question_text_cubit.dart';
 import 'package:quiz_league/2_presntation/TimeLine/controller/cubit/match_time_line_cubit.dart';
 import 'package:quiz_league/core/route.dart';
 import 'package:quiz_league/core/theme.dart';
@@ -55,12 +55,14 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
+              create: (_) => QuestionOptionBloc(),
+            ),
+            BlocProvider(
               create: (_) =>
                   QuestionCubit(questionUsecase: sl<QuestionUsecase>()),
             ),
             BlocProvider(
-              create: (_) => QuestionOptionCubit(
-                  postAnswerUsecase: sl<PostAnswerUsecase>()),
+              create: (_) => QuestionTextCubit(),
             ),
             BlocProvider(
               create: (_) => MatchControllerCubit(

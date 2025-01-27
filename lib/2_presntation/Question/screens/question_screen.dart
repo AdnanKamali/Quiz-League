@@ -5,7 +5,6 @@ import 'package:quiz_league/1_domain/entities/question_entity.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_cubit/question_cubit.dart';
-import 'package:quiz_league/2_presntation/Question/controller/question_option_cubit/question_option_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/widgets/question_loading.dart';
 import 'package:quiz_league/2_presntation/Question/widgets/question_option_item_loading.dart';
 import 'package:quiz_league/2_presntation/Question/widgets/question_box.dart';
@@ -26,14 +25,11 @@ class QuestionScreen extends StatelessWidget {
   final matchGameManager = MatchGameManager();
 
   void onBackToMatch(BuildContext context) {
-    final questionOptionCubit = context.read<QuestionOptionCubit>();
     final matchInfoCubit = context.read<MatchInfoCubit>();
     final matchControllerCubit = context.read<MatchControllerCubit>();
 
     matchInfoCubit.scoreChange();
     matchControllerCubit.questionAnswered();
-    questionOptionCubit.submitAnswerToServer();
-    questionOptionCubit.backToInit();
     context.pop();
   }
 

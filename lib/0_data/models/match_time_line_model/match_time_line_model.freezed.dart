@@ -328,7 +328,6 @@ class _$MatchTimeLineModelImpl implements _MatchTimeLineModel {
   }
 
   @override
-  // TODO: implement leagueEntity
   LeagueEntity get leagueEntity => LeagueEntity.fromModel(this.league);
 }
 

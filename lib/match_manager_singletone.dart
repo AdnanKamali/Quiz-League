@@ -50,7 +50,7 @@ class MatchGameManager {
   final _roundOfSelectCategory = [1, 5, 9];
   int _matchRound = 1;
 
-  final List<QuestionCategoryEntity> _categoryUsed = [];
+  List<QuestionCategoryEntity> _categoryUsed = [];
   bool isUsedCategory(QuestionCategoryEntity categoryEntity) =>
       _categoryUsed.contains(categoryEntity);
 
@@ -79,6 +79,32 @@ class MatchGameManager {
       return hostTeam.teamEntity!;
     }
     return guestTeam.teamEntity!;
+  }
+
+  TeamEntity? winnerTeam() {
+    int hostTrueAnswer = 0;
+    int guestTrueAnswer = 0;
+    for (var trueAnswer in hostTeam.questionAnswered) {
+      if (trueAnswer!) hostTrueAnswer++;
+    }
+    for (var trueAnswer in guestTeam.questionAnswered) {
+      if (trueAnswer!) guestTrueAnswer++;
+    }
+    if (hostTrueAnswer == guestTrueAnswer) {
+      return null;
+    } else if (hostTrueAnswer > guestTrueAnswer) {
+      return hostTeam.teamEntity;
+    }
+    return guestTeam.teamEntity;
+  }
+
+  bool get isEndGame => _matchRound == 13;
+
+  void reset() {
+    hostTeam.rest();
+    guestTeam.rest();
+    _categoryUsed = [];
+    _matchRound = 1;
   }
 
   MatchGameManager._internal();

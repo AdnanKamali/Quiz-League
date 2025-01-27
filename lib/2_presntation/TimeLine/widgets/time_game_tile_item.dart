@@ -34,9 +34,12 @@ class TimeGameTileItem extends StatelessWidget {
 
     final disabledColor = Theme.of(context).disabledColor;
 
+    // Teams Start
     final hsotTeam = matchTimeLineEntity.hostTeam;
     final guestTeam = matchTimeLineEntity.guestTeam;
+    // Teams End
 
+    // Context intialize Start
     final leagueGameCardContext = gameContainerButtonContext(
       imageUrl: matchTimeLineEntity.leagueEntity.logo,
       title: matchTimeLineEntity.leagueEntity.name,
@@ -47,6 +50,8 @@ class TimeGameTileItem extends StatelessWidget {
 
     final guestTeamGameCardContext = gameContainerButtonContext(
         imageUrl: guestTeam.logo, title: guestTeam.name);
+
+    // Context intialize End
 
     final startTime = Jalali.fromDateTime(matchTimeLineEntity.startTime);
     final isStartedMatch =
