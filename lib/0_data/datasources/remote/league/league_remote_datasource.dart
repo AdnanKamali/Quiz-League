@@ -23,6 +23,10 @@ abstract class LeagueRemoteDatasourceRestClient {
   Future<List<TeamPlayerModel>> getPlayers(@Path("teamId") String teamId);
   @GET("/match/{matchId}")
   Future<MatchInfoModel> getMatchInfo(@Path("matchId") String matchId);
-  @GET("/matches-time-line")
+  @GET("/matches-time-line/")
   Future<List<MatchTimeLineModel>> getMatchesTimeLine();
+  @POST("/surrender/")
+  Future<int> postSurrender(@Body() Map<String, dynamic> body);
+  @POST("/game_result/{matchId}/")
+  Future<int> postGameResult(@Path("matchId") int matchId);
 }

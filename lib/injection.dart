@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:quiz_league/0_data/datasources/remote/league/league_remote_datasource.dart';
 import 'package:quiz_league/0_data/datasources/remote/question/question_remote_datasource.dart';
+import 'package:quiz_league/0_data/repositories/game_result_repository.dart';
 import 'package:quiz_league/0_data/repositories/league_teams_table_repo_impl.dart';
 import 'package:quiz_league/0_data/repositories/leagues_repo_impl.dart';
 import 'package:quiz_league/0_data/repositories/match_info_repo_impl.dart';
@@ -9,6 +10,8 @@ import 'package:quiz_league/0_data/repositories/match_time_line_repo_impl.dart';
 import 'package:quiz_league/0_data/repositories/post_answer_repository.dart';
 import 'package:quiz_league/0_data/repositories/question_category_repo_impl.dart';
 import 'package:quiz_league/0_data/repositories/question_repo_impl.dart';
+import 'package:quiz_league/0_data/repositories/surrender_repository.dart';
+import 'package:quiz_league/1_domain/usecasees/game_result_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/league_teams_table_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/leagues_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/match_info_usecase.dart';
@@ -72,4 +75,13 @@ void serviceLocator() {
       questionRemoteDatasourceRestClient: questionRemoteDatasourceRestClient));
   sl.registerSingleton(
       PostAnswerUsecase(questionRepository: sl<PostAnswerRepository>()));
+
+  // Game Result Injection
+  sl.registerSingleton(GameResultRepository(
+      leagueRemoteDatasourceRestClient: leagueRemoteDatasourceRestClient));
+  sl.registerSingleton(SurrenderRepository(
+      leagueRemoteDatasourceRestClient: leagueRemoteDatasourceRestClient));
+  sl.registerSingleton(GameResultUsecase(
+      gameResultRepository: sl<GameResultRepository>(),
+      surrenderRepository: sl<SurrenderRepository>()));
 }

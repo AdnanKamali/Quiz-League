@@ -14,10 +14,10 @@ class AnswerParamsSingletone {
 
   set setMatchId(int matchId) => this.matchId = matchId;
   set setTeamId(int teamId) => this.teamId = teamId;
-  set setSelectedOptionId(int selectedOptionId) =>
+  set setSelectedOptionId(int? selectedOptionId) =>
       this.selectedOptionId = selectedOptionId;
   set setQuestionId(int questionId) => this.questionId = questionId;
-  set setTextAnswer(String textAnswer) => this.textAnswer = textAnswer;
+  set setTextAnswer(String? textAnswer) => this.textAnswer = textAnswer;
   set setIsCorrect(bool isCorrect) => this.isCorrect = isCorrect;
 
   Map<String, dynamic> toJson() => {

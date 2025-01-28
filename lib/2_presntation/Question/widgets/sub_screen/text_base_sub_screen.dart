@@ -76,6 +76,7 @@ class TextBaseSubScreenBuilder extends StatelessWidget {
                           textEditingController.text,
                           false,
                         );
+
                         onBackToMatch();
                         textEditingController.text = "";
                         questionTextCubit.intialState();
@@ -92,6 +93,7 @@ class TextBaseSubScreenBuilder extends StatelessWidget {
                           textEditingController.text,
                           true,
                         );
+
                         onBackToMatch();
                         textEditingController.text = "";
                         questionTextCubit.intialState();

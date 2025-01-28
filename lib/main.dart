@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quiz_league/1_domain/usecasees/game_result_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/league_teams_table_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/leagues_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/match_info_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/match_time_line_usecase.dart';
+import 'package:quiz_league/1_domain/usecasees/post_answer_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/question_category_usecase.dart';
 import 'package:quiz_league/1_domain/usecasees/question_usecase.dart';
 import 'package:quiz_league/2_presntation/LeagueTable/controller/cubit/league_table_cubit.dart';
@@ -55,17 +57,20 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => QuestionOptionBloc(),
+              create: (_) => QuestionOptionBloc(
+                  postAnswerUseCase: sl<PostAnswerUsecase>()),
             ),
             BlocProvider(
               create: (_) =>
                   QuestionCubit(questionUsecase: sl<QuestionUsecase>()),
             ),
             BlocProvider(
-              create: (_) => QuestionTextCubit(),
+              create: (_) =>
+                  QuestionTextCubit(postAnswerUsecase: sl<PostAnswerUsecase>()),
             ),
             BlocProvider(
               create: (_) => MatchControllerCubit(
+                  gameResultUsecase: sl<GameResultUsecase>(),
                   questionCategoryUsecase: sl<QuestionCategoryUsecase>()),
             ),
             BlocProvider(

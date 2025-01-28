@@ -23,8 +23,10 @@ class QuestionOptionItem extends StatelessWidget {
 
     final questionOptionBloc = context.read<QuestionOptionBloc>();
     return InkWell(
-      onTap: () => questionOptionBloc
-          .add(QuestionOptionEvent.select(questionOption: questionOption)),
+      onTap: () => questionOptionBloc.state.maybeWhen(
+          orElse: () => questionOptionBloc
+              .add(QuestionOptionEvent.select(questionOption: questionOption)),
+          answered: (_) => null),
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: Container(

@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:quiz_league/1_domain/entities/match_info_entity.dart';
 import 'package:quiz_league/1_domain/usecasees/match_info_usecase.dart';
 import 'package:quiz_league/answer_params_singletone.dart';
+import 'package:quiz_league/game_result_params.dart';
 import 'package:quiz_league/match_manager_singletone.dart';
 
 part 'match_info_state.dart';
@@ -15,6 +16,7 @@ class MatchInfoCubit extends Cubit<MatchInfoState> {
 
   final matchGameManager = MatchGameManager();
   final answerParamsSingletone = AnswerParamsSingletone();
+  final gameResultParams = GameResultParams();
 
   void scoreChange() {
     emit(
@@ -35,6 +37,7 @@ class MatchInfoCubit extends Cubit<MatchInfoState> {
         matchGameManager.hostTeam.setTeam = r.result.hostTeam;
 
         answerParamsSingletone.setMatchId = r.result.id;
+        gameResultParams.setMatchId = r.result.id;
         emit(MatchInfoState.success(matchInfoEntity: r.result));
       },
     );
