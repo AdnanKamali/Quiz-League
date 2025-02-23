@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
-import 'package:quiz_league/2_presntation/Question/controller/question_text_cubit/question_text_cubit.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_answer_cubit/question_answer_cubit.dart';
+import 'package:quiz_league/answer_params_singletone.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
 
 class TextBaseSubScreenBuilder extends StatelessWidget {
@@ -17,7 +18,7 @@ class TextBaseSubScreenBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final questionTextCubit = context.read<QuestionTextCubit>();
+    final questionAnswerCubit = context.read<QuestionAnswerCubit>();
     return Column(
       children: [
         TextField(
@@ -45,16 +46,14 @@ class TextBaseSubScreenBuilder extends StatelessWidget {
             ),
           ),
         ),
-        BlocBuilder<QuestionTextCubit, QuestionTextState>(
+        BlocBuilder<QuestionAnswerCubit, QuestionAnswerState>(
             builder: (ctx, state) {
           return state.maybeWhen(
             orElse: () => CustomElevatedButton(
               child: Text("مشاهده جواب"),
-              onPressed: () {
-                questionTextCubit.showAnswer();
-              },
+              onPressed: () => questionAnswerCubit.showResultQuestion(null),
             ),
-            showAnswer: () => Column(
+            showAnswer: (_) => Column(
               spacing: 26,
               children: [
                 SizedBox(
@@ -71,15 +70,15 @@ class TextBaseSubScreenBuilder extends StatelessWidget {
                   spacing: 165,
                   children: [
                     IconButton(
-                      onPressed: () {
-                        questionTextCubit.acceptAnswer(
-                          textEditingController.text,
-                          false,
-                        );
+                      onPressed: () async {
+                        final answerParam = AnswerParamsSingletone();
+                        answerParam.setTextAnswer = textEditingController.text;
+                        answerParam.setIsCorrect = false;
 
+                        questionAnswerCubit.onSendAnswerToServer(answerParam);
+                        questionAnswerCubit.backToInitial();
                         onBackToMatch();
                         textEditingController.text = "";
-                        questionTextCubit.intialState();
                       },
                       icon: Icon(
                         Icons.cancel,
@@ -88,15 +87,16 @@ class TextBaseSubScreenBuilder extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {
-                        questionTextCubit.acceptAnswer(
-                          textEditingController.text,
-                          true,
-                        );
+                      onPressed: () async {
+                        final answerParam = AnswerParamsSingletone();
+                        answerParam.setTextAnswer = textEditingController.text;
+                        answerParam.setIsCorrect = true;
 
+                        questionAnswerCubit.onSendAnswerToServer(answerParam);
+
+                        questionAnswerCubit.backToInitial();
                         onBackToMatch();
                         textEditingController.text = "";
-                        questionTextCubit.intialState();
                       },
                       icon: Icon(
                         Icons.check,

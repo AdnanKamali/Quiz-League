@@ -28,5 +28,5 @@ abstract class LeagueRemoteDatasourceRestClient {
   @POST("/surrender/")
   Future<int> postSurrender(@Body() Map<String, dynamic> body);
   @POST("/game_result/{matchId}/")
-  Future<int> postGameResult(@Path("matchId") int matchId);
+  Future<int> postGameResult(@Path("matchId") String matchId);
 }

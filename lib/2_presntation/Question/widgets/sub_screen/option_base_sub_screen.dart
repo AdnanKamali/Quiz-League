@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
-import 'package:quiz_league/2_presntation/Question/controller/question_option_bloc/question_option_bloc.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_answer_cubit/question_answer_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/widgets/question_item_option.dart';
+import 'package:quiz_league/answer_params_singletone.dart';
 
+// ignore: must_be_immutable
 class OptionBaseSubScreenBuilder extends StatelessWidget {
   OptionBaseSubScreenBuilder({
     super.key,
@@ -26,7 +28,7 @@ class OptionBaseSubScreenBuilder extends StatelessWidget {
   void startTimerForSelectedOptionToShowResult(
     void Function() onEndTimer,
   ) {
-    int maxTimeToShowAnswerSecond = 2;
+    int maxTimeToShowAnswerSecond = 1;
 
     if (_timer != null) cancelTimer();
     _timer = Timer.periodic(
@@ -44,8 +46,8 @@ class OptionBaseSubScreenBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final questionOptionBloc = context.read<QuestionOptionBloc>();
-    return BlocBuilder<QuestionOptionBloc, QuestionOptionState>(
+    final questionOptionCubit = context.read<QuestionAnswerCubit>();
+    return BlocBuilder<QuestionAnswerCubit, QuestionAnswerState>(
       builder: (ctx, state) {
         final trueAnsweredColor = Colors.green;
         final wrongAnsweredColor = Colors.red;
@@ -61,19 +63,16 @@ class OptionBaseSubScreenBuilder extends StatelessWidget {
                 final questionOption = questionOptionEntityList[index];
                 Color colorOption = state.when(
                   initial: () => initialOptionColor,
-                  selected: (questionOptionSelected) {
+                  selectOption: (questionOptionSelected) {
                     startTimerForSelectedOptionToShowResult(
-                      () => questionOptionBloc.add(
-                        QuestionOptionEvent.showResult(
-                          questionOption: questionOptionSelected,
-                        ),
-                      ),
+                      () => questionOptionCubit
+                          .showResultQuestion(questionOptionSelected),
                     );
                     return questionOptionSelected == questionOption
                         ? beforAnsweredColor
                         : initialOptionColor;
                   },
-                  answered: (questionOptionSelected) {
+                  showAnswer: (questionOptionSelected) {
                     if (questionOption.isCorrect) return trueAnsweredColor;
 
                     if (questionOptionSelected == null) {
@@ -96,10 +95,12 @@ class OptionBaseSubScreenBuilder extends StatelessWidget {
             SizedBox(height: 20),
             state.maybeWhen(
               orElse: () => Text(""),
-              answered: (_) => BackButton(
-                onPressed: () {
+              showAnswer: (_) => BackButton(
+                onPressed: () async {
+                  questionOptionCubit
+                      .onSendAnswerToServer(AnswerParamsSingletone());
+                  questionOptionCubit.backToInitial();
                   onBackToMatch();
-                  questionOptionBloc.add(QuestionOptionEvent.started());
                 },
               ),
             )

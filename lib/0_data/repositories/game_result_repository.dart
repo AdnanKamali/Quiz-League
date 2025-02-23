@@ -10,8 +10,8 @@ class GameResultRepository implements GetObjectInterface<int, int> {
   Future<Either<FailureResponse, SuccessResponse<int>>> getObject(
       int matchId) async {
     try {
-      final result =
-          await leagueRemoteDatasourceRestClient.postGameResult(matchId);
+      final result = await leagueRemoteDatasourceRestClient
+          .postGameResult(matchId.toString());
       final response = SuccessResponse(result: result);
       return Right(response);
     } catch (e) {

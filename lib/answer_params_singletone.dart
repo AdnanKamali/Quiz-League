@@ -21,9 +21,9 @@ class AnswerParamsSingletone {
   set setIsCorrect(bool isCorrect) => this.isCorrect = isCorrect;
 
   Map<String, dynamic> toJson() => {
-        "match_id": matchId,
-        "team_id": teamId,
-        "question_id": questionId,
+        "match": matchId,
+        "team": teamId,
+        "question": questionId,
         "selected_option": selectedOptionId,
         "text_answer": textAnswer,
         "is_correct": isCorrect,

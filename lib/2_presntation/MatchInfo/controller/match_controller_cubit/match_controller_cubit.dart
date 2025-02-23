@@ -43,12 +43,18 @@ class MatchControllerCubit extends Cubit<MatchControllerState> {
     ));
   }
 
+  Future<void> onPostGameEndToServer() async {
+    await gameResultUsecase.postGameResult(answerParams.matchId);
+  }
+
   void questionAnswered() async {
     matchGameManager.nextRound();
     if (matchGameManager.isEndGame) {
-      emit(MatchControllerState.endGame(
-          winnerTeam: matchGameManager.winnerTeam()));
-      await gameResultUsecase.postGameResult(answerParams.matchId);
+      emit(
+        MatchControllerState.endGame(
+          winnerTeam: matchGameManager.winnerTeam(),
+        ),
+      );
     }
     if (matchGameManager.isSelecteCategoryRound()) {
       beforStartRound();

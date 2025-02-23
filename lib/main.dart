@@ -14,9 +14,8 @@ import 'package:quiz_league/2_presntation/LeagueTable/controller/cubit/league_ta
 import 'package:quiz_league/2_presntation/Leagues/controller/cubit/leagues_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_controller_cubit/match_controller_cubit.dart';
 import 'package:quiz_league/2_presntation/MatchInfo/controller/match_info_cubit/match_info_cubit.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_answer_cubit/question_answer_cubit.dart';
 import 'package:quiz_league/2_presntation/Question/controller/question_cubit/question_cubit.dart';
-import 'package:quiz_league/2_presntation/Question/controller/question_option_bloc/question_option_bloc.dart';
-import 'package:quiz_league/2_presntation/Question/controller/question_text_cubit/question_text_cubit.dart';
 import 'package:quiz_league/2_presntation/TimeLine/controller/cubit/match_time_line_cubit.dart';
 import 'package:quiz_league/core/route.dart';
 import 'package:quiz_league/core/theme.dart';
@@ -57,16 +56,13 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => QuestionOptionBloc(
-                  postAnswerUseCase: sl<PostAnswerUsecase>()),
+              create: (_) => QuestionAnswerCubit(
+                postAnswerUsecase: sl<PostAnswerUsecase>(),
+              ),
             ),
             BlocProvider(
               create: (_) =>
                   QuestionCubit(questionUsecase: sl<QuestionUsecase>()),
-            ),
-            BlocProvider(
-              create: (_) =>
-                  QuestionTextCubit(postAnswerUsecase: sl<PostAnswerUsecase>()),
             ),
             BlocProvider(
               create: (_) => MatchControllerCubit(

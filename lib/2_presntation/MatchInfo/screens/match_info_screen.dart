@@ -10,6 +10,7 @@ import 'package:quiz_league/2_presntation/MatchInfo/widgets/surrender.dart';
 import 'package:quiz_league/core/route_info.dart';
 import 'package:quiz_league/core/widgets/custom_elevated_button.dart';
 import 'package:quiz_league/match_manager_singletone.dart';
+import 'package:window_manager/window_manager.dart';
 
 class MatchInfoScreen extends StatelessWidget {
   const MatchInfoScreen({super.key, required this.matchId});
@@ -62,8 +63,11 @@ class MatchInfoScreen extends StatelessWidget {
                             ),
                           CustomElevatedButton(
                             child: Text("بازگشت به صفحه اصلی"),
-                            onPressed: () {
+                            onPressed: () async {
+                              windowManager.setFullScreen(false);
                               context.go("/");
+                              await matchControllerCubit
+                                  .onPostGameEndToServer();
                               matchControllerCubit.backToInitialStateAndReset();
                             },
                           )

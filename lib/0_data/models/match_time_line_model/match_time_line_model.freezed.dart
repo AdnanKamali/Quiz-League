@@ -328,7 +328,7 @@ class _$MatchTimeLineModelImpl implements _MatchTimeLineModel {
   }
 
   @override
-  LeagueEntity get leagueEntity => LeagueEntity.fromModel(this.league);
+  LeagueEntity get leagueEntity => LeagueEntity.fromModel(league);
 }
 
 abstract class _MatchTimeLineModel implements MatchTimeLineModel {

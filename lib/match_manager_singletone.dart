@@ -43,7 +43,7 @@ class Team implements TeamInterface {
 class TeamMatch extends Team with QuestionManager {}
 
 class MatchGameManager {
-  static final MatchGameManager _instance = MatchGameManager._internal();
+  static final MatchGameManager _instance = MatchGameManager._internal(); 
   final hostTeam = TeamMatch();
   final guestTeam = TeamMatch();
 

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_league/2_presntation/Question/controller/question_option_bloc/question_option_bloc.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_answer_cubit/question_answer_cubit.dart';
 
 class TimerIndicator extends StatefulWidget {
   const TimerIndicator({super.key});
@@ -12,7 +12,8 @@ class TimerIndicator extends StatefulWidget {
 }
 
 class _TimerIndicatorState extends State<TimerIndicator> {
-  late QuestionOptionBloc _questionOptionBloc;
+  late QuestionAnswerCubit _questionAnswerCubit;
+
   Timer? _timer;
   int _start = 63000;
 
@@ -24,10 +25,8 @@ class _TimerIndicatorState extends State<TimerIndicator> {
         (Timer timer) {
           if (_start == 0) {
             setState(() {
+              _questionAnswerCubit.showResultQuestion(null);
               timer.cancel();
-              _questionOptionBloc.add(
-                QuestionOptionEvent.showResult(questionOption: null),
-              );
             });
           } else {
             setState(() {
@@ -42,13 +41,13 @@ class _TimerIndicatorState extends State<TimerIndicator> {
   @override
   void initState() {
     super.initState();
-    _questionOptionBloc = context.read<QuestionOptionBloc>();
+    _questionAnswerCubit = context.read<QuestionAnswerCubit>();
     Future.delayed(Duration.zero).then(
       (value) => !context.mounted
           ? null
-          : _questionOptionBloc.state.maybeWhen(
+          : _questionAnswerCubit.state.maybeWhen(
               orElse: () => startTimer(),
-              answered: (_) => null,
+              showAnswer: (_) => null,
             ),
     );
   }
@@ -69,10 +68,11 @@ class _TimerIndicatorState extends State<TimerIndicator> {
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
 
-    return BlocListener<QuestionOptionBloc, QuestionOptionState>(
+    return BlocListener<QuestionAnswerCubit, QuestionAnswerState>(
       listener: (context, state) {
-        state.mapOrNull(
-          answered: (value) => timerDisposer(),
+        state.maybeWhen(
+          orElse: () => null,
+          showAnswer: (_) => timerDisposer(),
         );
       },
       child: Directionality(

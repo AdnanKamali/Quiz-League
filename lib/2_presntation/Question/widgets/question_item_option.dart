@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_league/1_domain/entities/question_entity.dart';
-import 'package:quiz_league/2_presntation/Question/controller/question_option_bloc/question_option_bloc.dart';
+import 'package:quiz_league/2_presntation/Question/controller/question_answer_cubit/question_answer_cubit.dart';
 
 // when change state change color
 
@@ -21,12 +21,12 @@ class QuestionOptionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
 
-    final questionOptionBloc = context.read<QuestionOptionBloc>();
+    final questionOptionCubit = context.read<QuestionAnswerCubit>();
     return InkWell(
-      onTap: () => questionOptionBloc.state.maybeWhen(
-          orElse: () => questionOptionBloc
-              .add(QuestionOptionEvent.select(questionOption: questionOption)),
-          answered: (_) => null),
+      onTap: () => questionOptionCubit.state.maybeWhen(
+        orElse: () => questionOptionCubit.selectAnswerOption(questionOption),
+        showAnswer: (_) => null,
+      ),
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: Container(

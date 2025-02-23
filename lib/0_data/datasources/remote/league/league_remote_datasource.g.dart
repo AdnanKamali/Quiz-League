@@ -235,7 +235,7 @@ class _LeagueRemoteDatasourceRestClient
   }
 
   @override
-  Future<int> postGameResult(int matchId) async {
+  Future<int> postGameResult(String matchId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

@@ -650,7 +650,7 @@ class _$TeamTableModelImpl implements _TeamTableModel {
 
   @override
   TeamTableInfoEntity get teamTableInfoEntity =>
-      TeamTableInfoEntity.fromModel(this.teamTableInfoModel);
+      TeamTableInfoEntity.fromModel(teamTableInfoModel);
 }
 
 abstract class _TeamTableModel implements TeamTableModel {
