@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_league/core/base_url.dart';
+import 'package:quiz_league/config/url_manager.dart';
 
 class QuestionBox extends StatelessWidget {
   const QuestionBox(
@@ -49,7 +49,7 @@ class QuestionBox extends StatelessWidget {
               ),
               child: Center(
                 child: Image.network(
-                  baseUrl + imageUrl!,
+                  UrlManager.staticImageUrl + imageUrl!,
                   height: MediaQuery.of(context).size.height * 0.36,
                 ),
               ),
