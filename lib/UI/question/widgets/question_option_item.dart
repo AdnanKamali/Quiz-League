@@ -37,9 +37,10 @@ class QuestionOptionItem extends StatelessWidget {
               child: SizedBox(
                 height: 50,
                 child: CircleAvatar(
+                  backgroundColor: Colors.blue,
                   child: Text(
-                    "$index",
-                    style: TextStyle(fontSize: 16),
+                    "${index + 1}",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

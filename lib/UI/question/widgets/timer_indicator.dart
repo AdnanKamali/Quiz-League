@@ -65,13 +65,15 @@ class _TimerIndicatorState extends State<TimerIndicator> {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-
-    return LinearProgressIndicator(
-      color: primaryColor,
-      minHeight: 10,
-      borderRadius: BorderRadius.circular(8),
-      value: _start / 60000,
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: LinearProgressIndicator(
+        backgroundColor: Colors.black87,
+        color: Colors.blue,
+        minHeight: 10,
+        borderRadius: BorderRadius.circular(8),
+        value: _start / 60000,
+      ),
     );
   }
 }

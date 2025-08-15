@@ -57,7 +57,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
       content = const Center(child: CircularProgressIndicator());
     }
     if (state.errorResponse != null) {
-      content = Center(child: Text("مشکل در دریافت سوال"));
+      if (state.errorResponse!.statusCode == 404) {
+        content = Center(child: Text("سوالی یافت نشد"));
+      } else {
+        content = Center(child: Text("مشکل در دریافت سوال"));
+      }
     }
     if (state.question != null) {
       if (state.question!.questionType == QuestionType.TEXT) {
@@ -74,7 +78,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 if (answerState is AnswerControllerBeforShowResult) {
                   optionColor = answerState.selectedOption != null &&
                           option.id == answerState.selectedOption!.id
-                      ? Colors.yellow
+                      ? Colors.amber.shade800
                       : Colors.transparent;
                 } else if (answerState is AnswerControllerShowResult) {
                   if (_timer.isActive) {
@@ -142,6 +146,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   _timer = timer;
                 },
                 onEndTime: () {
+                  if (_answerControllerBloc.state
+                      is AnswerControllerBeforShowResult) {
+                    return;
+                  }
                   _answerControllerBloc.add(
                     SelectAnswerEvent(
                       answerReport: AnswerReportModel(
