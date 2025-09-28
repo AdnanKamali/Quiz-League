@@ -21,6 +21,9 @@ class QuestionModel {
   @JsonKey(name: 'text')
   String text;
 
+  @JsonKey(name: 'hint')
+  String? hint;
+
   @JsonKey(name: 'options')
   List<QuestionOptionModel>? options;
 
@@ -28,6 +31,7 @@ class QuestionModel {
     required this.id,
     required this.text,
     required this.questionType,
+    this.hint,
     this.options,
   });
 

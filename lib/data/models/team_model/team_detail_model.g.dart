@@ -10,8 +10,8 @@ TeamDetailModel _$TeamDetailModelFromJson(Map<String, dynamic> json) =>
     TeamDetailModel(
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
-      logo: json['logo'] as String,
       gamePlayed: (json['game_played'] as num).toInt(),
+      logo: json['logo'] as String,
       points: (json['points'] as num).toInt(),
       correctAnswer: (json['correct_answer'] as num).toInt(),
       wrongAnswer: (json['wrong_answer'] as num).toInt(),
@@ -25,6 +25,7 @@ Map<String, dynamic> _$TeamDetailModelToJson(TeamDetailModel instance) =>
       'id': instance.id,
       'name': instance.name,
       'logo': instance.logo,
+      'game_played': instance.gamePlayed,
       'points': instance.points,
       'correct_answer': instance.correctAnswer,
       'wrong_answer': instance.wrongAnswer,

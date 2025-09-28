@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_league/UI/0_common/controllers/settings_controller/settings_controller_cubit.dart';
 import 'package:quiz_league/UI/question/controllers/answer_controller/answer_controller_bloc.dart';
 import 'package:quiz_league/UI/question/controllers/question_controller/question_controller_cubit.dart';
 import 'package:quiz_league/UI/question/widgets/question_option_item.dart';
@@ -51,8 +52,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
   @override
   Widget build(BuildContext context) {
     final questionController = context.watch<QuestionControllerCubit>();
-    late Widget content;
     final state = questionController.state;
+
+    late Widget content;
     if (state.isLoading) {
       content = const Center(child: CircularProgressIndicator());
     }
@@ -66,7 +68,26 @@ class _QuestionScreenState extends State<QuestionScreen> {
     if (state.question != null) {
       if (state.question!.questionType == QuestionType.TEXT) {
       } else {
-        content = BlocBuilder<AnswerControllerBloc, AnswerControllerState>(
+        content = BlocConsumer<AnswerControllerBloc, AnswerControllerState>(
+          listener: (context, astate) {
+            if (astate is AnswerControllerShowResult &&
+                state.question?.hint != null) {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text("توضیحات سوال"),
+                  actions: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("بستن"))
+                  ],
+                  content: Text(state.question!.hint!),
+                ),
+              );
+            }
+          },
           builder: (context, answerState) {
             Color optionColor = Colors.transparent;
 
@@ -99,6 +120,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       optionColor = Colors.transparent;
                     }
                   }
+                  // TODO: show the hint
                 }
                 return QuestionOptionItem(
                   index: index,
@@ -130,7 +152,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
         );
       }
     }
-
+    final SettingsControllerCubit settingsControllerCubit = context.read();
     return Scaffold(
       appBar: AppBar(
         title: Text("سوال"),
@@ -142,6 +164,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
           children: [
             if (state.errorResponse == null && !state.isLoading)
               TimerIndicator(
+                milliseconds:
+                    settingsControllerCubit.state.timeOfEveryQuestion * 1000,
                 onStartTimer: (timer) {
                   _timer = timer;
                 },

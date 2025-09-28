@@ -22,7 +22,8 @@ class LeagueSection extends StatelessWidget {
             onTap: () => context.push(LeagueDetailsScreen.routeInfo.path
                 .replaceFirst(
                     ":leagueId", matchViewModel.league.id.toString())),
-            child: Padding(
+            child: Container(
+              color: Color(0xFF262626),
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
@@ -45,8 +46,12 @@ class LeagueSection extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) =>
                 MatchTile(match: matchViewModel.matches[index]),
-            separatorBuilder: (context, index) =>
-                Divider(height: 1, indent: 16, endIndent: 16),
+            separatorBuilder: (context, index) => Divider(
+              height: 1,
+              indent: 16,
+              endIndent: 16,
+              color: Color(0xFF262626),
+            ),
           ),
         ],
       ),

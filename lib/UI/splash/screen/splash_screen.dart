@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2)).then(
+    Future.delayed(Duration(seconds: 5)).then(
       (value) {
         if (context.mounted) {
           context.pushReplacementNamed(TimeLineScreen.routeInfo.name);
@@ -28,8 +28,21 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("به بازی خوش آمدید"),
+      body: Column(
+        children: [
+          Spacer(),
+          Center(
+            child: Text(
+              "به بازی لیگ خوش آمدید",
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
+          Spacer(),
+          Text("این بازی توسط عدنان کمالی توسعه داده شده"),
+          SizedBox(
+            height: 50,
+          )
+        ],
       ),
     );
   }

@@ -19,7 +19,7 @@ class MatchStatusBadge extends StatelessWidget {
     return Column(
       children: [
         if (matchModel.status != MatchStatus.SCHEDULED)
-          Text("${matchModel.hostTeamScore} - ${matchModel.guestTeamScore}",
+          Text("${matchModel.guestTeamScore} - ${matchModel.hostTeamScore}",
               textDirection: TextDirection.ltr,
               style: TextStyle(
                   fontSize: scoreFontSize,

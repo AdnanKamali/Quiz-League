@@ -8,4 +8,5 @@ abstract class UrlManager {
   static const String team = "$_baseUrlAPI/team";
   static const String match = "$_baseUrlAPI/match";
   static const String question = "$_baseUrlAPI/question";
+  static const String settings = "$_baseUrlAPI/settings";
 }

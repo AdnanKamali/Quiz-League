@@ -72,7 +72,7 @@ class _TimerIndicatorState extends State<TimerIndicator> {
         color: Colors.blue,
         minHeight: 10,
         borderRadius: BorderRadius.circular(8),
-        value: _start / 60000,
+        value: _start / widget.milliseconds,
       ),
     );
   }

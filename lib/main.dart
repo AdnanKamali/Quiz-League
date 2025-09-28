@@ -1,11 +1,22 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:quiz_league/UI/0_common/controllers/settings_controller/settings_controller_cubit.dart';
+import 'package:quiz_league/data/apis/settings_api/settings_api.dart';
+import 'package:quiz_league/data/repository/settings_repository.dart';
 
 import 'package:quiz_league/routing/routes.dart';
 import 'package:quiz_league/theme/app_theme.dart';
 
 // --- MAIN APP ---
-void main() => runApp(const MyAppWrapper());
+void main() => runApp(BlocProvider(
+      create: (context) => SettingsControllerCubit(
+          settingsRepository:
+              SettingsRepository(settingsApi: SettingsApi(Dio())))
+        ..getSettings(),
+      child: const MyAppWrapper(),
+    ));
 
 class MyAppWrapper extends StatefulWidget {
   const MyAppWrapper({super.key});
@@ -32,7 +43,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Live Scores',
+      title: 'مسابقه لیگی',
       theme: themeNotifier.getTheme(),
       routerConfig: goRouter,
       debugShowCheckedModeBanner: false,

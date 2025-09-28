@@ -11,6 +11,7 @@ QuestionModel _$QuestionModelFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num).toInt(),
       text: json['text'] as String,
       questionType: $enumDecode(_$QuestionTypeEnumMap, json['question_type']),
+      hint: json['hint'] as String?,
       options: (json['options'] as List<dynamic>?)
           ?.map((e) => QuestionOptionModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -21,6 +22,7 @@ Map<String, dynamic> _$QuestionModelToJson(QuestionModel instance) =>
       'id': instance.id,
       'question_type': _$QuestionTypeEnumMap[instance.questionType]!,
       'text': instance.text,
+      'hint': instance.hint,
       'options': instance.options,
     };
 
