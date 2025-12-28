@@ -75,7 +75,7 @@ class MatchControllerCubit extends Cubit<MatchControllerState> {
     final result = await matchRepository
         .fetchMatches("${date.year}-${date.month}-${date.day}");
     result.fold(
-      (error) => emit(state.copyWith(errorResponse: error)),
+      (error) => emit(state.copyWith(errorResponse: error, isLoading: false)),
       (matches) {
         final matchViewModelList = _groupMatchesByLeague(matches);
         emit(state.copyWith(matches: matchViewModelList, isLoading: false));

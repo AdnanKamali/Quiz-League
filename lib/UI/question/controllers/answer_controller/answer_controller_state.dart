@@ -23,9 +23,8 @@ final class AnswerControllerShowResult extends AnswerControllerState {
   });
 }
 
-final class AnswerTextBaseQuestion extends AnswerControllerState {
-  final String answer;
+final class AnsweredTextBaseQuestion extends AnswerControllerState {
   final ErrorResponse? errorResponse;
 
-  AnswerTextBaseQuestion({required this.answer, this.errorResponse});
+  AnsweredTextBaseQuestion({this.errorResponse});
 }

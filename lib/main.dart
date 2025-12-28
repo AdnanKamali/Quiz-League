@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,15 +9,25 @@ import 'package:quiz_league/data/repository/settings_repository.dart';
 
 import 'package:quiz_league/routing/routes.dart';
 import 'package:quiz_league/theme/app_theme.dart';
+import 'package:window_manager/window_manager.dart';
 
 // --- MAIN APP ---
-void main() => runApp(BlocProvider(
-      create: (context) => SettingsControllerCubit(
-          settingsRepository:
-              SettingsRepository(settingsApi: SettingsApi(Dio())))
-        ..getSettings(),
-      child: const MyAppWrapper(),
-    ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+  await windowManager.center();
+  if (kDebugMode) {
+    await windowManager.setSize(Size(1336, 720));
+  } else {
+    await windowManager.setFullScreen(true);
+  }
+  runApp(BlocProvider(
+    create: (context) => SettingsControllerCubit(
+        settingsRepository: SettingsRepository(settingsApi: SettingsApi(Dio())))
+      ..getSettings(),
+    child: const MyAppWrapper(),
+  ));
+}
 
 class MyAppWrapper extends StatefulWidget {
   const MyAppWrapper({super.key});
@@ -30,7 +41,6 @@ class _MyAppWrapperState extends State<MyAppWrapper> {
   void initState() {
     super.initState();
     _themeNotifier = ThemeNotifier(AppThemes.darkTheme);
-    _themeNotifier.addListener(() => setState(() {}));
   }
 
   @override

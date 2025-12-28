@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:quiz_league/UI/0_common/controllers/settings_controller/settings_controller_cubit.dart';
 import 'package:quiz_league/UI/question/controllers/answer_controller/answer_controller_bloc.dart';
 import 'package:quiz_league/UI/question/controllers/question_controller/question_controller_cubit.dart';
 import 'package:quiz_league/UI/question/widgets/question_option_item.dart';
 import 'package:quiz_league/UI/question/widgets/qustion_box/question_box.dart';
+import 'package:quiz_league/UI/question/widgets/text_answer_field.dart';
 import 'package:quiz_league/UI/question/widgets/timer_indicator.dart';
 import 'package:quiz_league/data/models/answer_report_model/answer_report_model.dart';
 import 'package:quiz_league/data/models/question_model/question_model.dart';
@@ -66,29 +68,57 @@ class _QuestionScreenState extends State<QuestionScreen> {
       }
     }
     if (state.question != null) {
-      if (state.question!.questionType == QuestionType.TEXT) {
-      } else {
-        content = BlocConsumer<AnswerControllerBloc, AnswerControllerState>(
-          listener: (context, astate) {
-            if (astate is AnswerControllerShowResult &&
-                state.question?.hint != null) {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text("توضیحات سوال"),
-                  actions: [
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text("بستن"))
-                  ],
-                  content: Text(state.question!.hint!),
-                ),
-              );
-            }
-          },
-          builder: (context, answerState) {
+      content = BlocConsumer<AnswerControllerBloc, AnswerControllerState>(
+        listener: (context, astate) {
+          if (astate is AnswerControllerShowResult &&
+              state.question?.hint != null) {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text("توضیحات سوال"),
+                actions: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("بستن"))
+                ],
+                content: Text(state.question!.hint!),
+              ),
+            );
+          }
+        },
+        builder: (context, answerState) {
+          if (state.question?.questionType == QuestionType.TEXT) {
+            return TextAnswerField(
+              answer: state.question!.options!.firstOrNull?.text ?? '',
+              onAnswerRevaled: () {
+                if (_timer.isActive) {
+                  _timer.cancel();
+                }
+              },
+              onAnswered: (params) {
+                if (state is AnsweredTextBaseQuestion) return;
+                final answerReport = AnswerReportModel(
+                  matchId: widget.matchId,
+                  teamId: widget.teamId,
+                  questionId: state.question!.id,
+                  isCorrectAnswer: params.isTrueAnswer,
+                  textAnswer: params.userAnswer,
+                );
+                _answerControllerBloc.add(
+                  EnterAnswerEvent(
+                    answerReport: answerReport,
+                  ),
+                );
+                Future.delayed(const Duration(seconds: 1), () {
+                  if (context.mounted) {
+                    context.pop();
+                  }
+                });
+              },
+            );
+          } else {
             Color optionColor = Colors.transparent;
 
             return Column(
@@ -105,6 +135,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   if (_timer.isActive) {
                     _timer.cancel();
                   }
+
                   if (answerState.selectedOption == null) {
                     if (option.isCorrect!) {
                       optionColor = Colors.green;
@@ -120,7 +151,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       optionColor = Colors.transparent;
                     }
                   }
-                  // TODO: show the hint
                 }
                 return QuestionOptionItem(
                   index: index,
@@ -148,9 +178,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 );
               }),
             );
-          },
-        );
-      }
+          }
+        },
+      );
     }
     final SettingsControllerCubit settingsControllerCubit = context.read();
     return Scaffold(
@@ -191,7 +221,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ),
             if (state.question != null)
               QuestionBox(
-                imageUrl: null,
+                imageUrl: state.question!.image,
                 question: state.question!.text,
               ),
             content,

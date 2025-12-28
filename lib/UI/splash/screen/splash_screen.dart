@@ -37,6 +37,17 @@ class _SplashScreenState extends State<SplashScreen> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
+          SizedBox(
+            height: 50,
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              "assets/images/Quiz-League-Logo.png",
+              height: 300,
+              width: 300,
+            ),
+          ),
           Spacer(),
           Text("این بازی توسط عدنان کمالی توسعه داده شده"),
           SizedBox(

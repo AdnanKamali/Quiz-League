@@ -107,7 +107,7 @@ class MatchDetailsScreen extends StatelessWidget {
         ),
         Card(
           child: ListTile(
-            leading: const Icon(Icons.emoji_events),
+            leading: const Icon(Icons.group),
             title: Text(matchDetailController.state.teamTurn?.name ?? ''),
             subtitle: const Text("نوبت تیم"),
           ),

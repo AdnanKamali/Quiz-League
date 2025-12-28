@@ -29,7 +29,6 @@ final class SelectAnswerEvent extends AnswerControllerEvent {
 
 final class EnterAnswerEvent extends AnswerControllerEvent {
   final AnswerReportModel answerReport;
-  final String answer;
 
-  EnterAnswerEvent({required this.answerReport, required this.answer});
+  EnterAnswerEvent({required this.answerReport});
 }

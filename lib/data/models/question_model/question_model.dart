@@ -24,6 +24,9 @@ class QuestionModel {
   @JsonKey(name: 'hint')
   String? hint;
 
+  @JsonKey(name: 'image')
+  String? image;
+
   @JsonKey(name: 'options')
   List<QuestionOptionModel>? options;
 

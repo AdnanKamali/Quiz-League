@@ -77,11 +77,10 @@ class AnswerControllerBloc
       answerReport: event.answerReport,
     );
     result.fold(
-      (failure) => emit(AnswerTextBaseQuestion(
-        answer: event.answer,
+      (failure) => emit(AnsweredTextBaseQuestion(
         errorResponse: failure,
       )),
-      (_) => emit(AnswerTextBaseQuestion(answer: event.answer)),
+      (_) => emit(AnsweredTextBaseQuestion()),
     );
   }
 }

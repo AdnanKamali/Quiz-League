@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_league/UI/0_common/controllers/match_controller/match_controller_cubit.dart';
@@ -67,18 +69,13 @@ class _TimeLineScreenState extends State<TimeLineScreen>
       } else if (dateOnly == today + 1) {
         dayLabel = "فردا";
       } else {
-        dayLabel = "${date.formatter.wN}\n${date.day}/${date.month}";
+        dayLabel = "${date.formatter.wN} - ${date.day}/${date.month}";
       }
 
       _tabs.add(Tab(
-          child: TextButton(
-              onPressed: () {
-                _changeTab(dateOnly);
-              },
-              child: Text(dayLabel,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontFamily: 'Pelak', color: Colors.white)))));
+        text: dayLabel,
+      ));
+
       _tabDates.add(dateOnly);
       _tabViews.add(MatchesForDate(date: dateOnly.toDateTime()));
     }
@@ -117,11 +114,49 @@ class _TimeLineScreenState extends State<TimeLineScreen>
           icon: const Icon(Icons.calendar_today),
           onPressed: () => _selectDate(context),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              tooltip: "خروج از برنامه",
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text("خروج از برنامه"),
+                      content: const Text("آیا می‌خواهید از برنامه خارج شوید؟"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("خیر"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            exit(0);
+                          },
+                          child: const Text("بله"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              icon: const Icon(Icons.power_settings_new, color: Colors.red),
+            ),
+          ),
+        ],
         title: const Text("نتایج زنده"),
         centerTitle: true,
         bottom: TabBar(
+          indicatorWeight: 10,
+          onTap: (value) {
+            _matchControllerCubit.fetchMatches(_tabDates[value].toDateTime());
+          },
           controller: _tabController,
-          isScrollable: true,
+          isScrollable: false,
           tabs: _tabs,
         ),
       ),

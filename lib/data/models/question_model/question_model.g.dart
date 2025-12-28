@@ -15,7 +15,7 @@ QuestionModel _$QuestionModelFromJson(Map<String, dynamic> json) =>
       options: (json['options'] as List<dynamic>?)
           ?.map((e) => QuestionOptionModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
+    )..image = json['image'] as String?;
 
 Map<String, dynamic> _$QuestionModelToJson(QuestionModel instance) =>
     <String, dynamic>{
@@ -23,6 +23,7 @@ Map<String, dynamic> _$QuestionModelToJson(QuestionModel instance) =>
       'question_type': _$QuestionTypeEnumMap[instance.questionType]!,
       'text': instance.text,
       'hint': instance.hint,
+      'image': instance.image,
       'options': instance.options,
     };
 
